@@ -29,7 +29,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "webpack": "webpack --watch --mode=production",
-    "postinstall": "webpack"
+    "postinstall": "./node_modules/.bin/webpack --mode=production"
   },
   "repository": {
     "type": "git",
