@@ -29,11 +29,19 @@ class SessionForm extends React.Component {
 
   render() {
     let header;
+    let errMessages;
+    if (this.props.errors.length > 0){
+      errMessages = this.props.errors.map((err) => {
+        return <li>err</li>;
+      });
+    }
+
     let loginFields;
     if (this.props.formType === 'signup'){
       header = (<h1>SIGNUP</h1>);
       loginFields = (
         <div>
+          {errMessages}
           <label>Username
           <input type="text" value={this.state.username} onChange={this.update('username')}></input>
         </label>
@@ -43,14 +51,15 @@ class SessionForm extends React.Component {
       </div>);
     } else {
       header = (<h1>Welcome to Sparrow</h1>);
-      loginFields = (  <label>Email or Username
+      loginFields = (<label>Email or Username
         <input type="text" value={this.state.username} onChange={this.update('username')}></input>
       </label>);
     }
-
     return(
     <div className="flex flex-vertical">
-      <div className="flex-child greet-img"></div>
+      <div className="flex-child greet-img">
+        <img src={window.shipURL} className="greet-ship"/>
+      </div>
       <div className="flex-child greet-form-container">
         <div className="greet-form">
           {header}

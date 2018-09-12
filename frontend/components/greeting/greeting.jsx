@@ -12,10 +12,11 @@ class Greeting extends React.Component {
   render () {
     if (this.props.currentUser) {
       return(
-      <div>
+      <header className="greeting-container">
+        <img src={window.flagURL} />
         <h1>Welcome {this.props.currentUser.username} </h1>
         <button onClick={this.handleClick}> Leave </button>
-      </div>);
+      </header>);
     } else {
       return(
         <div>
