@@ -1,8 +1,8 @@
-export const getQuote = (asset) => {
+export const getExternalInfo = (requestType, asset) => {
   // debugger
   return $.ajax({
     method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/${asset.symbol}/quote`,
+    url: `https://api.iextrading.com/1.0/stock/${asset.symbol}/${requestType}`,
   });
 };
 

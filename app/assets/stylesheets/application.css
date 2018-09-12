@@ -19,6 +19,10 @@ html, body {
   font-family: sans-serif;
 }
 
+.news-img{
+  width: 100px;
+}
+
 
 .greet-form-container{
   display: flex;

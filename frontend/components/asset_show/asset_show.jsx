@@ -1,5 +1,7 @@
 import React from 'react';
-import { getQuote } from '../../util/asset_api_util';
+import { getExternalInfo } from '../../util/asset_api_util';
+import AssetNews from './asset_news';
+import AssetChart from './asset_chart';
 
 class AssetShow extends React.Component {
   constructor(props){
@@ -8,22 +10,16 @@ class AssetShow extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchAsset(this.props.match.params.id).then(
+    this.props.fetchAsset(this.props.assetId).then(
       (arg) => {
         this.setState({ assets: {[arg.asset.id]: arg.asset } });
       }).then(
         () => {
-          return getQuote(this.state.assets[this.props.match.params.id]);
+          return getExternalInfo("quote", this.state.assets[this.props.assetId]);
         }
       ).then((data) => {
-        this.setState({ assets: {[this.props.match.params.id]: data}});
+        this.setState({ assets: {[this.props.assetId]: data}});
       });
-    // console.log(this.props.assets);
-    // this.setState({assets: { 1: this.props.assets[1] }});
-  }
-
-  componentDidUpdate() {
-    // this.setState({ assets: { this.props.assets }});
   }
 
   render () {
@@ -39,6 +35,8 @@ class AssetShow extends React.Component {
           <h3>current: {this.state.assets[this.props.assetId].iexRealtimePrice}</h3>
           <h3>open: {this.state.assets[this.props.assetId].open}</h3>
           <h3>close: {this.state.assets[this.props.assetId].close}</h3>
+          <AssetChart asset={this.state.assets[this.props.assetId]} />
+          <AssetNews asset={this.state.assets[this.props.assetId]} />
         </div>
       );
     }
