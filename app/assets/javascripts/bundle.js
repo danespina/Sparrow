@@ -247,13 +247,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -271,8 +271,11 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AssetChart).call(this, props));
     _this.state = {
-      chartData: []
+      chartData: [],
+      timeFrame: "1d"
     };
+    _this.times = ['1d', '1m', '3m', '6m', '1y', '2y'];
+    _this.update = _this.update.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -281,7 +284,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["getExternalInfo"])("chart", this.props.asset).then(function (data) {
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["getExternalInfo"])("chart/".concat(this.state.timeFrame), this.props.asset).then(function (data) {
         var mappedData = data.map(function (datum) {
           return {
             date: datum.date,
@@ -295,25 +298,53 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "update",
+    value: function update(field) {
+      var _this3 = this;
+
+      this.setState({
+        timeFrame: field
+      }, function () {
+        Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["getExternalInfo"])("chart/".concat(_this3.state.timeFrame), _this3.props.asset).then(function (data) {
+          var mappedData = data.map(function (datum) {
+            return {
+              date: datum.date,
+              close: datum.close
+            };
+          });
+
+          _this3.setState({
+            chartData: mappedData
+          });
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
-        width: 500,
-        height: 500,
+      var _this4 = this;
+
+      var timeButtons = this.times.map(function (frame) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: function onClick() {
+            return _this4.update(frame);
+          }
+        }, frame);
+      });
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "the-chart"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
+        width: 900,
+        height: 300,
         data: this.state.chartData
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
-        type: "monotone",
+        type: "linear",
         dataKey: "close",
-        stroke: "#00FF00"
+        stroke: "#00FF00",
+        dot: false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
-        label: {
-          value: 'price',
-          angle: -90,
-          position: 'insideLeft'
-        },
-        type: "number",
         domain: ['auto', 'auto']
-      }));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, timeButtons));
     }
   }]);
 
@@ -489,7 +520,11 @@ function (_React$Component) {
       if (!this.state.assets[this.props.assetId]) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "wait");
       } else {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.assets[this.props.assetId].companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "symbol: ", this.state.assets[this.props.assetId].symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "current: ", this.state.assets[this.props.assetId].iexRealtimePrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "open: ", this.state.assets[this.props.assetId].open), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "close: ", this.state.assets[this.props.assetId].close), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "asset-show-main"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+          className: "asset-show-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, this.state.assets[this.props.assetId].companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "symbol: ", this.state.assets[this.props.assetId].symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "$", this.state.assets[this.props.assetId].iexRealtimePrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.assets[this.props.assetId].change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           asset: this.state.assets[this.props.assetId]
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_news__WEBPACK_IMPORTED_MODULE_2__["default"], {
           asset: this.state.assets[this.props.assetId]
@@ -598,7 +633,11 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       if (this.props.currentUser) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome ", this.props.currentUser.username, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
+          className: "greeting-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: window.flagURL
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome ", this.props.currentUser.username, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.handleClick
         }, " Leave "));
       } else {

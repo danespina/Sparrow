@@ -29,12 +29,13 @@ class AssetShow extends React.Component {
       return (<h1>wait</h1>);
     } else {
       return (
-        <div>
-          <h1>{this.state.assets[this.props.assetId].companyName}!</h1>
-          <h2>symbol: {this.state.assets[this.props.assetId].symbol}</h2>
-          <h3>current: {this.state.assets[this.props.assetId].iexRealtimePrice}</h3>
-          <h3>open: {this.state.assets[this.props.assetId].open}</h3>
-          <h3>close: {this.state.assets[this.props.assetId].close}</h3>
+        <div className="asset-show-main">
+          <header className="asset-show-header">
+            <h1>{this.state.assets[this.props.assetId].companyName}!</h1>
+            <h3>symbol: {this.state.assets[this.props.assetId].symbol}</h3>
+            <h2>${this.state.assets[this.props.assetId].iexRealtimePrice}</h2>
+            <h3>{this.state.assets[this.props.assetId].change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
+          </header>
           <AssetChart asset={this.state.assets[this.props.assetId]} />
           <AssetNews asset={this.state.assets[this.props.assetId]} />
         </div>

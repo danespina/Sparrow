@@ -1,0 +1,26 @@
+.asset-show-main{
+  display: flex;
+  flex-direction: column;
+  width: 900px;
+  margin: 0 auto;
+}
+
+.asset-show-main h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.asset-show-main h2 {
+  font-size: 30px;
+}
+
+.the-chart ul {
+  display: flex;
+  border-bottom: 1px solid magenta;
+  padding: 10px 0;
+  margin-bottom: 10px;
+}
+
+.the-chart button {
+  margin-right: 50px;
+}
