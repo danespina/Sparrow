@@ -54,7 +54,7 @@ html, body {
   border-radius: 5px;
   padding: 10px;
   margin-bottom: 10px;
-  width: 75%
+  width: 75%;
 }
 
 .greet-form input[type="text"]:hover {
