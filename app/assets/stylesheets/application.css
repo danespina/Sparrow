@@ -33,6 +33,7 @@ html, body {
 .greeting-container img {
   width: 100px;
   height: 100px;
+  background-color: lime;
 }
 
 .greet-form-container{
@@ -97,7 +98,8 @@ html, body {
 } */
 
 .greet-ship{
-  min-height: 100%
+  min-height: 100%;
+  background-color: lime;
 }
 
 .root{
