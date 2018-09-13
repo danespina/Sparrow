@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import configureStore from './store/store';
 import Root from './components/root';
 import { login, logout, signup } from './actions/session_actions';
-import { getQuote } from './util/asset_api_util';
 
 window.signup = signup;
 window.login = login;
 window.logout = logout;
-window.getQuote = getQuote;
 
 
 document.addEventListener("DOMContentLoaded", () => {

@@ -298,9 +298,13 @@ function (_React$Component) {
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-about"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, assetTags), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "about-span"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "asset-about-detail"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "CEO"), " ", this.state.about.CEO)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "CEO"), " ", this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "about-span"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Collection"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, assetTags)));
     }
   }]);
 
@@ -359,9 +363,9 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AssetChart).call(this, props));
     _this.state = {
       chartData: [],
-      timeFrame: "1d"
+      timeFrame: "1D"
     };
-    _this.times = ['1d', '1m', '3m', '6m', '1y', '2y'];
+    _this.times = ['1D', '1M', '3M', '6M', '1Y', '2Y'];
     _this.update = _this.update.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -413,6 +417,7 @@ function (_React$Component) {
 
       var timeButtons = this.times.map(function (frame) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: _this4.state.timeFrame === frame ? "selected-time-frame" : "",
           onClick: function onClick() {
             return _this4.update(frame);
           }
@@ -421,8 +426,8 @@ function (_React$Component) {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
-        width: 900,
-        height: 300,
+        width: 676,
+        height: 196,
         data: this.state.chartData
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
         type: "linear",
@@ -430,7 +435,8 @@ function (_React$Component) {
         stroke: "#00FF00",
         dot: false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
-        domain: ['auto', 'auto']
+        domain: ['auto', 'auto'],
+        hide: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, timeButtons));
     }
   }]);
@@ -507,14 +513,23 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var newsList = this.state.news.map(function (news) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        var niceDate = new Date(news.datetime);
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          className: "news-item"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+          href: news.url
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "news-item-col1"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: window.flagURL,
           className: "news-img"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: news.url
-        }, news.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, news.summary));
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "news-item-col2"
+        }, news.source, niceDate.toDateString(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, news.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, news.summary))));
       });
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, newsList);
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "asset-news"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "News"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, newsList));
     }
   }]);
 
@@ -614,7 +629,7 @@ function (_React$Component) {
           className: "asset-show-main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "asset-show-header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "symbol: ", curAsset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "$", curAsset.iexRealtimePrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, curAsset.change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "symbol: ", curAsset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "$", curAsset.iexRealtimePrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, curAsset.change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           asset: curAsset
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_about__WEBPACK_IMPORTED_MODULE_4__["default"], {
           asset: curAsset
@@ -1243,9 +1258,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./store/store */ "./frontend/store/store.js");
 /* harmony import */ var _components_root__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/root */ "./frontend/components/root.jsx");
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./util/asset_api_util */ "./frontend/util/asset_api_util.js");
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -1255,7 +1268,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 window.signup = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["signup"];
 window.login = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["login"];
 window.logout = _actions_session_actions__WEBPACK_IMPORTED_MODULE_4__["logout"];
-window.getQuote = _util_asset_api_util__WEBPACK_IMPORTED_MODULE_5__["getQuote"];
 document.addEventListener("DOMContentLoaded", function () {
   var root = document.getElementById('root');
   var store;

@@ -22,14 +22,19 @@ class AssetAbout extends React.Component {
     }
     return (
       <div className="asset-about">
-        <h2>About {this.props.asset.symbol}</h2>
-        <ul>{assetTags}</ul>
-        <p>{this.state.about.description}</p>
-        <ul className="asset-about-detail">
-          <li>
-            <h4>CEO</h4> {this.state.about.CEO}
-          </li>
-        </ul>
+        <div className="about-span">
+          <h2>About {this.props.asset.symbol}</h2>
+          <p>{this.state.about.description}</p>
+          <ul className="asset-about-detail">
+            <li>
+              <h4>CEO</h4> {this.state.about.CEO}
+              </li>
+            </ul>
+        </div>
+        <div className="about-span">
+          <h2>Collection</h2>
+          <ul>{assetTags}</ul>
+        </div>
       </div>
     );
   }
