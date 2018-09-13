@@ -13,15 +13,32 @@ class AssetNews extends React.Component {
   }
   render () {
     const newsList = this.state.news.map( (news) => {
-      return (<li>
-        <img src={window.flagURL} className="news-img" />
-        <a href={news.url}>{news.headline}</a>
-        <p>{news.summary}</p>
+      let niceDate = new Date(news.datetime);
+      return (<li className="news-item">
+        <a href={news.url}>
+          <div className="news-item-col1">
+            <img src={window.flagURL} className="news-img" />
+          </div>
+          <div className="news-item-col2">
+            <div className="news-item-header">
+              <span className="bold">{news.source}</span>
+              <span className="news-date">{niceDate.toDateString()}</span>
+            </div>
+            <div className="news-item-body">
+              <h3 className="bold">{news.headline}</h3>
+              <h3>{news.summary}</h3>
+            </div>
+          </div>
+      </a>
       </li>);
     });
-    return(<ul>
-      {newsList}
-    </ul>);
+    return(
+      <div className="asset-news">
+        <h2>News</h2>
+        <ul>
+          {newsList}
+        </ul>
+      </div>);
   }
 }
 

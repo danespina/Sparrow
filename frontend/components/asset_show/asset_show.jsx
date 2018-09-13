@@ -35,7 +35,7 @@ class AssetShow extends React.Component {
           <header className="asset-show-header">
             <h1>{curAsset.companyName}!</h1>
             <h3>symbol: {curAsset.symbol}</h3>
-            <h2>${curAsset.iexRealtimePrice}</h2>
+            <h1>${curAsset.iexRealtimePrice}</h1>
             <h3>{curAsset.change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
           </header>
           <AssetChart asset={curAsset} />
