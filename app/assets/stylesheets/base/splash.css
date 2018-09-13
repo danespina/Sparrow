@@ -1,7 +1,7 @@
 .splash {
   display: flex;
-  flex-direction: row;
   width: 1170px;
+  margin: 0 auto;
 }
 
 .left .right {

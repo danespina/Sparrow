@@ -1,18 +1,8 @@
 .asset-show-main{
   display: flex;
   flex-direction: column;
-  width: 1024px;
-  margin: 0 auto;
+  width: 66.6%;
   padding-top: 30px;
-}
-
-.asset-show-main h1 {
-  font-size: 24px;
-  font-weight: bold;
-}
-
-.asset-show-main h2 {
-  font-size: 30px;
 }
 
 .asset-show-header {
@@ -104,10 +94,6 @@
 
 .news-item-header {
   font-size: 13px;
-}
-
-.bold {
-  font-weight: bold;
 }
 
 .news-date {

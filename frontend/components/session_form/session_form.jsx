@@ -34,6 +34,16 @@ class SessionForm extends React.Component {
     };
   }
 
+  // renderErrors() {
+  //   return(
+  //     <ul>
+  //       {this.props.errors.map((err, idx) => (
+  //         <li key={idx}>{err}</li>
+  //       ))}
+  //     </ul>
+  //   );
+  // }
+
   render() {
     let header;
     let errMessages;
@@ -48,7 +58,9 @@ class SessionForm extends React.Component {
       header = (<h1>SIGNUP</h1>);
       loginFields = (
         <div>
-          {errMessages}
+          <ul>
+            {errMessages}
+          </ul>
           <label>Username
           <input type="text" value={this.state.username} onChange={this.update('username')}></input>
         </label>
@@ -58,9 +70,14 @@ class SessionForm extends React.Component {
       </div>);
     } else {
       header = (<h1>Welcome to Sparrow</h1>);
-      loginFields = (<label>Email or Username
-        <input type="text" value={this.state.username} onChange={this.update('username')}></input>
-      </label>);
+      loginFields = (<div>
+        <ul>
+          {errMessages}
+        </ul>
+        <label>Email or Username
+          <input type="text" value={this.state.username} onChange={this.update('username')}></input>
+        </label>
+      </div>);
     }
     return(
     <div className="flex flex-vertical">

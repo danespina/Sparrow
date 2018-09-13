@@ -17,7 +17,7 @@ class AssetAbout extends React.Component {
     let assetTags;
     if (this.state.about.tags){
       assetTags = this.state.about.tags.map((tag) => {
-        return <button>{tag}</button>;
+        return <button key={tag}>{tag}</button>;
       });
     }
     return (

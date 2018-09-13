@@ -14,7 +14,7 @@ class AssetNews extends React.Component {
   render () {
     const newsList = this.state.news.map( (news) => {
       let niceDate = new Date(news.datetime);
-      return (<li className="news-item">
+      return (<li key={news.datetime} className="news-item">
         <a href={news.url}>
           <div className="news-item-col1">
             <img src={window.flagURL} className="news-img" />

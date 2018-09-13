@@ -15,11 +15,6 @@
  *= require_self
  */
 
-html, body {
-  height: 100%;
-  font-family: sans-serif;
-}
-
 .news-img{
   width: 100px;
 }
@@ -28,12 +23,24 @@ html, body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: 64px;
 }
 
 .greeting-container img {
-  width: 100px;
-  height: 100px;
+  width: 48px;
+  height: 48px;
   background-color: lime;
+}
+
+.greet-links {
+  display: flex;
+  flex-direction: row;
+}
+
+.greet-links a {
+  margin-left: 10px;
+  color: lime;
+  font-weight: bold;
 }
 
 .greet-form-container{

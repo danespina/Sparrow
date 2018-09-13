@@ -13,15 +13,18 @@ class Greeting extends React.Component {
     if (this.props.currentUser) {
       return(
       <header className="greeting-container">
-        <img src={window.flagURL} />
+        <Link to='/'><img src={window.flagURL} /></Link>
         <h1>Welcome {this.props.currentUser.username} </h1>
         <button onClick={this.handleClick}> Leave </button>
       </header>);
     } else {
       return(
-        <div>
-          <Link to='/signup'>Sign Up</Link>
-          <Link to='/login'>Log In</Link>
+        <div className="greeting-container">
+          <Link to='/'><img src={window.flagURL} /></Link>
+          <div className="greet-links">
+            <Link to='/signup'>Sign Up</Link>
+            <Link to='/login'>Log In</Link>
+          </div>
         </div>
       );
     }
