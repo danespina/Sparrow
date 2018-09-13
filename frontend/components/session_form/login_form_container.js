@@ -16,9 +16,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       return dispatch(login(
         {
           username: user.username,
-          password: user.password
+          password: user.password,
         }));
-    }
+    },
+    login: (user) => {
+      return dispatch(login(
+        {
+          username: user.username,
+          password: user.password,
+        }
+      ));
+    },
   };
 };
 

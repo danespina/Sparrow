@@ -1,0 +1,43 @@
+.splash {
+  display: flex;
+  flex-direction: row;
+  width: 1170px;
+}
+
+.left .right {
+  width: 50%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.right img {
+  width: 452px;
+  height: 678px;
+}
+
+.left {
+  margin-top: 144px;
+  padding: 0 30px;
+}
+
+.left h1 {
+  font-size: 55px;
+  font-weight: bold;
+}
+
+.left h4 {
+  font-size: 18px;
+  margin-bottom: 30px;
+  width: 380px;
+}
+
+.left a {
+    padding: 16px;
+    background-color: lime;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid lime;
+    border-radius: 15px;
+}
