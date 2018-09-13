@@ -24,3 +24,12 @@
 .the-chart button {
   margin-right: 50px;
 }
+
+.asset-about h2 {
+  border-bottom: 1px solid magenta;
+  padding-bottom: 10px;
+}
+
+.asset-about button {
+  font-weight: bold;
+}

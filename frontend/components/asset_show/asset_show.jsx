@@ -2,6 +2,7 @@ import React from 'react';
 import { getExternalInfo } from '../../util/asset_api_util';
 import AssetNews from './asset_news';
 import AssetChart from './asset_chart';
+import AssetAbout from './asset_about';
 
 class AssetShow extends React.Component {
   constructor(props){
@@ -28,16 +29,18 @@ class AssetShow extends React.Component {
     if(!this.state.assets[this.props.assetId]){
       return (<h1>wait</h1>);
     } else {
+      const curAsset = this.state.assets[this.props.assetId];
       return (
         <div className="asset-show-main">
           <header className="asset-show-header">
-            <h1>{this.state.assets[this.props.assetId].companyName}!</h1>
-            <h3>symbol: {this.state.assets[this.props.assetId].symbol}</h3>
-            <h2>${this.state.assets[this.props.assetId].iexRealtimePrice}</h2>
-            <h3>{this.state.assets[this.props.assetId].change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
+            <h1>{curAsset.companyName}!</h1>
+            <h3>symbol: {curAsset.symbol}</h3>
+            <h2>${curAsset.iexRealtimePrice}</h2>
+            <h3>{curAsset.change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
           </header>
-          <AssetChart asset={this.state.assets[this.props.assetId]} />
-          <AssetNews asset={this.state.assets[this.props.assetId]} />
+          <AssetChart asset={curAsset} />
+          <AssetAbout asset={curAsset} />
+          <AssetNews asset={curAsset} />
         </div>
       );
     }
