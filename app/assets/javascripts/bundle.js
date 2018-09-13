@@ -300,9 +300,13 @@ function (_React$Component) {
         className: "asset-about"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about-span"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "asset-about-detail"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "CEO"), " ", this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "CEO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+      }, this.state.about.CEO))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about-span"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Collection"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, assetTags)));
     }
@@ -525,7 +529,17 @@ function (_React$Component) {
           className: "news-img"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "news-item-col2"
-        }, news.source, niceDate.toDateString(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, news.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, news.summary))));
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "news-item-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "bold"
+        }, news.source), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "news-date"
+        }, niceDate.toDateString())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "news-item-body"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+          className: "bold"
+        }, news.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, news.summary)))));
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-news"

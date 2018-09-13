@@ -20,10 +20,14 @@ class AssetNews extends React.Component {
             <img src={window.flagURL} className="news-img" />
           </div>
           <div className="news-item-col2">
-            {news.source}
-            {niceDate.toDateString()}
-            <h3>{news.headline}</h3>
-            <p>{news.summary}</p>
+            <div className="news-item-header">
+              <span className="bold">{news.source}</span>
+              <span className="news-date">{niceDate.toDateString()}</span>
+            </div>
+            <div className="news-item-body">
+              <h3 className="bold">{news.headline}</h3>
+              <h3>{news.summary}</h3>
+            </div>
           </div>
       </a>
       </li>);

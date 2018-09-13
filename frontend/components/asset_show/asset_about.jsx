@@ -24,10 +24,15 @@ class AssetAbout extends React.Component {
       <div className="asset-about">
         <div className="about-span">
           <h2>About {this.props.asset.symbol}</h2>
-          <p>{this.state.about.description}</p>
+          <h3>{this.state.about.description}</h3>
           <ul className="asset-about-detail">
             <li>
-              <h4>CEO</h4> {this.state.about.CEO}
+              <div className="bold">CEO</div>
+              <div>
+                <a href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                  {this.state.about.CEO}
+                </a>
+              </div>
               </li>
             </ul>
         </div>
