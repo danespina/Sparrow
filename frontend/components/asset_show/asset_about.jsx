@@ -41,7 +41,7 @@ class AssetAbout extends React.Component {
           <div className="asset-header">
             <h2>About {this.props.asset.symbol}</h2>
             <button id="show-hide" onClick={this.toggleHide}>ShowHide</button>
-          </div>about
+          </div>
           <h3>{this.state.about.description}</h3>
           <ul className="asset-about-detail">
             <li>

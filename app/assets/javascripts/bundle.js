@@ -346,7 +346,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "show-hide",
         onClick: this.toggleHide
-      }, "ShowHide")), "about", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, "ShowHide")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "asset-about-detail"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
