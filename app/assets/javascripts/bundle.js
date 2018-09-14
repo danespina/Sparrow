@@ -90,27 +90,44 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/asset_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ASSET, receiveAsset, fetchAsset */
+/*! exports provided: RECEIVE_ASSET, RECEIVE_ASSETS, receiveAsset, receiveAssets, fetchAsset, fetchAssets */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ASSET", function() { return RECEIVE_ASSET; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ASSETS", function() { return RECEIVE_ASSETS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAsset", function() { return receiveAsset; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAssets", function() { return receiveAssets; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAsset", function() { return fetchAsset; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAssets", function() { return fetchAssets; });
 /* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/asset_api_util */ "./frontend/util/asset_api_util.js");
 
 var RECEIVE_ASSET = 'RECEIVE_ASSET';
+var RECEIVE_ASSETS = 'RECEIVE_ASSETS';
 var receiveAsset = function receiveAsset(asset) {
   return {
     type: RECEIVE_ASSET,
     asset: asset
   };
 };
+var receiveAssets = function receiveAssets(assets) {
+  return {
+    type: RECEIVE_ASSETS,
+    assets: assets
+  };
+};
 var fetchAsset = function fetchAsset(id) {
   return function (dispatch) {
     return _util_asset_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAsset"](id).then(function (asset) {
       return dispatch(receiveAsset(asset));
+    });
+  };
+};
+var fetchAssets = function fetchAssets() {
+  return function (dispatch) {
+    return _util_asset_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAssets"]().then(function (assets) {
+      return dispatch(receiveAssets(assets));
     });
   };
 };
@@ -235,6 +252,127 @@ var App = function App() {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (App);
+
+/***/ }),
+
+/***/ "./frontend/components/asset_index/asset_index.jsx":
+/*!*********************************************************!*\
+  !*** ./frontend/components/asset_index/asset_index.jsx ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var AssetIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(AssetIndex, _React$Component);
+
+  function AssetIndex(props) {
+    var _this;
+
+    _classCallCheck(this, AssetIndex);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AssetIndex).call(this, props));
+    _this.state = {
+      assets: {}
+    };
+    return _this;
+  }
+
+  _createClass(AssetIndex, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      this.props.fetchAssets().then(function (data) {
+        _this2.setState({
+          assets: data.assets
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var theAssets;
+
+      if (this.props.assets) {
+        theAssets = Object.values(this.state.assets).map(function (el) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: el.id
+          }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+            to: "/assets/".concat(el.id)
+          }, el.symbol));
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, theAssets);
+    }
+  }]);
+
+  return AssetIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (AssetIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/asset_index/asset_index_container.js":
+/*!******************************************************************!*\
+  !*** ./frontend/components/asset_index/asset_index_container.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _asset_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./asset_index */ "./frontend/components/asset_index/asset_index.jsx");
+
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    assets: state.entities.assets
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchAssets: function fetchAssets() {
+      return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAssets"])());
+    }
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_asset_index__WEBPACK_IMPORTED_MODULE_2__["default"]));
 
 /***/ }),
 
@@ -779,6 +917,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -796,6 +935,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -821,6 +961,18 @@ function (_React$Component) {
       this.props.logout();
     }
   }, {
+    key: "makeSeeds",
+    value: function makeSeeds(e) {
+      $.ajax({
+        method: "GET",
+        url: "https://api.iextrading.com/1.0/ref-data/symbols"
+      }).then(function (resArr) {
+        resArr.slice(0, 200).map(function (el) {
+          return Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["createAsset"])(el.symbol);
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       if (this.props.currentUser) {
@@ -834,6 +986,8 @@ function (_React$Component) {
           type: "text",
           value: "don't search yet"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.makeSeeds
+        }, "Make the seeds!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.handleClick
         }, " Leave "));
       } else {
@@ -1191,6 +1345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _asset_index_asset_index_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../asset_index/asset_index_container */ "./frontend/components/asset_index/asset_index_container.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1212,6 +1367,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Splash =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1228,27 +1384,23 @@ function (_React$Component) {
     value: function render() {
       // debugger
       if (this.props.currentUser) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "dash"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/assets/1"
-        }, "Peep the only asset!"));
+        }, "Peep the only asset!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_index_asset_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], null));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "left flex-child"
+          className: "flex flex-vertical"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "left-header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "left-words"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Sparrow lets you learn to invest in the stock market for free.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          className: "left flex-child"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Sparrow lets you learn to invest in the stock market for free."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
         }, "Sign Up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "right flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: phoneURL
-        })));
+        }))));
       }
     }
   }]);
@@ -1311,6 +1463,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         var newAsset = _defineProperty({}, action.asset.id, action.asset);
 
         return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, newAsset);
+      }
+
+    case _actions_asset_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ASSETS"]:
+      {
+        var newAssets = action.assets;
+        return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, newAssets);
       }
 
     default:
@@ -1574,15 +1732,17 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/asset_api_util.js ***!
   \*****************************************/
-/*! exports provided: getExternalInfo, fetchAsset */
+/*! exports provided: getExternalInfo, fetchAsset, fetchAssets, getQuote, createAsset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getExternalInfo", function() { return getExternalInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAsset", function() { return fetchAsset; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAssets", function() { return fetchAssets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getQuote", function() { return getQuote; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAsset", function() { return createAsset; });
 var getExternalInfo = function getExternalInfo(requestType, asset) {
-  // debugger
   return $.ajax({
     method: "GET",
     url: "https://api.iextrading.com/1.0/stock/".concat(asset.symbol, "/").concat(requestType)
@@ -1592,6 +1752,35 @@ var fetchAsset = function fetchAsset(id) {
   return $.ajax({
     method: "GET",
     url: "/api/assets/".concat(id)
+  });
+};
+var fetchAssets = function fetchAssets() {
+  return $.ajax({
+    method: "GET",
+    url: "/api/assets"
+  });
+};
+var getQuote = function getQuote(sym) {
+  return $.ajax({
+    method: "GET",
+    url: "https://api.iextrading.com/1.0/stock/".concat(sym, "/quote")
+  });
+};
+var createAsset = function createAsset(sym) {
+  console.log("making ".concat(sym, "!"));
+  getQuote(sym).then(function (quote) {
+    var asset = {
+      symbol: sym,
+      open: quote.open,
+      close: quote.close
+    };
+    return $.ajax({
+      method: "POST",
+      url: "/api/assets",
+      data: {
+        asset: asset
+      }
+    });
   });
 };
 

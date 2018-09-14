@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import { createAsset } from '../../util/asset_api_util';
 
 class Greeting extends React.Component {
   constructor(props) {
@@ -9,6 +10,18 @@ class Greeting extends React.Component {
   handleClick(e) {
     this.props.logout();
   }
+
+  makeSeeds(e) {
+    $.ajax({
+      method: "GET",
+      url: `https://api.iextrading.com/1.0/ref-data/symbols`,
+    }).then((resArr) => {
+      resArr.slice(0,200).map((el) => {
+        return createAsset(el.symbol);
+      });
+    });
+  }
+
   render () {
     if (this.props.currentUser) {
       return(
@@ -17,6 +30,7 @@ class Greeting extends React.Component {
         <form>
           <input type="text" value="don't search yet"></input>
         </form>
+        <button onClick={this.makeSeeds}>Make the seeds!</button>
         <button onClick={this.handleClick}> Leave </button>
       </header>);
     } else {

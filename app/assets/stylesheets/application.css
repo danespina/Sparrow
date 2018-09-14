@@ -11,12 +11,39 @@
  * It is generally better to create a new file per style scope.
  *
  *= require reset.css
+ *= require colors.css
  *= require_tree .
  *= require_self
  */
 
+ :root {
+   --main-green: #21ce99;
+   --light-green: rgb(230, 249, 243);
+   --black: #171718;
+   --light-gray: #F4F4F8;
+ }
+
+
 .news-img{
   width: 100px;
+}
+
+.greeting-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 64px;
+}
+
+.greeting-container img {
+  width: 48px;
+  height: 48px;
+  background-color: lime;
+}
+
+.greet-links {
+  display: flex;
+  flex-direction: row;
 }
 
 .greet-links a {
