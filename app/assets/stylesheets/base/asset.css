@@ -5,6 +5,15 @@
   padding-top: 30px;
 }
 
+.asset-show-main h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.asset-show-main h2 {
+  font-size: 30px;
+}
+
 .asset-show-header {
   margin-bottom: 10px;
 }
@@ -21,12 +30,13 @@
 }
 
 .the-chart button {
-  margin-right: 50px;
-  padding-bottom: 10px;
+  margin-right: 12px;
+  padding-bottom: 12px;
+  margin-bottom: 2px;
 }
 
 .selected-time-frame {
-  border-bottom: 5px solid lime;
+  border-bottom: 2px solid lime;
   color: magenta;
 }
 
@@ -45,7 +55,7 @@
   background-color: magenta;
   border: 1px magenta;
   border-radius: 17px;
-  padding: 2px 12px;
+  padding: 4px 12px;
   margin-right: 10px;
 }
 
@@ -72,6 +82,11 @@
   padding: 30px;
 }
 
+.news-item img {
+  height: 134px;
+  width: 196px;
+}
+
 .news-item:hover {
   background-color: magenta;
 }
@@ -94,6 +109,10 @@
 
 .news-item-header {
   font-size: 13px;
+}
+
+.bold {
+  font-weight: bold;
 }
 
 .news-date {
