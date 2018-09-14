@@ -79,6 +79,17 @@
   font-weight: bold;
 }
 
+.hidden {
+  display: none;
+}
+
+.showing {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
 .about-span {
   margin-bottom: 60px;
 }

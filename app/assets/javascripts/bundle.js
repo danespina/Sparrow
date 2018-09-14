@@ -300,6 +300,13 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "toggleHide",
+    value: function toggleHide() {
+      var hideThis = document.getElementById('sometimes-show');
+      hideThis.classList.toggle('hidden');
+      hideThis.classList.toggle('showing');
+    }
+  }, {
     key: "render",
     value: function render() {
       var assetTags;
@@ -312,11 +319,33 @@ function (_React$Component) {
         });
       }
 
+      var moreAbout = [{
+        "High Today": "/stats"
+      }, {
+        "Low Today": "/stats"
+      }, {
+        "Open Price": "/stats"
+      }, {
+        "Volume": "/stats"
+      }, {
+        "52 Week High": "/stats"
+      }, {
+        "52 Week Low": "/stats"
+      }];
+      var sometimesShow = moreAbout.map(function (el) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "bold"
+        }, Object.keys(el)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.values(el)));
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-about"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about-span"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "about-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.toggleHide
+      }, "ShowHide")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "asset-about-detail"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
@@ -324,31 +353,22 @@ function (_React$Component) {
         href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
       }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
-      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be seeded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
-      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be seeded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
-      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be seeded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Market Cap"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
-      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Market Cap"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.marketCap)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Price-Earnings Ratio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
-      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Price-Earnings Ratio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.peRatio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Dividend Yield"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
-      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Dividend Yield"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be pulled from /stats/")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loud")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loud")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "sometimes-show",
+        className: "showing"
+      }, sometimesShow))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about-span"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Collection"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, assetTags)));
     }
@@ -480,7 +500,8 @@ function (_React$Component) {
         type: "linear",
         dataKey: "close",
         stroke: "#00FF00",
-        dot: false
+        dot: false,
+        animationDuration: 0
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         domain: ['auto', 'auto'],
         hide: true
@@ -687,7 +708,7 @@ function (_React$Component) {
           className: "asset-show-main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "asset-show-header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "symbol: ", curAsset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "$", curAsset.iexRealtimePrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, curAsset.change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "symbol: ", curAsset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "$", curAsset.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, curAsset.change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           asset: curAsset
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_about__WEBPACK_IMPORTED_MODULE_4__["default"], {
           asset: curAsset

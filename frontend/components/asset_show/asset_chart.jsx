@@ -39,7 +39,7 @@ class AssetChart extends React.Component {
     return (
       <div className="the-chart">
         <LineChart width={676} height={196} data={this.state.chartData}>
-          <Line type="linear" dataKey="close" stroke="#00FF00" dot={false}/>
+          <Line type="linear" dataKey="close" stroke="#00FF00" dot={false} animationDuration={0}/>
           <YAxis domain={['auto', 'auto']} hide={true}/>
         </LineChart>
         <ul>
