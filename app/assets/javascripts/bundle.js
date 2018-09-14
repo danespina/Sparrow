@@ -322,7 +322,33 @@ function (_React$Component) {
         className: "bold"
       }, "CEO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
-      }, this.state.about.CEO))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "Market Cap"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "Price-Earnings Ratio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "Dividend Yield"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+      }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "bold"
+      }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loud")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about-span"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Collection"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, assetTags)));
     }

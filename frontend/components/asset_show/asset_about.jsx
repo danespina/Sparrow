@@ -34,6 +34,60 @@ class AssetAbout extends React.Component {
                 </a>
               </div>
               </li>
+            <li>
+              <div className="bold">Employees</div>
+              <div>
+                <a href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                  {this.state.about.CEO}
+                </a>
+              </div>
+              </li>
+            <li>
+              <div className="bold">Headquarters</div>
+              <div>
+                <a href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                  {this.state.about.CEO}
+                </a>
+              </div>
+              </li>
+            <li>
+              <div className="bold">Founded</div>
+              <div>
+                <a href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                  {this.state.about.CEO}
+                </a>
+              </div>
+              </li>
+            <li>
+              <div className="bold">Market Cap</div>
+              <div>
+                <a href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                  {this.state.about.CEO}
+                </a>
+              </div>
+              </li>
+            <li>
+              <div className="bold">Price-Earnings Ratio</div>
+              <div>
+                <a href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                  {this.state.about.CEO}
+                </a>
+              </div>
+              </li>
+            <li>
+              <div className="bold">Dividend Yield</div>
+              <div>
+                <a href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                  {this.state.about.CEO}
+                </a>
+              </div>
+              </li>
+            <li>
+              <div className="bold">Average Volume</div>
+              <div>
+                Loud
+              </div>
+              </li>
             </ul>
         </div>
         <div className="about-span">
