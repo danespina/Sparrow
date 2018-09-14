@@ -34,7 +34,9 @@ class AssetNews extends React.Component {
     });
     return(
       <div className="asset-news">
-        <h2>News</h2>
+        <div className="asset-header">
+          <h2>News</h2>
+        </div>
         <ul>
           {newsList}
         </ul>

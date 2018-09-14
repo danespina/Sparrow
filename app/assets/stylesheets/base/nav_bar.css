@@ -1,0 +1,32 @@
+.greeting-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 64px;
+  width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  background-color: white;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.greeting-container img {
+  width: 48px;
+  height: 48px;
+  background-color: lime;
+}
+
+.greet-links {
+  display: flex;
+  flex-direction: row;
+}
+
+.greeting-container input {
+  border: 1px solid black;
+  width: 500px;
+  height: 36px;
+  margin-left: -55%;
+}

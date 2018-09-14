@@ -342,10 +342,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about-span"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "about-header"
+        className: "asset-header"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        id: "show-hide",
         onClick: this.toggleHide
-      }, "ShowHide")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, "ShowHide")), "about", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "asset-about-detail"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
@@ -367,10 +368,12 @@ function (_React$Component) {
         className: "bold"
       }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loud")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "sometimes-show",
-        className: "showing"
+        className: "hidden"
       }, sometimesShow))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "about-span"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Collection"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, assetTags)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "asset-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Collection")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, assetTags)));
     }
   }]);
 
@@ -608,7 +611,9 @@ function (_React$Component) {
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-news"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "News"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, newsList));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "asset-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "News")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, newsList));
     }
   }]);
 
@@ -825,7 +830,10 @@ function (_React$Component) {
           to: "/"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: window.flagURL
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome ", this.props.currentUser.username, " "), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "text",
+          value: "don't search yet"
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.handleClick
         }, " Leave "));
       } else {
@@ -1220,23 +1228,27 @@ function (_React$Component) {
     value: function render() {
       // debugger
       if (this.props.currentUser) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "dash"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/assets/1"
-        }, "Peep the only asset!");
+        }, "Peep the only asset!"));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "flex flex-vertical"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left flex-child"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Sparrow lets you learn to invest in the stock market for free."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-words"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Sparrow lets you learn to invest in the stock market for free.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
         }, "Sign Up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "right flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: phoneURL
-        }))));
+        })));
       }
     }
   }]);

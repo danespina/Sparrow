@@ -1,6 +1,6 @@
 html, body {
   height: 100%;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-size: 13px;
   line-height: 19px;
 }
@@ -22,6 +22,11 @@ h3 {
 }
 
 .main-content {
+  padding-top: 36px;
   width: 1024px;
   margin: 0 auto;
+}
+
+.main {
+  padding-top: 64px;
 }

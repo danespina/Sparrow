@@ -14,7 +14,9 @@ class Greeting extends React.Component {
       return(
       <header className="greeting-container">
         <Link to='/'><img src={window.flagURL} /></Link>
-        <h1>Welcome {this.props.currentUser.username} </h1>
+        <form>
+          <input type="text" value="don't search yet"></input>
+        </form>
         <button onClick={this.handleClick}> Leave </button>
       </header>);
     } else {

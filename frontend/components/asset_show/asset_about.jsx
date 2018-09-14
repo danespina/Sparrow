@@ -38,10 +38,10 @@ class AssetAbout extends React.Component {
     return (
       <div className="asset-about">
         <div className="about-span">
-          <div className="about-header">
+          <div className="asset-header">
             <h2>About {this.props.asset.symbol}</h2>
-            <button onClick={this.toggleHide}>ShowHide</button>
-          </div>
+            <button id="show-hide" onClick={this.toggleHide}>ShowHide</button>
+          </div>about
           <h3>{this.state.about.description}</h3>
           <ul className="asset-about-detail">
             <li>
@@ -94,13 +94,15 @@ class AssetAbout extends React.Component {
                 Loud
               </div>
               </li>
-              <div id="sometimes-show" className="showing">
+              <div id="sometimes-show" className="hidden">
                 {sometimesShow}
               </div>
             </ul>
         </div>
         <div className="about-span">
-          <h2>Collection</h2>
+          <div className="asset-header">
+            <h2>Collection</h2>
+          </div>
           <ul>{assetTags}</ul>
         </div>
       </div>

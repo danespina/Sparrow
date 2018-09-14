@@ -40,10 +40,19 @@
   color: magenta;
 }
 
-.asset-show-main h2 {
+.asset-header {
   border-bottom: 1px solid magenta;
   padding-bottom: 10px;
   margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+#show-hide {
+  border: 0;
+  background-color: white;
+  color: magenta;
 }
 
 .asset-about h3 {
@@ -55,7 +64,7 @@
   background-color: magenta;
   border: 1px magenta;
   border-radius: 17px;
-  padding: 4px 12px;
+  padding: 2px 12px;
   margin-right: 10px;
 }
 
