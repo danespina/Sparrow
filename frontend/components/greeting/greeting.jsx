@@ -27,11 +27,17 @@ class Greeting extends React.Component {
       return(
       <header className="greeting-container">
         <Link to='/'><img src={window.flagURL} /></Link>
-        <form>
-          <input type="text" value="don't search yet"></input>
-        </form>
-        <button onClick={this.makeSeeds}>Make the seeds!</button>
-        <button onClick={this.handleClick}> Leave </button>
+        <div className="greeting-container-middle">
+          <div className="greeting-flex">
+            <form>
+              <input type="text" value="don't search yet"></input>
+            </form>
+            <nav className="greet-links">
+              <Link to='/'>Home</Link>
+              <button onClick={this.handleClick}>Leave</button>
+            </nav>
+          </div>
+        </div>
       </header>);
     } else {
       return(

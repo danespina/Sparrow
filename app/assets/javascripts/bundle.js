@@ -585,7 +585,7 @@ function (_React$Component) {
       Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["getExternalInfo"])("chart/".concat(this.state.timeFrame), this.props.asset).then(function (data) {
         var mappedData = data.map(function (datum) {
           return {
-            date: datum.date,
+            date: parseInt(datum.date),
             close: datum.close
           };
         });
@@ -604,6 +604,7 @@ function (_React$Component) {
         timeFrame: field
       }, function () {
         Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["getExternalInfo"])("chart/".concat(_this3.state.timeFrame), _this3.props.asset).then(function (data) {
+          console.log(data);
           var mappedData = data.map(function (datum) {
             return {
               date: datum.date,
@@ -643,7 +644,7 @@ function (_React$Component) {
         stroke: "#00FF00",
         dot: false,
         animationDuration: 0
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         domain: ['auto', 'auto'],
         hide: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, timeButtons));
@@ -982,14 +983,20 @@ function (_React$Component) {
           to: "/"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: window.flagURL
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "greeting-container-middle"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "greeting-flex"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           value: "don't search yet"
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: this.makeSeeds
-        }, "Make the seeds!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+          className: "greet-links"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/"
+        }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.handleClick
-        }, " Leave "));
+        }, "Leave")))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-container"

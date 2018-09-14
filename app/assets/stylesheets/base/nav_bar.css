@@ -17,16 +17,33 @@
   width: 48px;
   height: 48px;
   background-color: lime;
+  position: absolute;
+  top: 15px;
+  left: 3%;
 }
 
 .greet-links {
   display: flex;
   flex-direction: row;
+  position: absolute;
+  top: 20px;
+  right: 48px;
 }
 
 .greeting-container input {
   border: 1px solid black;
   width: 500px;
   height: 36px;
-  margin-left: -55%;
+  margin-left: 0;
+}
+
+.greeting-container-middle {
+  display: block;
+  margin: 0 auto;
+  width: 1024px;
+}
+
+.greeting-flex {
+  display: flex;
+  justify-content: space-between;
 }

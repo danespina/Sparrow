@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, YAxis, CartesianAxis } from 'recharts';
+import { LineChart, Line, YAxis, CartesianAxis, Tooltip } from 'recharts';
 import { getExternalInfo } from '../../util/asset_api_util';
 
 class AssetChart extends React.Component {
@@ -13,7 +13,7 @@ class AssetChart extends React.Component {
   componentDidMount(){
     getExternalInfo(`chart/${this.state.timeFrame}`, this.props.asset).then((data) => {
       let mappedData = data.map((datum) => {
-        return {date: datum.date, close: datum.close };
+        return {date: parseInt(datum.date), close: datum.close };
       });
       this.setState({ chartData: mappedData });
     });
@@ -23,6 +23,7 @@ class AssetChart extends React.Component {
 
     this.setState({ timeFrame: field }, () => {
       getExternalInfo(`chart/${this.state.timeFrame}`, this.props.asset).then((data) => {
+        console.log(data);
         let mappedData = data.map((datum) => {
           return {date: datum.date, close: datum.close };
         });
@@ -36,10 +37,12 @@ class AssetChart extends React.Component {
       return <button key={frame} className={this.state.timeFrame === frame ? "selected-time-frame" : ""}
         onClick={() => this.update(frame)}>{frame}</button>;
     });
+
     return (
       <div className="the-chart">
         <LineChart width={676} height={196} data={this.state.chartData}>
           <Line type="linear" dataKey="close" stroke="#00FF00" dot={false} animationDuration={0}/>
+          <Tooltip />
           <YAxis domain={['auto', 'auto']} hide={true}/>
         </LineChart>
         <ul>
