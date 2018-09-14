@@ -8,4 +8,4 @@
 
 users = User.create({username: "Demo", email: "Demo", password: "123456"})
 
-assets = Asset.create({symbol: "DIS", open: 109.25, close: 109.60})
+assets = Asset.create([{symbol: "DIS", open: 109.25, close: 109.60}, {symbol: "FB", open: 161.72, close: 161.36}, {symbol: "SPOT", open: 185, close: 184.75}])
