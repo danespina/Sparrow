@@ -40,10 +40,21 @@
   color: magenta;
 }
 
-.asset-show-main h2 {
+.asset-header {
+  display: flex;
+  justify-content: space-between;
   border-bottom: 1px solid var(--light-gray);
   padding-bottom: 10px;
   margin-bottom: 20px;
+}
+
+#show-hide {
+  background-color: white;
+  color: lime;
+}
+
+#show-hide:hover {
+  color: chartreuse;
 }
 
 .asset-about h3 {

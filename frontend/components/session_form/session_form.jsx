@@ -58,50 +58,49 @@ class SessionForm extends React.Component {
       header = (<h1>SIGNUP</h1>);
       loginFields = (
         <div>
-          <ul>
-            {errMessages}
-          </ul>
-          <label>Username
+          <label><div className="form-label">Username</div>
           <input type="text" value={this.state.username} onChange={this.update('username')}></input>
         </label>
-        <label>Email
+        <label><div className="form-label">Email</div>
           <input type="text" value={this.state.email} onChange={this.update('email')}></input>
         </label>
       </div>);
     } else {
-      header = (<h1>Welcome to Sparrow</h1>);
+      header = (<h2>Welcome to Sparrow</h2>);
       loginFields = (<div>
-        <ul>
-          {errMessages}
-        </ul>
-        <label>Email or Username
+        <label><div className="form-label">Email or Username</div>
           <input type="text" value={this.state.username} onChange={this.update('username')}></input>
         </label>
       </div>);
     }
     return(
-    <div className="flex flex-vertical">
-      <div className="flex-child greet-img">
-        <img src={window.shipURL} className="greet-ship"/>
-      </div>
-      <div className="flex-child greet-form-container">
-        <div className="greet-form">
-          {header}
-          <form onSubmit={this.handleSubmit}>
-            {loginFields}
-            <label>Password
-              <input type="text" value={this.state.password} onChange={this.update('password')}></input>
-            </label>
-            <button>
-              <div>
-                Submit
-              </div>
-            </button>
-          </form>
-          <button onClick={this.startDemo}>Demo User!</button>
+      <div className="session-div">
+        <div className="flex">
+          <div className="greet-img">
+            <img src={window.shipURL} className="greet-ship"/>
+          </div>
+          <div className="greet-form-container">
+            <div className="greet-form">
+              {header}
+              <form onSubmit={this.handleSubmit}>
+                {loginFields}
+                <label><div className="form-label">Password</div>
+                  <input type="password" value={this.state.password} onChange={this.update('password')}></input>
+                </label>
+                <ul>
+                  {errMessages}
+                </ul>
+                <button>
+                  <div>
+                    Submit
+                  </div>
+                </button>
+              </form>
+              <button onClick={this.startDemo} id="demo-button">Demo User!</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
   );
   }
 }

@@ -1,0 +1,86 @@
+.session-div {
+  display: flex;
+  min-width: 100%;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.greet-img {
+  display: flex;
+  flex: 1 1 50%;
+  min-width: 520px;
+}
+
+.greet-form-container {
+  display: block;
+  flex: 1 1 50%;
+  max-width: 50%;
+}
+
+.greet-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 52px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  width: 412px;
+}
+
+.form-label {
+  padding: 9px 0;
+}
+
+.greet-form h2 {
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -.14px;
+  line-height: 30px;
+  margin: 0 0 16px;
+}
+.greet-form form, label{
+  display: flex;
+  flex-direction: column;
+}
+
+.greet-form input {
+  background-color: gray;
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 15px 20px;
+  width: 100%;
+  line-height: 16px;
+}
+
+.greet-form input:hover {
+  background-color: white;
+  border: 1px solid darkgray;
+}
+
+.greet-form input:focus {
+  background-color: white;
+  border: 1px solid magenta;
+}
+
+#demo-button {
+  margin-top: 0;
+}
+
+.greet-form button {
+  margin-top: 60px;
+  display: inline-flex;
+  background-color: lime;
+  padding: 13px 0;
+  width: 140px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.greet-ship {
+  background-color: lime;
+  max-height: 900px;
+}

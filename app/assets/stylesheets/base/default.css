@@ -28,6 +28,7 @@ h3 {
 
 .main {
   padding-top: 64px;
+  display: flex;
 }
 
 :root {
