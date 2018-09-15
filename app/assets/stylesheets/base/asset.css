@@ -33,11 +33,16 @@
   margin-right: 12px;
   padding-bottom: 12px;
   margin-bottom: 2px;
+  font-weight: bold;
+}
+
+.the-chart button:hover {
+  color: lime;
 }
 
 .selected-time-frame {
   border-bottom: 2px solid lime;
-  color: magenta;
+  color: lime;
 }
 
 .asset-header {

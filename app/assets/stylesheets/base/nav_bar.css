@@ -42,11 +42,19 @@
   right: 48px;
 }
 
+.greet-links button {
+  margin-left: 33px;
+}
+
 .greeting-container input {
   border: 1px solid black;
   /* width: 500px; */
   height: 36px;
   margin-left: 0;
+}
+
+.greeting-container input:hover, input:focus {
+  box-shadow: 5px 5px 20px;
 }
 
 .greeting-container-middle {
@@ -58,4 +66,22 @@
 .greeting-flex {
   display: flex;
   justify-content: space-between;
+}
+
+.greet-links a {
+  margin-left: 10px;
+  color: black;
+  font-weight: bold;
+}
+
+.greet-links button {
+  font-weight: bold;
+}
+
+.greet-links a:hover {
+  color: lime;
+}
+
+.greet-links button:hover {
+  color: lime;
 }
