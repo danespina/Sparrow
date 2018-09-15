@@ -26,12 +26,16 @@ class Greeting extends React.Component {
     if (this.props.currentUser) {
       return(
       <header className="greeting-container">
-        <Link to='/'><img src={window.flagURL} /></Link>
+        <div className="greeting-logo">
+          <Link to='/'><img src={window.flagURL} /></Link>
+        </div>
         <div className="greeting-container-middle">
           <div className="greeting-flex">
-            <form>
-              <input type="text" value="don't search yet"></input>
-            </form>
+            <div className="greeting-search">
+              <form>
+                <input type="text" value="don't search yet"></input>
+              </form>
+            </div>
             <nav className="greet-links">
               <Link to='/'>Home</Link>
               <button onClick={this.handleClick}>Leave</button>
