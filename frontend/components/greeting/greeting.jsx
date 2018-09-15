@@ -46,7 +46,9 @@ class Greeting extends React.Component {
     } else {
       return(
         <div className="greeting-container">
-          <Link to='/'><img src={window.flagURL} /></Link>
+          <div className="greeting-logo">
+            <Link to='/'><img src={window.flagURL} /></Link>
+          </div>
           <div className="greet-links">
             <Link to='/signup'>Sign Up</Link>
             <Link to='/login'>Log In</Link>

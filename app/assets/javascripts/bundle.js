@@ -421,7 +421,9 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AssetAbout).call(this, props));
     _this.state = {
-      about: {}
+      about: {},
+      stats: {},
+      quote: {}
     };
     return _this;
   }
@@ -434,6 +436,16 @@ function (_React$Component) {
       Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])("company", this.props.asset).then(function (data) {
         _this2.setState({
           about: data
+        });
+      });
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])("stats", this.props.asset).then(function (data) {
+        _this2.setState({
+          stats: data
+        });
+      });
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])("quote", this.props.asset).then(function (data) {
+        _this2.setState({
+          quote: data
         });
       });
     }
@@ -458,23 +470,24 @@ function (_React$Component) {
       }
 
       var moreAbout = [{
-        "High Today": "/stats"
+        "High Today": this.props.asset.high
       }, {
-        "Low Today": "/stats"
+        "Low Today": this.props.asset.low
       }, {
-        "Open Price": "/stats"
+        "Open Price": this.props.asset.open
       }, {
-        "Volume": "/stats"
+        "Volume": this.props.asset.iexVolume
       }, {
-        "52 Week High": "/stats"
+        "52 Week High": this.state.stats.week52high
       }, {
-        "52 Week Low": "/stats"
+        "52 Week Low": this.state.stats.week52low
       }];
       var sometimesShow = moreAbout.map(function (el) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bold"
         }, Object.keys(el)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.values(el)));
       });
+      console.log(this.props.asset);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-about"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -502,9 +515,9 @@ function (_React$Component) {
         className: "bold"
       }, "Price-Earnings Ratio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.peRatio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Dividend Yield"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be pulled from /stats/")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Dividend Yield"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.stats.dividendYield)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Loud")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.avgTotalVolume)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "sometimes-show",
         className: "hidden"
       }, sometimesShow))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -646,10 +659,8 @@ function (_React$Component) {
         animationDuration: 0
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
         position: {
-          x: 0,
           y: 0
-        },
-        offset: -90
+        }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         domain: ['auto', 'auto'],
         hide: true
@@ -1010,11 +1021,13 @@ function (_React$Component) {
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-container"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "greeting-logo"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: window.flagURL
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greet-links"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"

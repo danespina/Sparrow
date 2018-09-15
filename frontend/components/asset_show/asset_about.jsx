@@ -4,12 +4,18 @@ import { getExternalInfo } from '../../util/asset_api_util';
 class AssetAbout extends React.Component {
   constructor(props){
     super(props);
-    this.state = { about: {} };
+    this.state = { about: {}, stats: {}, quote: {} };
   }
 
   componentDidMount(){
     getExternalInfo("company", this.props.asset).then((data) => {
       this.setState({ about: data });
+    });
+    getExternalInfo("stats", this.props.asset).then((data) => {
+      this.setState({ stats: data });
+    });
+    getExternalInfo("quote", this.props.asset).then((data) => {
+      this.setState({ quote: data });
     });
   }
 
@@ -26,7 +32,12 @@ class AssetAbout extends React.Component {
         return <button key={tag}>{tag}</button>;
       });
     }
-    const moreAbout = [{"High Today": "/stats"}, {"Low Today": "/stats"}, {"Open Price": "/stats"}, {"Volume": "/stats"}, {"52 Week High": "/stats"}, {"52 Week Low": "/stats"},];
+    const moreAbout = [{"High Today": this.props.asset.high},
+      {"Low Today": this.props.asset.low},
+      {"Open Price": this.props.asset.open},
+      {"Volume": this.props.asset.iexVolume},
+      {"52 Week High": this.state.stats.week52high},
+      {"52 Week Low": this.state.stats.week52low},];
     const sometimesShow = moreAbout.map((el) => {
       return (<li>
         <div className="bold">{Object.keys(el)}</div>
@@ -35,6 +46,7 @@ class AssetAbout extends React.Component {
         </div>
       </li>);
     });
+    console.log(this.props.asset);
     return (
       <div className="asset-about">
         <div className="about-span">
@@ -85,13 +97,13 @@ class AssetAbout extends React.Component {
             <li>
               <div className="bold">Dividend Yield</div>
               <div>
-                To be pulled from /stats/
+                {this.state.stats.dividendYield}
               </div>
               </li>
             <li>
               <div className="bold">Average Volume</div>
               <div>
-                Loud
+                {this.props.asset.avgTotalVolume}
               </div>
               </li>
               <div id="sometimes-show" className="hidden">
