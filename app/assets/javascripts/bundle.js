@@ -443,11 +443,6 @@ function (_React$Component) {
           stats: data
         });
       });
-      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])("quote", this.props.asset).then(function (data) {
-        _this2.setState({
-          quote: data
-        });
-      });
     }
   }, {
     key: "toggleHide",
@@ -487,7 +482,6 @@ function (_React$Component) {
           className: "bold"
         }, Object.keys(el)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.values(el)));
       });
-      console.log(this.props.asset);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-about"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -658,7 +652,12 @@ function (_React$Component) {
         dot: false,
         animationDuration: 0
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
+        wrapperStyle: {
+          background: 'transparent',
+          border: 'none'
+        },
         position: {
+          x: 0,
           y: 0
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
@@ -1425,17 +1424,23 @@ function (_React$Component) {
     value: function render() {
       // debugger
       if (this.props.currentUser) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          clasName: "dash"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/assets/1"
         }, "Peep the only asset!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_index_asset_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], null));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "flex flex-vertical"
+          className: "flex"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left flex-child"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Sparrow lets you learn to invest in the stock market for free."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-words"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Sparrow lets you learn to invest in the stock market for free.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
         }, "Sign Up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "right flex-child"

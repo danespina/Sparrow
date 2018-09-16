@@ -3,6 +3,8 @@
   width: 1170px;
   margin: 0 auto;
   padding-top: 64px;
+  align-items: center;
+  justify-content: center;
 }
 
 .dash {
@@ -29,8 +31,8 @@
 }
 
 .left {
-  margin-top: 18%;
-  padding: 0 30px;
+  margin-top: 15%;
+  padding: 0 15px;
 }
 
 .left a {

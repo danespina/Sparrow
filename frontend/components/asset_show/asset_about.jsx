@@ -14,9 +14,6 @@ class AssetAbout extends React.Component {
     getExternalInfo("stats", this.props.asset).then((data) => {
       this.setState({ stats: data });
     });
-    getExternalInfo("quote", this.props.asset).then((data) => {
-      this.setState({ quote: data });
-    });
   }
 
   toggleHide() {
@@ -46,7 +43,6 @@ class AssetAbout extends React.Component {
         </div>
       </li>);
     });
-    console.log(this.props.asset);
     return (
       <div className="asset-about">
         <div className="about-span">

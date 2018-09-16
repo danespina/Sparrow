@@ -42,7 +42,7 @@ class AssetChart extends React.Component {
       <div className="the-chart">
         <LineChart width={676} height={196} data={this.state.chartData}>
           <Line type="linear" dataKey="close" stroke="#00FF00" dot={false} animationDuration={0}/>
-          <Tooltip position={{ y: 0 }} />
+          <Tooltip  wrapperStyle={{ background: 'transparent', border: 'none'}} position={{ x: 0, y: 0 }} />
           <YAxis domain={['auto', 'auto']} hide={true}/>
         </LineChart>
         <ul>

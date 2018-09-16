@@ -1,8 +1,8 @@
 html, body {
   height: 100%;
+  font-family: 'Roboto', sans-serif;
   font-size: 13px;
   line-height: 19px;
-  font-family: 'Roboto', sans-serif;
 }
 
 h1 {
@@ -22,18 +22,12 @@ h3 {
 }
 
 .main-content {
+  padding-top: 36px;
   width: 1024px;
   margin: 0 auto;
+  display: flex;
 }
 
 .main {
   padding-top: 64px;
-  display: flex;
-}
-
-:root {
-  --main-green: #21ce99;
-  --light-green: rgb(230, 249, 243);
-  --black: #171718;
-  --light-gray: #F4F4F8;
 }
