@@ -592,7 +592,7 @@ function (_React$Component) {
       Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["getExternalInfo"])("chart/".concat(this.state.timeFrame), this.props.asset).then(function (data) {
         var mappedData = data.map(function (datum) {
           return {
-            date: parseInt(datum.date),
+            label: datum.label,
             close: datum.close
           };
         });
@@ -614,7 +614,7 @@ function (_React$Component) {
           console.log(data);
           var mappedData = data.map(function (datum) {
             return {
-              date: datum.date,
+              label: datum.label,
               close: datum.close
             };
           });
@@ -1250,9 +1250,7 @@ function (_React$Component) {
       var errMessages;
 
       if (this.props.errors.length > 0) {
-        errMessages = this.props.errors.map(function (err) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, "err");
-        });
+        errMessages = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, this.props.errors[0]);
       }
 
       var loginFields;
@@ -1438,7 +1436,7 @@ function (_React$Component) {
           className: "left flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left-header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Investing."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Now for the rest of us.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left-words"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Sparrow lets you learn to invest in the stock market for free.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"

@@ -20,9 +20,9 @@
 }
 
 .right {
-  margin-top: 10%;
   justify-content: center;
   overflow: hidden;
+  padding: 0 15px;
 }
 .right img {
   float: right;
@@ -31,7 +31,6 @@
 }
 
 .left {
-  margin-top: 15%;
   padding: 0 15px;
 }
 

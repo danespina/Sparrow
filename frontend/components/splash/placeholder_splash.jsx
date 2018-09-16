@@ -18,8 +18,8 @@ class Splash extends React.Component {
           <div className="flex">
             <div className="left flex-child">
               <div className="left-header">
-                <h1>Investing</h1>
-                <h1>Now for the rest of us</h1>
+                <h1>Investing.</h1>
+                <h1>Now for the rest of us.</h1>
               </div>
               <div className="left-words">
                 <h4>Sparrow lets you learn to invest in the stock market for free.</h4>

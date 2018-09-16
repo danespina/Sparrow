@@ -13,7 +13,7 @@ class AssetChart extends React.Component {
   componentDidMount(){
     getExternalInfo(`chart/${this.state.timeFrame}`, this.props.asset).then((data) => {
       let mappedData = data.map((datum) => {
-        return {date: parseInt(datum.date), close: datum.close };
+        return {label: datum.label, close: datum.close };
       });
       this.setState({ chartData: mappedData });
     });
@@ -25,7 +25,7 @@ class AssetChart extends React.Component {
       getExternalInfo(`chart/${this.state.timeFrame}`, this.props.asset).then((data) => {
         console.log(data);
         let mappedData = data.map((datum) => {
-          return {date: datum.date, close: datum.close };
+          return {label: datum.label, close: datum.close };
         });
         this.setState({ chartData: mappedData });
       });

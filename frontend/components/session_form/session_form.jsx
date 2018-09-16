@@ -48,9 +48,7 @@ class SessionForm extends React.Component {
     let header;
     let errMessages;
     if (this.props.errors.length > 0){
-      errMessages = this.props.errors.map((err) => {
-        return <li>err</li>;
-      });
+      errMessages = (<li>{this.props.errors[0]}</li>);
     }
 
     let loginFields;
