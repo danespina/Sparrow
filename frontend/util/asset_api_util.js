@@ -26,14 +26,22 @@ export const getQuote = (sym) => {
   });
 };
 
-export const createAsset = (sym) => {
-  console.log(`making ${sym}!`);
-  getQuote(sym).then((quote) => {
-    const asset = { symbol: sym, open: quote.open, close: quote.close };
-    return $.ajax({
-      method: "POST",
-      url: "/api/assets",
-      data: { asset },
-    });
+// export const createAsset = (sym) => {
+//   console.log(`making ${sym}!`);
+//   getQuote(sym).then((quote) => {
+//     const asset = { symbol: sym, open: quote.open, close: quote.close };
+//     return $.ajax({
+//       method: "POST",
+//       url: "/api/assets",
+//       data: { asset },
+//     });
+//   });
+// };
+
+export const createAsset = (asset) => {
+  return $.ajax({
+    method: "POST",
+    url: "/api/assets",
+    data: { asset },
   });
 };

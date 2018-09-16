@@ -16,8 +16,8 @@ class Greeting extends React.Component {
       method: "GET",
       url: `https://api.iextrading.com/1.0/ref-data/symbols`,
     }).then((resArr) => {
-      resArr.slice(0,200).map((el) => {
-        return createAsset(el.symbol);
+      resArr.map((el) => {
+        return createAsset({ symbol: el.symbol, name: el.name });
       });
     });
   }
@@ -37,6 +37,7 @@ class Greeting extends React.Component {
               </form>
             </div>
             <nav className="greet-links">
+              <button onClick={this.makeSeeds}>Make the seeds!</button>
               <Link to='/'>Home</Link>
               <button onClick={this.handleClick}>Leave</button>
             </nav>

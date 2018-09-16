@@ -18,6 +18,6 @@ class Api::AssetsController < ApplicationController
 
   private
   def asset_params
-    params.require(:asset).permit(:symbol, :open, :close)
+    params.require(:asset).permit(:symbol, :name)
   end
 end

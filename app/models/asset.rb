@@ -1,3 +1,4 @@
 class Asset < ApplicationRecord
-  validates :symbol, :open, :close, presence: true
+  validates :symbol, :name, presence: true
+  validates :symbol, uniqueness: true
 end

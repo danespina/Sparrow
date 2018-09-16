@@ -984,8 +984,11 @@ function (_React$Component) {
         method: "GET",
         url: "https://api.iextrading.com/1.0/ref-data/symbols"
       }).then(function (resArr) {
-        resArr.slice(0, 200).map(function (el) {
-          return Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["createAsset"])(el.symbol);
+        resArr.map(function (el) {
+          return Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["createAsset"])({
+            symbol: el.symbol,
+            name: el.name
+          });
         });
       });
     }
@@ -1012,7 +1015,9 @@ function (_React$Component) {
           value: "don't search yet"
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
           className: "greet-links"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          onClick: this.makeSeeds
+        }, "Make the seeds!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
         }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.handleClick
@@ -1809,22 +1814,25 @@ var getQuote = function getQuote(sym) {
     method: "GET",
     url: "https://api.iextrading.com/1.0/stock/".concat(sym, "/quote")
   });
-};
-var createAsset = function createAsset(sym) {
-  console.log("making ".concat(sym, "!"));
-  getQuote(sym).then(function (quote) {
-    var asset = {
-      symbol: sym,
-      open: quote.open,
-      close: quote.close
-    };
-    return $.ajax({
-      method: "POST",
-      url: "/api/assets",
-      data: {
-        asset: asset
-      }
-    });
+}; // export const createAsset = (sym) => {
+//   console.log(`making ${sym}!`);
+//   getQuote(sym).then((quote) => {
+//     const asset = { symbol: sym, open: quote.open, close: quote.close };
+//     return $.ajax({
+//       method: "POST",
+//       url: "/api/assets",
+//       data: { asset },
+//     });
+//   });
+// };
+
+var createAsset = function createAsset(asset) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/assets",
+    data: {
+      asset: asset
+    }
   });
 };
 

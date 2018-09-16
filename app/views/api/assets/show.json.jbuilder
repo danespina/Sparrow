@@ -1,1 +1,1 @@
-json.extract! @asset, :id, :symbol
+json.extract! @asset, :id, :symbol, :name
