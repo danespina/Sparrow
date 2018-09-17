@@ -23,16 +23,11 @@ class Greeting extends React.Component {
   }
 
   render () {
-    const logo = (<svg className="logo" viewBox="0 0 1024 1024">
-    <path class="path1" d="M 0 1000 L 100 1000 L 200 800 L 600 600 L 450 580 L 400 400 L 0 1000z"></path>
-  <path class="path1" d="M 150 750 L 380 380 L 310 380 L 280 280 L 150 750z"></path>
-  <path class="path1" d="M 300 260 L 700 100 L 620 580 L 460 560 L 420 380 L 400 360 L 330 360"></path>
-  </svg>);
     if (this.props.currentUser) {
       return(
       <header className="greeting-container">
         <div className="greeting-logo">
-          <Link to='/'>{logo}</Link>
+          <Link to='/'><img src={window.flagURL} /></Link>
         </div>
         <div className="greeting-container-middle">
           <div className="greeting-flex">
@@ -42,7 +37,6 @@ class Greeting extends React.Component {
               </form>
             </div>
             <nav className="greet-links">
-              <button onClick={this.makeSeeds}>Make the seeds!</button>
               <Link to='/'>Home</Link>
               <button onClick={this.handleClick}>Leave</button>
             </nav>
@@ -53,7 +47,7 @@ class Greeting extends React.Component {
       return(
         <div className="greeting-container">
           <div className="greeting-logo">
-            <Link to='/'>{logo}</Link>
+            <Link to='/'><img src={window.flagURL} /></Link>
           </div>
           <div className="greet-links">
             <Link to='/signup'>Sign Up</Link>
