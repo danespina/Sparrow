@@ -6,6 +6,8 @@ class User < ApplicationRecord
 
   attr_reader :password
 
+  has_many :portfolios, dependent: :destroy
+
   def self.find_by_credentials(username, password)
     user = User.find_by(username: username)
     user ||= User.find_by(email: username)
