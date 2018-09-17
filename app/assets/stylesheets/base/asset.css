@@ -37,12 +37,12 @@
 }
 
 .the-chart button:hover {
-  color: lime;
+  color: var(--main-green);
 }
 
 .selected-time-frame {
-  border-bottom: 2px solid lime;
-  color: lime;
+  border-bottom: 2px solid var(--main-green);
+  color: var(--main-green);
 }
 
 .asset-header {
@@ -55,11 +55,11 @@
 
 #show-hide {
   background-color: white;
-  color: lime;
+  color: var(--main-green);
 }
 
 #show-hide:hover {
-  color: chartreuse;
+  color: var(--medium-green);
 }
 
 .asset-about h3 {
@@ -68,15 +68,17 @@
 
 .asset-about button {
   font-weight: bold;
-  background-color: magenta;
-  border: 1px magenta;
+  background-color: var(--light-green);
+  border: 1px var(--light-green);
+  color: var(--main-green);
   border-radius: 17px;
   padding: 4px 12px;
   margin-right: 10px;
 }
 
 .asset-about button:hover {
-  background-color: lime;
+  background-color: var(--main-green);
+  color: #fff;
 }
 
 .asset-about-detail {
@@ -91,7 +93,7 @@
 }
 
 .asset-about-detail a {
-  color: magenta;
+  color: var(--main-green);
   font-weight: bold;
 }
 
@@ -141,6 +143,7 @@
 
 .news-item-body h3 {
   font-size: 16px;
+  line-height: 22px;
   margin-bottom: 2px;
 }
 

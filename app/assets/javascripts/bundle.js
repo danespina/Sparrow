@@ -648,7 +648,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Line"], {
         type: "linear",
         dataKey: "close",
-        stroke: "#00FF00",
+        stroke: "#21ce99",
         dot: false,
         animationDuration: 0
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
@@ -729,9 +729,11 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])("news", this.props.asset).then(function (data) {
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getNews"])(this.props.asset).then(function (data) {
+        console.log(data);
+
         _this2.setState({
-          news: data
+          news: data.articles.slice(5)
         });
       });
     }
@@ -739,16 +741,16 @@ function (_React$Component) {
     key: "render",
     value: function render() {
       var newsList = this.state.news.map(function (news) {
-        var niceDate = new Date(news.datetime);
+        var niceDate = new Date(news.publishedAt);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: news.datetime,
+          key: news.publishedAt,
           className: "news-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: news.url
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "news-item-col1"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: window.flagURL,
+          src: news.urlToImage,
           className: "news-img"
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "news-item-col2"
@@ -756,13 +758,15 @@ function (_React$Component) {
           className: "news-item-header"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "bold"
-        }, news.source), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, news.source.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "news-date"
         }, niceDate.toDateString())), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "news-item-body"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
           className: "bold"
-        }, news.headline), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, news.summary)))));
+        }, news.title), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+          className: "light"
+        }, news.description)))));
       });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-news"
@@ -1781,12 +1785,13 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/asset_api_util.js ***!
   \*****************************************/
-/*! exports provided: getExternalInfo, fetchAsset, fetchAssets, getQuote, createAsset */
+/*! exports provided: getExternalInfo, getNews, fetchAsset, fetchAssets, getQuote, createAsset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getExternalInfo", function() { return getExternalInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNews", function() { return getNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAsset", function() { return fetchAsset; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAssets", function() { return fetchAssets; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getQuote", function() { return getQuote; });
@@ -1795,6 +1800,12 @@ var getExternalInfo = function getExternalInfo(requestType, asset) {
   return $.ajax({
     method: "GET",
     url: "https://api.iextrading.com/1.0/stock/".concat(asset.symbol, "/").concat(requestType)
+  });
+};
+var getNews = function getNews(asset) {
+  return $.ajax({
+    method: "GET",
+    url: "https://newsapi.org/v2/everything?q=".concat(asset.symbol, "&apiKey=d2bd5f8caa8a48d2990c419acd49b433")
   });
 };
 var fetchAsset = function fetchAsset(id) {

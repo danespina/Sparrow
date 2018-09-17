@@ -1,5 +1,5 @@
 import React from 'react';
-import { getExternalInfo } from '../../util/asset_api_util';
+import { getExternalInfo, getNews } from '../../util/asset_api_util';
 
 class AssetNews extends React.Component {
   constructor(props){
@@ -7,26 +7,27 @@ class AssetNews extends React.Component {
     this.state = { news: []};
   }
   componentDidMount(){
-    getExternalInfo("news", this.props.asset).then((data) => {
-      this.setState({ news: data });
+    getNews(this.props.asset).then((data) => {
+      console.log(data);
+      this.setState({ news: data.articles.slice(5) });
     });
   }
   render () {
     const newsList = this.state.news.map( (news) => {
-      let niceDate = new Date(news.datetime);
-      return (<li key={news.datetime} className="news-item">
+      let niceDate = new Date(news.publishedAt);
+      return (<li key={news.publishedAt} className="news-item">
         <a href={news.url}>
           <div className="news-item-col1">
-            <img src={window.flagURL} className="news-img" />
+            <img src={news.urlToImage} className="news-img" />
           </div>
           <div className="news-item-col2">
             <div className="news-item-header">
-              <span className="bold">{news.source}</span>
+              <span className="bold">{news.source.name}</span>
               <span className="news-date">{niceDate.toDateString()}</span>
             </div>
             <div className="news-item-body">
-              <h3 className="bold">{news.headline}</h3>
-              <h3>{news.summary}</h3>
+              <h3 className="bold">{news.title}</h3>
+              <h3 className="light">{news.description}</h3>
             </div>
           </div>
       </a>

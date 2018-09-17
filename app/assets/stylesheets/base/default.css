@@ -1,6 +1,7 @@
 html, body {
   height: 100%;
   font-family: 'Roboto', sans-serif;
+  color: var(--black);
   font-size: 13px;
   line-height: 19px;
 }
@@ -19,6 +20,10 @@ h3 {
 
 .bold {
   font-weight: bold;
+}
+
+.light {
+  font-weight: lighter;
 }
 
 .main-content {

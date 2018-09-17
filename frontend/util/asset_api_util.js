@@ -5,6 +5,13 @@ export const getExternalInfo = (requestType, asset) => {
   });
 };
 
+export const getNews = (asset) => {
+  return $.ajax({
+    method: "GET",
+    url: `https://newsapi.org/v2/everything?q=${asset.symbol}&apiKey=d2bd5f8caa8a48d2990c419acd49b433`,
+  });
+};
+
 export const fetchAsset = (id) => {
   return $.ajax({
     method: "GET",

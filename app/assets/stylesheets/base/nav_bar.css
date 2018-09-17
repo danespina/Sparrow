@@ -79,9 +79,9 @@
 }
 
 .greet-links a:hover {
-  color: lime;
+  color: var(--main-green);
 }
 
 .greet-links button:hover {
-  color: lime;
+  color: var(--main-green);
 }
