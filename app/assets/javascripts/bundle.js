@@ -996,6 +996,19 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var logo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+        viewBox: "0 0 1024 1024"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        class: "path1",
+        d: "M 0 1000 L 100 1000 L 200 800 L 600 600 L 450 580 L 400 400 L 0 1000z"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        class: "path1",
+        d: "M 150 750 L 380 380 L 310 380 L 280 280 L 150 750z"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        class: "path1",
+        d: "M 300 260 L 700 100 L 620 580 L 460 560 L 420 380 L 400 360 L 330 360"
+      }));
+
       if (this.props.currentUser) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "greeting-container"
@@ -1003,9 +1016,7 @@ function (_React$Component) {
           className: "greeting-logo"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: window.flagURL
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, logo)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-container-middle"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-flex"
@@ -1028,9 +1039,7 @@ function (_React$Component) {
           className: "greeting-logo"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: window.flagURL
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, logo)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greet-links"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
