@@ -22,6 +22,19 @@ class AssetAbout extends React.Component {
     hideThis.classList.toggle('showing');
   }
 
+  formatNums(number) {
+    const num = parseFloat(number);
+    if(num > Math.pow(10, 9)){
+      return (num / Math.pow(10, 9)).toFixed(2) + ' B';
+    } else if (num > Math.pow(10, 6)) {
+      return (num / Math.pow(10, 6)).toFixed(2) + ' M';
+    } else if (num){
+      return num.toFixed(2);
+    } else {
+      return num;
+    }
+  }
+
   render () {
     let assetTags;
     if (this.state.about.tags){
@@ -29,12 +42,12 @@ class AssetAbout extends React.Component {
         return <button key={tag}>{tag}</button>;
       });
     }
-    const moreAbout = [{"High Today": this.props.asset.high},
-      {"Low Today": this.props.asset.low},
-      {"Open Price": this.props.asset.open},
-      {"Volume": this.props.asset.iexVolume},
-      {"52 Week High": this.state.stats.week52high},
-      {"52 Week Low": this.state.stats.week52low},];
+    const moreAbout = [{"High Today": `$ ${this.props.asset.high}`},
+      {"Low Today": `$ ${this.props.asset.low}`},
+      {"Open Price": `$ ${this.props.asset.open}`},
+      {"Volume": this.formatNums(this.props.asset.iexVolume)},
+      {"52 Week High": `$ ${this.state.stats.week52high}`},
+      {"52 Week Low": `$ ${this.state.stats.week52low}`},];
     const sometimesShow = moreAbout.map((el) => {
       return (<li>
         <div className="bold">{Object.keys(el)}</div>
@@ -81,7 +94,7 @@ class AssetAbout extends React.Component {
             <li>
               <div className="bold">Market Cap</div>
               <div>
-                {this.props.asset.marketCap}
+                {this.formatNums(this.props.asset.marketCap)}
               </div>
               </li>
             <li>
@@ -93,13 +106,13 @@ class AssetAbout extends React.Component {
             <li>
               <div className="bold">Dividend Yield</div>
               <div>
-                {this.state.stats.dividendYield}
+                {this.formatNums(this.state.stats.dividendYield)}
               </div>
               </li>
             <li>
               <div className="bold">Average Volume</div>
               <div>
-                {this.props.asset.avgTotalVolume}
+                {this.formatNums(this.props.asset.avgTotalVolume)}
               </div>
               </li>
               <div id="sometimes-show" className="hidden">

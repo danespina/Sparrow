@@ -35,11 +35,11 @@
 }
 
 .left a {
-    background-color: lime;
+    background-color: var(--main-green);
     color: white;
     font-size: 16px;
     font-weight: bold;
-    border: 16px solid lime;
+    border: 16px solid var(--main-green);
     border-radius: 15px;
     position: relative;
     display: inline-block;

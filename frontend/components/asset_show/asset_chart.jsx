@@ -23,7 +23,6 @@ class AssetChart extends React.Component {
 
     this.setState({ timeFrame: field }, () => {
       getExternalInfo(`chart/${this.state.timeFrame}`, this.props.asset).then((data) => {
-        console.log(data);
         let mappedData = data.map((datum) => {
           return {label: datum.label, close: datum.close };
         });

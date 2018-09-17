@@ -72,7 +72,7 @@
 .greet-form button {
   margin-top: 60px;
   display: inline-flex;
-  background-color: lime;
+  background-color: var(--main-green);
   padding: 13px 0;
   width: 140px;
   align-items: center;
@@ -81,6 +81,6 @@
 }
 
 .greet-ship {
-  background-color: lime;
+  background-color: var(--main-green);
   max-height: 900px;
 }

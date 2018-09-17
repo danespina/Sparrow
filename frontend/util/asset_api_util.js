@@ -8,7 +8,7 @@ export const getExternalInfo = (requestType, asset) => {
 export const getNews = (asset) => {
   return $.ajax({
     method: "GET",
-    url: `https://newsapi.org/v2/everything?q=${asset.symbol}&apiKey=${process.env.NEWS_API_KEY}`,
+    url: `https://newsapi.org/v2/everything?q=${asset.name}&apiKey=${asset.key}`,
   });
 };
 

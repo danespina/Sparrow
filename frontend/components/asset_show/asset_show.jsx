@@ -24,8 +24,6 @@ class AssetShow extends React.Component {
   }
 
   render () {
-    // console.log(this.props);
-    console.log(this.state);
     if(!this.state.assets[this.props.assetId]){
       return (<h1>wait</h1>);
     } else {
@@ -34,8 +32,7 @@ class AssetShow extends React.Component {
         <div className="asset-show-main">
           <header className="asset-show-header">
             <h1>{curAsset.companyName}!</h1>
-            <h3>symbol: {curAsset.symbol}</h3>
-            <h1>${curAsset.latestPrice}</h1>
+            <span className="display-nums">${curAsset.latestPrice}</span>
             <h3>{curAsset.change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
           </header>
           <AssetChart asset={curAsset} />
@@ -44,7 +41,6 @@ class AssetShow extends React.Component {
         </div>
       );
     }
-    // console.log(this.props.assets);
   }
 }
 

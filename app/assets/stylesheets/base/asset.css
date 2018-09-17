@@ -6,12 +6,18 @@
 }
 
 .asset-show-main h1 {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: bold;
+  line-height: 42px;
 }
 
 .asset-show-main h2 {
   font-size: 30px;
+}
+
+.display-nums {
+  font-size: 36px;
+  line-height: 42px;
 }
 
 .asset-show-header {

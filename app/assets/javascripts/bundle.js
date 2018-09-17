@@ -452,6 +452,21 @@ function (_React$Component) {
       hideThis.classList.toggle('showing');
     }
   }, {
+    key: "formatNums",
+    value: function formatNums(number) {
+      var num = parseFloat(number);
+
+      if (num > Math.pow(10, 9)) {
+        return (num / Math.pow(10, 9)).toFixed(2) + ' B';
+      } else if (num > Math.pow(10, 6)) {
+        return (num / Math.pow(10, 6)).toFixed(2) + ' M';
+      } else if (num) {
+        return num.toFixed(2);
+      } else {
+        return num;
+      }
+    }
+  }, {
     key: "render",
     value: function render() {
       var assetTags;
@@ -465,17 +480,17 @@ function (_React$Component) {
       }
 
       var moreAbout = [{
-        "High Today": this.props.asset.high
+        "High Today": "$ ".concat(this.props.asset.high)
       }, {
-        "Low Today": this.props.asset.low
+        "Low Today": "$ ".concat(this.props.asset.low)
       }, {
-        "Open Price": this.props.asset.open
+        "Open Price": "$ ".concat(this.props.asset.open)
       }, {
-        "Volume": this.props.asset.iexVolume
+        "Volume": this.formatNums(this.props.asset.iexVolume)
       }, {
-        "52 Week High": this.state.stats.week52high
+        "52 Week High": "$ ".concat(this.state.stats.week52high)
       }, {
-        "52 Week Low": this.state.stats.week52low
+        "52 Week Low": "$ ".concat(this.state.stats.week52low)
       }];
       var sometimesShow = moreAbout.map(function (el) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -505,13 +520,13 @@ function (_React$Component) {
         className: "bold"
       }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be seeded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Market Cap"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.marketCap)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Market Cap"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.formatNums(this.props.asset.marketCap))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
       }, "Price-Earnings Ratio"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.peRatio)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Dividend Yield"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.state.stats.dividendYield)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Dividend Yield"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.formatNums(this.state.stats.dividendYield))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.avgTotalVolume)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Average Volume"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.formatNums(this.props.asset.avgTotalVolume))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "sometimes-show",
         className: "hidden"
       }, sometimesShow))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -611,7 +626,6 @@ function (_React$Component) {
         timeFrame: field
       }, function () {
         Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["getExternalInfo"])("chart/".concat(_this3.state.timeFrame), _this3.props.asset).then(function (data) {
-          console.log(data);
           var mappedData = data.map(function (datum) {
             return {
               label: datum.label,
@@ -727,8 +741,6 @@ function (_React$Component) {
       var _this2 = this;
 
       Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getNews"])(this.props.asset).then(function (data) {
-        console.log(data);
-
         _this2.setState({
           news: data.articles.slice(5)
         });
@@ -858,9 +870,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      // console.log(this.props);
-      console.log(this.state);
-
       if (!this.state.assets[this.props.assetId]) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "wait");
       } else {
@@ -869,15 +878,16 @@ function (_React$Component) {
           className: "asset-show-main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "asset-show-header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "symbol: ", curAsset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "$", curAsset.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, curAsset.change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+          className: "display-nums"
+        }, "$", curAsset.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, curAsset.change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           asset: curAsset
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_about__WEBPACK_IMPORTED_MODULE_4__["default"], {
           asset: curAsset
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_news__WEBPACK_IMPORTED_MODULE_2__["default"], {
           asset: curAsset
         }));
-      } // console.log(this.props.assets);
-
+      }
     }
   }]);
 
@@ -1000,13 +1010,10 @@ function (_React$Component) {
         className: "logo",
         viewBox: "0 0 1024 1024"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-        class: "path1",
         d: "M 0 1000 L 100 1000 L 200 800 L 600 600 L 450 580 L 400 400 L 0 1000z"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-        class: "path1",
         d: "M 150 750 L 380 380 L 310 380 L 280 280 L 150 750z"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
-        class: "path1",
         d: "M 300 260 L 700 100 L 620 580 L 460 560 L 420 380 L 400 360 L 330 360"
       }));
 
@@ -1779,7 +1786,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -1795,7 +1802,7 @@ var configureStore = function configureStore() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getExternalInfo", function() { return getExternalInfo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getExternalInfo", function() { return getExternalInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNews", function() { return getNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAsset", function() { return fetchAsset; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAssets", function() { return fetchAssets; });
@@ -1810,7 +1817,7 @@ var getExternalInfo = function getExternalInfo(requestType, asset) {
 var getNews = function getNews(asset) {
   return $.ajax({
     method: "GET",
-    url: "https://newsapi.org/v2/everything?q=".concat(asset.symbol, "&apiKey=").concat(process.env.NEWS_API_KEY)
+    url: "https://newsapi.org/v2/everything?q=".concat(asset.name, "&apiKey=").concat(asset.key)
   });
 };
 var fetchAsset = function fetchAsset(id) {
@@ -1851,7 +1858,6 @@ var createAsset = function createAsset(asset) {
     }
   });
 };
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
