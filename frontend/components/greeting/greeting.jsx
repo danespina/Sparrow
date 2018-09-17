@@ -42,7 +42,6 @@ class Greeting extends React.Component {
               </form>
             </div>
             <nav className="greet-links">
-              <button onClick={this.makeSeeds}>Make the seeds!</button>
               <Link to='/'>Home</Link>
               <button onClick={this.handleClick}>Leave</button>
             </nav>

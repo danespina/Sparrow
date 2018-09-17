@@ -23,8 +23,8 @@
 .greeting-logo svg {
   width: 48px;
   height: 48px;
-  fill: var(--black);
   display: inline;
+  fill: var(--black);
 }
 
 .greeting-logo svg:hover {
@@ -84,9 +84,9 @@
 }
 
 .greet-links a:hover {
-  color: var(--main-green);
+  color: lime;
 }
 
 .greet-links button:hover {
-  color: var(--main-green);
+  color: lime;
 }

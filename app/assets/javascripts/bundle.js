@@ -1028,9 +1028,7 @@ function (_React$Component) {
           value: "don't search yet"
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
           className: "greet-links"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-          onClick: this.makeSeeds
-        }, "Make the seeds!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
         }, "Home"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           onClick: this.handleClick

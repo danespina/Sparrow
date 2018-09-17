@@ -18,6 +18,7 @@ class Api::PortfoliosController < ApplicationController
       render json: {}
     else
       render json: @portfolio.errors.full_messages, status: 422
+    end
   end
 
   private
