@@ -20,11 +20,16 @@
   padding-right: 18px;
 }
 
-.greeting-logo img {
+.greeting-logo svg {
   width: 48px;
   height: 48px;
-  background-color: lime;
+  fill: var(--black);
   display: inline;
+}
+
+.greeting-logo svg:hover {
+  fill: var(--main-green);
+  transition: 2s;
 }
 
 .greeting-search {

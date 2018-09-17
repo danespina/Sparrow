@@ -41,8 +41,8 @@ class AssetChart extends React.Component {
     return (
       <div className="the-chart">
         <LineChart width={676} height={196} data={this.state.chartData}>
-          <Line type="linear" dataKey="close" stroke="#21ce99" dot={false} animationDuration={0}/>
-          <Tooltip  wrapperStyle={{ background: 'transparent', border: 'none'}} position={{ x: 0, y: 0 }} />
+          <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} animationDuration={0}/>
+          <Tooltip  position={{ x: 0, y: 0 }} />
           <YAxis domain={['auto', 'auto']} hide={true}/>
         </LineChart>
         <ul>

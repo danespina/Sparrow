@@ -7,7 +7,7 @@ class Splash extends React.Component {
     // debugger
     if(this.props.currentUser) {
       return (
-        <div clasName="dash">
+        <div className="dash">
           <Link to='/assets/1'>Peep the only asset!</Link>
           <AssetIndexContainer />
         </div>

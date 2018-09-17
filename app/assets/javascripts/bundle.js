@@ -649,13 +649,10 @@ function (_React$Component) {
         type: "linear",
         dataKey: "close",
         stroke: "#21ce99",
+        strokeWidth: 2,
         dot: false,
         animationDuration: 0
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
-        wrapperStyle: {
-          background: 'transparent',
-          border: 'none'
-        },
         position: {
           x: 0,
           y: 0
@@ -999,6 +996,20 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var logo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+        className: "logo",
+        viewBox: "0 0 1024 1024"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        class: "path1",
+        d: "M 0 1000 L 100 1000 L 200 800 L 600 600 L 450 580 L 400 400 L 0 1000z"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        class: "path1",
+        d: "M 150 750 L 380 380 L 310 380 L 280 280 L 150 750z"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+        class: "path1",
+        d: "M 300 260 L 700 100 L 620 580 L 460 560 L 420 380 L 400 360 L 330 360"
+      }));
+
       if (this.props.currentUser) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "greeting-container"
@@ -1006,9 +1017,7 @@ function (_React$Component) {
           className: "greeting-logo"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: window.flagURL
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, logo)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-container-middle"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-flex"
@@ -1033,9 +1042,7 @@ function (_React$Component) {
           className: "greeting-logo"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: window.flagURL
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, logo)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greet-links"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
@@ -1432,7 +1439,7 @@ function (_React$Component) {
       // debugger
       if (this.props.currentUser) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          clasName: "dash"
+          className: "dash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/assets/1"
         }, "Peep the only asset!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_index_asset_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], null));
@@ -1790,7 +1797,7 @@ var configureStore = function configureStore() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getExternalInfo", function() { return getExternalInfo; });
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getExternalInfo", function() { return getExternalInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNews", function() { return getNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAsset", function() { return fetchAsset; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAssets", function() { return fetchAssets; });
@@ -1805,7 +1812,7 @@ var getExternalInfo = function getExternalInfo(requestType, asset) {
 var getNews = function getNews(asset) {
   return $.ajax({
     method: "GET",
-    url: "https://newsapi.org/v2/everything?q=".concat(asset.symbol, "&apiKey=d2bd5f8caa8a48d2990c419acd49b433")
+    url: "https://newsapi.org/v2/everything?q=".concat(asset.symbol, "&apiKey=").concat(process.env.NEWS_API_KEY)
   });
 };
 var fetchAsset = function fetchAsset(id) {
@@ -1846,6 +1853,7 @@ var createAsset = function createAsset(asset) {
     }
   });
 };
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/process/browser.js */ "./node_modules/process/browser.js")))
 
 /***/ }),
 
