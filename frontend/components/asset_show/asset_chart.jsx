@@ -36,6 +36,7 @@ class AssetChart extends React.Component {
       return <button key={frame} className={this.state.timeFrame === frame ? "selected-time-frame" : ""}
         onClick={() => this.update(frame)}>{frame}</button>;
     });
+    console.log(this.state.chartData);
 
     return (
       <div className="the-chart">

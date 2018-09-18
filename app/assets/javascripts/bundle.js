@@ -286,11 +286,7 @@ __webpack_require__.r(__webpack_exports__);
 var App = function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_greeting_greeting_container__WEBPACK_IMPORTED_MODULE_2__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     className: "main"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
-    exact: true,
-    path: "/",
-    component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_7__["default"]
-  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
     path: "/login",
     component: _session_form_login_form_container__WEBPACK_IMPORTED_MODULE_3__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["AuthRoute"], {
@@ -298,7 +294,11 @@ var App = function App() {
     component: _session_form_signup_form_container__WEBPACK_IMPORTED_MODULE_4__["default"]
   }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("main", {
     className: "main-content"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Route"], {
+    exact: true,
+    path: "/",
+    component: _splash_splash_container__WEBPACK_IMPORTED_MODULE_7__["default"]
+  }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_util_route_util__WEBPACK_IMPORTED_MODULE_5__["ProtectedRoute"], {
     path: "/assets/:id",
     component: _asset_show_asset_show_container__WEBPACK_IMPORTED_MODULE_6__["default"]
   }))));
@@ -706,6 +706,7 @@ function (_React$Component) {
           }
         }, frame);
       });
+      console.log(this.state.chartData);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
@@ -1008,7 +1009,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/portfolio_actions */ "./frontend/actions/portfolio_actions.js");
-/* harmony import */ var _placeholder_dashboard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./placeholder_dashboard */ "./frontend/components/dashboard/placeholder_dashboard.jsx");
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _placeholder_dashboard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./placeholder_dashboard */ "./frontend/components/dashboard/placeholder_dashboard.jsx");
+
 
 
 
@@ -1024,18 +1027,46 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchPortfolio: function fetchPortfolio(id) {
       return dispatch(Object(_actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_1__["fetchPortfolio"])(id));
+    },
+    fetchAssets: function fetchAssets() {
+      return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAssets"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_placeholder_dashboard__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_placeholder_dashboard__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
-/***/ "./frontend/components/dashboard/placeholder_dashboard.jsx":
-/*!*****************************************************************!*\
-  !*** ./frontend/components/dashboard/placeholder_dashboard.jsx ***!
-  \*****************************************************************/
+/***/ "./frontend/components/dashboard/holdings_show_container.js":
+/*!******************************************************************!*\
+  !*** ./frontend/components/dashboard/holdings_show_container.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _holdings_show_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./holdings_show_index */ "./frontend/components/dashboard/holdings_show_index.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    assets: state.entities.assets,
+    portfolios: state.entities.portfolios
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_holdings_show_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/dashboard/holdings_show_index.jsx":
+/*!***************************************************************!*\
+  !*** ./frontend/components/dashboard/holdings_show_index.jsx ***!
+  \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1044,6 +1075,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _holdings_show_item__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./holdings_show_item */ "./frontend/components/dashboard/holdings_show_item.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1065,6 +1097,201 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+var HoldingsIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(HoldingsIndex, _React$Component);
+
+  function HoldingsIndex(props) {
+    _classCallCheck(this, HoldingsIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(HoldingsIndex).call(this, props));
+  }
+
+  _createClass(HoldingsIndex, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var stockItems;
+
+      if (Object.values(this.props.portfolios).length > 0) {
+        // debugger;
+        stockItems = Object.values(Object.values(this.props.portfolios)[0].holdings).map(function (holding) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            asset: _this.props.assets[holding.asset_id],
+            shares: holding.position
+          });
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-1-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "holdings-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "holdings-header bold"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Stocks")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, stockItems)));
+    }
+  }]);
+
+  return HoldingsIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (HoldingsIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/dashboard/holdings_show_item.jsx":
+/*!**************************************************************!*\
+  !*** ./frontend/components/dashboard/holdings_show_item.jsx ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var HoldingsItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(HoldingsItem, _React$Component);
+
+  function HoldingsItem(props) {
+    var _this;
+
+    _classCallCheck(this, HoldingsItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(HoldingsItem).call(this, props));
+    _this.state = {
+      chartData: []
+    };
+    return _this;
+  }
+
+  _createClass(HoldingsItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])('chart/1D', this.props.asset).then(function (data) {
+        var mappedData = data.map(function (datum) {
+          return {
+            label: datum.label,
+            close: datum.close
+          };
+        });
+
+        _this2.setState({
+          chartData: mappedData
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var price;
+
+      if (this.state.chartData.pop()) {
+        price = this.state.chartData.pop().close;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "holdings-form-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "holdings-symbol"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "bold"
+      }, this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.shares, " shares")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["LineChart"], {
+        width: 80,
+        height: 40,
+        data: this.state.chartData
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["Line"], {
+        type: "linear",
+        dataKey: "close",
+        stroke: "#21ce99",
+        strokeWidth: 1,
+        dot: false,
+        animationDuration: 0
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["YAxis"], {
+        domain: ['auto', 'auto'],
+        hide: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, price)));
+    }
+  }]);
+
+  return HoldingsItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (HoldingsItem);
+
+/***/ }),
+
+/***/ "./frontend/components/dashboard/placeholder_dashboard.jsx":
+/*!*****************************************************************!*\
+  !*** ./frontend/components/dashboard/placeholder_dashboard.jsx ***!
+  \*****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+/* harmony import */ var _holdings_show_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./holdings_show_container */ "./frontend/components/dashboard/holdings_show_container.js");
+/* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./script */ "./frontend/components/dashboard/script.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
 var Dashboard =
 /*#__PURE__*/
 function (_React$Component) {
@@ -1077,6 +1304,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Dashboard).call(this, props));
     _this.state = {
+      assets: {},
       portfolio: {}
     };
     return _this;
@@ -1087,9 +1315,15 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.fetchPortfolio(this.props.portfolioId).then(function (data) {
+      this.props.fetchAssets().then(function (data) {
         _this2.setState({
-          portfolio: data.portfolio
+          assets: data.assets
+        });
+      }).then(function () {
+        _this2.props.fetchPortfolio(_this2.props.portfolioId).then(function (data) {
+          _this2.setState({
+            portfolio: data.portfolio
+          });
         });
       });
     }
@@ -1108,7 +1342,34 @@ function (_React$Component) {
         });
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, holds));
+      var chart;
+
+      if (this.state.portfolio.history) {
+        chart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["LineChart"], {
+          width: 676,
+          height: 196,
+          data: this.state.portfolio.history
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["Line"], {
+          type: "linear",
+          dataKey: "close",
+          stroke: "#21ce99",
+          strokeWidth: 2,
+          dot: false,
+          animationDuration: 0
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["YAxis"], {
+          domain: ['auto', 'auto'],
+          hide: true
+        }));
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "asset-page"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-2-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _script__WEBPACK_IMPORTED_MODULE_3__["script"])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        portfolios: this.state.portfolios,
+        assets: this.state.assets
+      }));
     }
   }]);
 
@@ -1116,6 +1377,20 @@ function (_React$Component) {
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 /* harmony default export */ __webpack_exports__["default"] = (Dashboard);
+
+/***/ }),
+
+/***/ "./frontend/components/dashboard/script.js":
+/*!*************************************************!*\
+  !*** ./frontend/components/dashboard/script.js ***!
+  \*************************************************/
+/*! exports provided: script */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "script", function() { return script; });
+var script = "FADE IN:\n\nEXT. CARIBBEAN SEA - DAY\n\nA gray, impenetrable wall of fog. From somewhere comes the\nFAINT SOUND of a LITTLE GIRL'S VOICE, singing, slow tempo,\nalmost under her breath.\n\n                     YOUNG ELIZABETH (O.S.)\n           Yo, ho, yo, ho, a pirate's life for me\n           Yo, ho, yo, ho, it's a pirate's life\n           for me...\n\nSuddenly a massive SHIP emerges from the grey, the Winged\nVictory maidenhead looming. It's a British dreadnought,\nthe H.M.S. Dauntless. Formidable, frightening, twenty-five\ngun ports on a side, and rail guns to boot.\n\nEXT. H.M.S. DAUNTLESS - FORECASTLE - DAY\n\nELIZABETH SWANN, strawberry blond hair, stands at the bow\nrailing, gazing at the seas, still singing --\n\n                     ELIZABETH\n           ...drink up me hearties, yo, ho...\n\nJOSHAMEE GIBBS, who was born old, skin a dark leather,\nclutches her shoulder, startling her.\n\n                     GIBBS\n               (sotto)\n           Quiet, missy! Cursed pirates sail\n           these waters. You want to call\n           'em down on us?\n\nElizabeth stares wide-eyed at him.\n\n                        NORRINGTON\n           Mr. Gibbs.\n\nNORRINGTON, a dashing young man, Royal Navy to the core,\nglares sternly at Gibbs. Standing besides him is GOVERNOR\nWEATHERBY SWAN, a man of obvious high station, brass\nbuttons on his thick blue jacket. He is Elizabeth's\nfather.\n\n                     NORRINGTON (CONT'D)\n           That will do.\n\n                    GIBBS\n          She was singing about pirates.\n          Bad luck to sing about pirates,\n          with us mired in this unnatural\n          fog-- mark my words.\n\n                    NORRINGTON\n          Consider them marked.   On your\n          way.\n\n                    GIBBS\n          'Aye, Captain.\n              (as he moves off)\n          Bad luck to have a woman on board,\n          too. Even a mini'ture one.\n\nHe returns to his deck-swabbing duties, surreptitiously\ntakes a quick swig from flask.\n\n                    ELIZABETH\n          I think it would be rather\n          exciting to meet a pirate.\n\n                    NORRINGTON\n          Think again, Miss Swan.   Vile and\n          dissolute creatures, the  lot of\n          them. I intend to see to   it that\n          any man who sails under a  pirate\n          flag, or wears a pirates  brand,\n          gets what he deserves: a  short\n          drop and a sudden stop.\n\nElizabeth doesn't know what 'a short drop and a sudden\nstop' means. Gibbs helpfully mimes: a man being hung.\n\n                    SWAN\n          Captain Norrington... I appreciate\n          your fervor, but I am concerned about\n          the effect this subject will have on\n          my daughter.\n\n                    NORRINGTON\n          My apologies, Governor.\n\n                    ELIZABETH\n          Actually, I find it all fascinating.\n\n                    SWAN\n\n          And that's what concerns me. Elizabeth,\n          dear... we will be landing in Port\n          Royal very soon, and beginning our new\n          lives. Wouldn't it be wonderful if we\n          comport ourselves as befits our class\n          and station?\n\n                    ELIZABETH\n          Yes, father.\n\nChastised, she turns away, to look out over the bow rail.\n\n                    ELIZABETH (CONT'D)\n              (to herself)\n          I still think it would be exciting\n          to meet a pirate...\n\nThe fog still hems in the ship; very little of the sea is\nvisible --\n\n-- but suddenly, a FIGURE comes into view. A young boy,\nWILL TURNER, floating on his back in the otherwise empty\nwater. There is nothing to show where he came from, or how\nhe came to be there.\n\n                     ELIZABETH (CONT'D)\n          Look!   A boy! In the water!\n\nNorrington and Swann spot him --\n\n                    NORRINGTON\n          Man overboard!\n\n                    ELIZABETH\n          Boy overboard!\n\n                    NORRINGTON\n          Fetch a hook! Haul him out of\n          there!\n\nQuick movement and activity on the deck. Sailors use a\nboathook to snag the boy he the passes. Norrington and\nSwann haul him aboard, and lay him on the deck. Elizabeth\nsidles in for a closer look.\n\n                    NORRINGTON (CONT'D)\n          He's still breathing.\n\n                     SWAN\n\n          Where did he come from?\n\n                    GIBBS\n          Mary mother of God ...\n\nAttention is turned away from the boy --\n\nThe sea is no longer empty. WRECKAGE from a ship litters\nthe water... along with the bodies of its crew. What is\nleft of the ship's hull BURNS, a ragged British flag\nhanging limply from the stern.\n\nThe H.M.S. Dauntless slips silently through it all.   The\nscene calls for hushed voices.\n\n                    SWAN\n          What happened here?\n\n                    NORRINGTON\n          An explosion in the powder magazine.\n          Merchant vessels run heavily armed.\n\n                    GIBBS\n          Lot of good it did them...\n              (off Swan's look)\n          Everyone's thinking it! I'm just\n          saying it! Pirates!\n\n                    SWAN\n          There is no proof of that. It could\n          have been an accident. Captain, these\n          men were protection. If there is even\n          the slightest chance one of those poor\n          devils is still alive, we cannot\n          abandon them!\n\n                     NORRINGTON\n          Of course not, Governor.\n              (to the crew)\n          Come about and strike the sails! Unlash\n          the boats! Gunnery crew... jackets off\n          the cannons!\n              (to Swann)\n          Hope for the best...prepare for\n          the worst.\n              (to two sailors)\n          Move the boy aft. We'll need the\n          deck clear.\n\nThey lift the boy. Swann pulls Elizabeth away from the\nrail, away from the hideous scene in the water.\n\n                    SWAN\n          Elizabeth, I want you to accompany\n          the boy. He's in your charge now.\n          You'll watch over him?\n\nElizabeth nods gravely. Swann hurries away to help unstow\nthe longboat. The sailors lay the boy gently on the poop\ndeck, behind the wheel, then hurry off. Elizabeth kneels\ndown besides the boy.\n\nHis good looks are not lost on her. She reaches out,\ngently brushes the blond hair from his eyes --\n\nSuddenly, he grabs her wrist, awake now. Elizabeth is\nstartled, but their eyes lock. She takes his hand in hers.\n\n                    ELIZABETH\n          My name is Elizabeth Swann.\n\n                    WILL\n          Will Turner.\n\n                    ELIZABETH\n          I'm watching over you, Will.\n\nHe clutches her hands, then slips back into\nunconsciousness.\n\nHis movement has opened the collar of his shirt; Elizabeth\nsees he wears a chain around his neck. She tugs it free,\nrevealing--\n\nA GOLD MEDALLION.   One side is blank.   She turns it over --\n\nA SKULL gazes up at her. Vaguely Aztec in design, but to\nher eyes, it means one thing only:\n\n                    ELIZABETH (CONT'D)\n          You're a pirate.\n\nShe glances back at the crew.   Sees Norrington, giving\norders, moving toward her.\n\nShe looks back at Will -- comes to a quick decision. Takes\nthe medallion from around his neck. Hides it under her\ncoat.";
 
 /***/ }),
 
@@ -1628,13 +1903,14 @@ function (_React$Component) {
 
   _createClass(Splash, [{
     key: "render",
+    // <AssetIndexContainer />
     value: function render() {
       if (this.props.currentUser) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "dash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dashboard_dashboard_container__WEBPACK_IMPORTED_MODULE_3__["default"], {
           currentUserId: this.props.currentUser.id
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_index_asset_index_container__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+        }));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash"

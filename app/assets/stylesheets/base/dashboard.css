@@ -1,0 +1,35 @@
+.holdings-header {
+  display: flex;
+  padding-top: 4px;
+  margin: 0 -24px;
+  height: 51px;
+  align-items: center;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.holdings-header h3 {
+  padding-left: 24px;
+}
+
+.holdings-form-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  border-bottom: 1px solid var(--light-gray);
+}
+
+.holdings-symbol {
+  margin-right: 12px;
+}
+
+.holdings-form-row h3 {
+  margin-left: 12px;
+  font-size: 16px;
+  line-height: 22px;
+}
+
+.holdings-form-row h4, h5 {
+  font-size: 13px;
+  line-height: 19px;
+}

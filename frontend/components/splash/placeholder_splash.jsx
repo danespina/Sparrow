@@ -4,12 +4,12 @@ import AssetIndexContainer from '../asset_index/asset_index_container';
 import DashboardContainer from '../dashboard/dashboard_container';
 
 class Splash extends React.Component {
+  // <AssetIndexContainer />
   render () {
     if(this.props.currentUser) {
       return (
         <div className="dash">
           <DashboardContainer currentUserId={this.props.currentUser.id}/>
-          <AssetIndexContainer />
         </div>
       );
     } else {

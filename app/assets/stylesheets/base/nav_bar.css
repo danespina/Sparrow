@@ -29,7 +29,7 @@
 
 .greeting-logo svg:hover {
   fill: var(--main-green);
-  transition: 60s cubic-bezier(0, 1, 1, 0);
+  transition: 6s cubic-bezier(0, 1, 1, 0);
 }
 
 .greeting-search {
