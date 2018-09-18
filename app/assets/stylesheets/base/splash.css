@@ -40,11 +40,15 @@
     font-size: 16px;
     font-weight: bold;
     border: 16px solid var(--main-green);
-    border-radius: 15px;
+    border-radius: 5px;
     position: relative;
     display: inline-block;
 }
 
+.left a:hover {
+  background-color: var(--medium-green);
+  border: 16px solid var(--medium-green);
+}
 .left-header h1 {
   font-size: 55px;
   line-height: 58px;

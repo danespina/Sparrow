@@ -4,6 +4,7 @@ html, body {
   color: var(--black);
   font-size: 13px;
   line-height: 19px;
+  background-color: #fff;
 }
 
 h1 {
@@ -16,6 +17,7 @@ h2 {
 
 h3 {
   font-size: 16px;
+  line-height: 22px;
 }
 
 .bold {
@@ -35,4 +37,5 @@ h3 {
 
 .main {
   padding-top: 64px;
+  position: relative;
 }

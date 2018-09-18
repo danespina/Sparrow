@@ -932,6 +932,8 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "asset-page"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-2-3"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "asset-show-main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "asset-show-header"
@@ -943,10 +945,12 @@ function (_React$Component) {
           asset: curAsset
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_news__WEBPACK_IMPORTED_MODULE_2__["default"], {
           asset: curAsset
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_trade_show_trade_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "col-1-3"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_trade_show_trade_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           asset: curAsset,
           assetId: this.props.assetId
-        }));
+        })));
       }
     }
   }]);
@@ -1100,7 +1104,7 @@ function (_React$Component) {
         holds = Object.values(this.state.portfolio.holdings).map(function (el) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
             key: el.asset_id
-          }, "You own ", _this3.props.assets[el.asset_id].symbol, ", ", el.position, ", ", el.avg_price, "!");
+          }, "You own ", _this3.props.assets[el.asset_id].symbol, ",", el.position, ",", el.avg_price, "!");
         });
       }
 
@@ -1625,7 +1629,6 @@ function (_React$Component) {
   _createClass(Splash, [{
     key: "render",
     value: function render() {
-      // debugger
       if (this.props.currentUser) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "dash"
@@ -1796,13 +1799,23 @@ function (_React$Component) {
     value: function render() {
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "trade-form"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "How many", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "trade-form-header bold"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Buy ", this.props.asset.symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "trade-form-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Shares"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         onChange: this.handleChange,
         value: this.state.position
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "trade-form-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Market Price"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "$", this.props.asset.latestPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "trade-form-row bold"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Estimated Cost"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "$", this.props.asset.latestPrice * this.state.position)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "trade-form-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleClick
-      }, "Make trade!")));
+      }, "Make trade!"))));
     }
   }]);
 

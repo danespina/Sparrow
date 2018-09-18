@@ -47,22 +47,23 @@
 }
 
 .greet-form input {
-  background-color: gray;
-  border: 1px solid gray;
+  background-color: var(--white-ish);
+  border: 1px solid var(--white-ish);
   border-radius: 5px;
   padding: 15px 20px;
   width: 100%;
   line-height: 16px;
+  box-shadow: none;
 }
 
 .greet-form input:hover {
-  background-color: white;
-  border: 1px solid darkgray;
+  background-color: #fff;
+  border: 1px solid var(--gray);
 }
 
 .greet-form input:focus {
-  background-color: white;
-  border: 1px solid magenta;
+  background-color: #fff;
+  border: 1px solid var(--gray);
 }
 
 #demo-button {
@@ -73,11 +74,16 @@
   margin-top: 60px;
   display: inline-flex;
   background-color: var(--main-green);
+  color: #fff;
   padding: 13px 0;
   width: 140px;
   align-items: center;
   justify-content: center;
   border-radius: 5px;
+}
+
+.greet-form button:hover {
+  background-color: var(--medium-green);
 }
 
 .greet-ship {

@@ -5,7 +5,6 @@ import DashboardContainer from '../dashboard/dashboard_container';
 
 class Splash extends React.Component {
   render () {
-    // debugger
     if(this.props.currentUser) {
       return (
         <div className="dash">
