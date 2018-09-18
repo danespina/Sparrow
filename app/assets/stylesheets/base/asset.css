@@ -4,7 +4,7 @@
   justify-content: space-between;
 }
 
-.trade-form, .holdings-form {
+.trade-form {
   position: fixed;
   border: 1px solid var(--light-gray);
   box-shadow: 0 0 4px 1px rgba(0,0,0,.01),

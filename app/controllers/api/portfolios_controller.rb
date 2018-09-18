@@ -4,7 +4,7 @@ class Api::PortfoliosController < ApplicationController
   end
 
   def create
-    @portfolio = Portfolio.create(current_user.id)
+    @portfolio = Portfolio.create(user_id: current_user.id)
     if @portfolio.save
       render json: {}
     else

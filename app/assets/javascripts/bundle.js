@@ -706,7 +706,6 @@ function (_React$Component) {
           }
         }, frame);
       });
-      console.log(this.state.chartData);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
@@ -1117,7 +1116,6 @@ function (_React$Component) {
       var stockItems;
 
       if (Object.values(this.props.portfolios).length > 0) {
-        // debugger;
         stockItems = Object.values(Object.values(this.props.portfolios)[0].holdings).map(function (holding) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
             asset: _this.props.assets[holding.asset_id],
@@ -1156,6 +1154,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
 /* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1173,6 +1172,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1222,7 +1222,9 @@ function (_React$Component) {
         price = this.state.chartData.pop().close;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: "/assets/".concat(this.props.asset.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "holdings-form-row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "holdings-symbol"
@@ -1242,7 +1244,7 @@ function (_React$Component) {
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["YAxis"], {
         domain: ['auto', 'auto'],
         hide: true
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, price)));
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "$", price))));
     }
   }]);
 
@@ -1732,7 +1734,30 @@ function (_React$Component) {
       var errMessages;
 
       if (this.props.errors.length > 0) {
-        errMessages = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, this.props.errors[0]);
+        errMessages = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          width: "18",
+          height: "18",
+          viewBox: "0 0 18 18"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
+          fill: "none",
+          "fill-rule": "evenodd",
+          transform: "translate(0 -1)"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("circle", {
+          cx: "9",
+          cy: "10",
+          r: "9",
+          fill: "#303032"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("text", {
+          fill: "#FFF",
+          "font-family": "DINPro-Black, DINPro",
+          "font-size": "14",
+          "font-weight": "700",
+          "letter-spacing": ".058"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tspan", {
+          x: "6.409",
+          y: "15"
+        }, "!")))), this.props.errors[0]);
       }
 
       var loginFields;
@@ -1776,18 +1801,20 @@ function (_React$Component) {
         className: "greet-form-container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "greet-form"
-      }, header, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
-        onSubmit: this.handleSubmit
-      }, loginFields, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, header, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, loginFields, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "form-label"
       }, "Password"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "password",
         value: this.state.password,
         onChange: this.update('password')
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errMessages), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Submit"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "bold"
+      }, errMessages), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        onClick: this.handleSubmit
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Submit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.startDemo,
         id: "demo-button"
-      }, "Demo User!")))));
+      }, "Demo User!"))))));
     }
   }]);
 
@@ -2426,7 +2453,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

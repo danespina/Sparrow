@@ -10,10 +10,15 @@ class User < ApplicationRecord
   has_many :trades, dependent: :destroy
 
   def self.find_by_credentials(username, password)
-    user = User.find_by(username: username)
-    user ||= User.find_by(email: username)
-    return nil unless user && user.is_password?(password)
-    user
+    user_by_username = User.find_by(username: username)
+    user_by_email = User.find_by(email: username)
+    if user_by_username && user_by_username.is_password?(password)
+      return user_by_username
+    elsif user_by_email && user_by_email.is_password?(password)
+      return user_by_email
+    else
+      return nil
+    end
   end
 
   def self.generate_session_token

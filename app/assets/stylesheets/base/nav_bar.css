@@ -34,17 +34,22 @@
 
 .greeting-search {
   display: block;
+  flex-basis: 480px;
+}
+
+.greeting-search form {
   width: 100%;
-  /* max-width: 480px; */
-  box-sizing: border-box;
 }
 
 .greet-links {
   display: flex;
   flex-direction: row;
-  position: absolute;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  /* position: absolute;
   top: 20px;
-  right: 48px;
+  right: 48px; */
 }
 
 .greet-links button {
@@ -53,7 +58,7 @@
 
 .greeting-container input {
   border: 1px solid black;
-  /* width: 500px; */
+  width: 100%;
   height: 36px;
   margin-left: 0;
 }

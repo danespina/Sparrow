@@ -66,8 +66,19 @@
   border: 1px solid var(--gray);
 }
 
+.greet-form ul {
+  padding: 12px 0;
+}
+
+.greet-form svg {
+  margin-right: 8px;
+}
+
 #demo-button {
   margin-top: 0;
+  position: relative;
+  top: -45px;
+  left: 160px;
 }
 
 .greet-form button {
@@ -89,4 +100,9 @@
 .greet-ship {
   background-color: var(--main-green);
   max-height: 900px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
 }
