@@ -1,3 +1,13 @@
+.asset-page {
+  display: flex;
+}
+
+.trade-form {
+  position: fixed;
+  border: 1px solid black;
+  left: 66.6%;
+}
+
 .asset-show-main{
   display: flex;
   flex-direction: column;

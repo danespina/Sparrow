@@ -930,6 +930,8 @@ function (_React$Component) {
       } else {
         var curAsset = this.state.assets[this.props.assetId];
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "asset-page"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "asset-show-main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "asset-show-header"
@@ -941,7 +943,7 @@ function (_React$Component) {
           asset: curAsset
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_news__WEBPACK_IMPORTED_MODULE_2__["default"], {
           asset: curAsset
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_trade_show_trade_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_trade_show_trade_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           asset: curAsset,
           assetId: this.props.assetId
         }));
@@ -1009,7 +1011,8 @@ __webpack_require__.r(__webpack_exports__);
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    portfolioId: state.entities.users[state.session.currentUserId].portfolioId
+    portfolioId: state.entities.users[state.session.currentUserId].portfolioId,
+    assets: state.entities.assets
   };
 };
 
@@ -1085,16 +1088,19 @@ function (_React$Component) {
           portfolio: data.portfolio
         });
       });
-      console.log(this.state);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var holds;
 
-      if (this.state.portfolio.holdings) {
+      if (this.state.portfolio.holdings && Object.values(this.props.assets).length > 0) {
         holds = Object.values(this.state.portfolio.holdings).map(function (el) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, el.asset_id, ", ", el.position, ", ", el.avg_price);
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+            key: el.asset_id
+          }, "You own ", _this3.props.assets[el.asset_id].symbol, ", ", el.position, ", ", el.avg_price, "!");
         });
       }
 
@@ -1774,6 +1780,9 @@ function (_React$Component) {
         avg_price: this.props.asset.latestPrice
       });
       this.props.makeTrade(trade);
+      this.setState({
+        position: 0
+      });
     }
   }, {
     key: "handleChange",
@@ -1785,7 +1794,9 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "position", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "trade-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "How many", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text",
         onChange: this.handleChange,
         value: this.state.position

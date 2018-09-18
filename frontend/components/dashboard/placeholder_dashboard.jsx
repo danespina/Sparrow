@@ -11,13 +11,12 @@ class Dashboard extends React.Component {
     this.props.fetchPortfolio(this.props.portfolioId).then((data) => {
       this.setState({ portfolio: data.portfolio });
     });
-    console.log(this.state);
   }
   render () {
     let holds;
-    if(this.state.portfolio.holdings){
+    if(this.state.portfolio.holdings && Object.values(this.props.assets).length > 0){
       holds = Object.values(this.state.portfolio.holdings).map((el) => {
-      return (<li>{el.asset_id}, {el.position}, {el.avg_price}</li>);
+      return (<li key={el.asset_id}>You own {this.props.assets[el.asset_id].symbol}, {el.position}, {el.avg_price}!</li>);
       });
     }
     return (

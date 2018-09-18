@@ -5,6 +5,7 @@ import Dashboard from './placeholder_dashboard';
 const mapStateToProps = (state) => {
   return {
     portfolioId: state.entities.users[state.session.currentUserId].portfolioId,
+    assets: state.entities.assets,
   };
 };
 

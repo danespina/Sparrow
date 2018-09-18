@@ -11,15 +11,16 @@ class TradeForm extends React.Component {
   handleClick(e){
     const trade = merge({}, this.state, {asset_id: this.props.assetId, avg_price: this.props.asset.latestPrice});
     this.props.makeTrade(trade);
+    this.setState({position: 0});
   }
   handleChange(e){
     this.setState({position: e.target.value });
   }
   render () {
     return (
-      <div>
+      <div className="trade-form">
         <form>
-          <label>position
+          <label>How many
             <input type={"text"} onChange={this.handleChange} value={this.state.position}></input>
           </label>
           <button onClick={this.handleClick}>Make trade!</button>

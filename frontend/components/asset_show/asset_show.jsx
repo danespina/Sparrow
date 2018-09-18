@@ -30,15 +30,17 @@ class AssetShow extends React.Component {
     } else {
       const curAsset = this.state.assets[this.props.assetId];
       return (
-        <div className="asset-show-main">
-          <header className="asset-show-header">
-            <h1>{curAsset.companyName}!</h1>
-            <span className="display-nums">${curAsset.latestPrice}</span>
-            <h3>{curAsset.change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
-          </header>
-          <AssetChart asset={curAsset} />
-          <AssetAbout asset={curAsset} />
-          <AssetNews asset={curAsset} />
+        <div className="asset-page">
+          <div className="asset-show-main">
+            <header className="asset-show-header">
+              <h1>{curAsset.companyName}!</h1>
+              <span className="display-nums">${curAsset.latestPrice}</span>
+              <h3>{curAsset.change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
+            </header>
+            <AssetChart asset={curAsset} />
+            <AssetAbout asset={curAsset} />
+            <AssetNews asset={curAsset} />
+          </div>
           <TradeContainer asset={curAsset} assetId={this.props.assetId} />
         </div>
       );
