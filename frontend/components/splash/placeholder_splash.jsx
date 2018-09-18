@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import AssetIndexContainer from '../asset_index/asset_index_container';
+import DashboardContainer from '../dashboard/dashboard_container';
 
 class Splash extends React.Component {
   render () {
@@ -8,7 +9,7 @@ class Splash extends React.Component {
     if(this.props.currentUser) {
       return (
         <div className="dash">
-          <Link to='/assets/1'>Peep the only asset!</Link>
+          <DashboardContainer currentUserId={this.props.currentUser.id}/>
           <AssetIndexContainer />
         </div>
       );

@@ -5,6 +5,7 @@ export default function (state = {}, action) {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_ASSET:{
+      const data = merge({}, { id: action.asset.id }, action.asset);
       const newAsset = { [action.asset.id]: action.asset };
       return merge({}, state, newAsset);
     }

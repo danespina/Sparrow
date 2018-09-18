@@ -3,6 +3,7 @@ import { getExternalInfo } from '../../util/asset_api_util';
 import AssetNews from './asset_news';
 import AssetChart from './asset_chart';
 import AssetAbout from './asset_about';
+import TradeContainer from '../trade_show/trade_container';
 
 class AssetShow extends React.Component {
   constructor(props){
@@ -38,6 +39,7 @@ class AssetShow extends React.Component {
           <AssetChart asset={curAsset} />
           <AssetAbout asset={curAsset} />
           <AssetNews asset={curAsset} />
+          <TradeContainer asset={curAsset} assetId={this.props.assetId} />
         </div>
       );
     }
