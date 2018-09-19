@@ -41,6 +41,14 @@
   width: 100%;
 }
 
+.search-results {
+  display: flex;
+  width: 100%;
+  position: absolute;
+  background-color: magenta;
+  border: 1px solid lime;
+}
+
 .greet-links {
   display: flex;
   flex-direction: row;

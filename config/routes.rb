@@ -7,5 +7,8 @@ Rails.application.routes.draw do
     resources :portfolios, only: [:create, :update, :show]
     resources :trades, only: [:create]
   end
+  resources :assets, only: [:search] do
+    get "search", on: :collection
+  end
   root "static_pages#root"
 end

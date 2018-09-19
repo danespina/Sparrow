@@ -957,6 +957,23 @@ function (_React$Component) {
       }
     }
   }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+      var _this3 = this;
+
+      this.props.fetchAsset(this.props.match.params.id).then(function (arg) {
+        _this3.setState({
+          assets: _defineProperty({}, arg.asset.id, arg.asset)
+        }).then(function () {
+          return Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])("quote", _this3.state.assets[_this3.props.match.params.id]);
+        }).then(function (data) {
+          _this3.setState({
+            assets: _defineProperty({}, _this3.props.match.params.id, data)
+          });
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       if (!this.state.assets[this.props.assetId]) {
@@ -1513,6 +1530,11 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Greeting).call(this, props));
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.state = {
+      query: '',
+      results: {}
+    };
     return _this;
   }
 
@@ -1537,8 +1559,29 @@ function (_React$Component) {
       });
     }
   }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      var _this2 = this;
+
+      this.setState({
+        query: e.currentTarget.value
+      });
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["searchAssets"])(e.currentTarget.value).then(function (data) {
+        _this2.setState({
+          results: data
+        });
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
+      var searchItems = Object.values(this.state.results).map(function (el) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: el.id
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+          to: "/assets/".concat(el.id)
+        }, el.symbol, " ", el.name));
+      });
       var logo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
         className: "logo",
         viewBox: "0 0 1024 1024"
@@ -1565,8 +1608,11 @@ function (_React$Component) {
           className: "greeting-search"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
-          value: "don't search yet"
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
+          onChange: this.handleChange,
+          value: this.state.query
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "search-results"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, searchItems))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
           className: "greet-links"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
@@ -2582,7 +2628,7 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/asset_api_util.js ***!
   \*****************************************/
-/*! exports provided: getExternalInfo, getNews, fetchAsset, fetchAllAssets, getQuote, createAsset */
+/*! exports provided: getExternalInfo, getNews, fetchAsset, fetchAllAssets, getQuote, createAsset, searchAssets */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2593,6 +2639,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllAssets", function() { return fetchAllAssets; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getQuote", function() { return getQuote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAsset", function() { return createAsset; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "searchAssets", function() { return searchAssets; });
 var getExternalInfo = function getExternalInfo(requestType, asset) {
   return $.ajax({
     method: "GET",
@@ -2643,6 +2690,16 @@ var createAsset = function createAsset(asset) {
     url: "/api/assets",
     data: {
       asset: asset
+    }
+  });
+};
+var searchAssets = function searchAssets(query) {
+  return $.ajax({
+    method: "GET",
+    url: "/assets/search",
+    dataType: 'json',
+    data: {
+      query: query
     }
   });
 };

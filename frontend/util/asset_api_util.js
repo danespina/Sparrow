@@ -56,3 +56,12 @@ export const createAsset = (asset) => {
     data: { asset },
   });
 };
+
+export const searchAssets = (query) => {
+  return $.ajax({
+    method: "GET",
+    url: "/assets/search",
+    dataType: 'json',
+    data: { query },
+  });
+};

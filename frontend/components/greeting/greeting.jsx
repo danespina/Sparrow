@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
-import { createAsset } from '../../util/asset_api_util';
+import { searchAssets, createAsset } from '../../util/asset_api_util';
 
 class Greeting extends React.Component {
   constructor(props) {
     super(props);
     this.handleClick = this.handleClick.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.state = { query: '', results: {} };
   }
   handleClick(e) {
     this.props.logout();
@@ -22,7 +24,18 @@ class Greeting extends React.Component {
     });
   }
 
+  handleChange(e) {
+    this.setState({ query: e.currentTarget.value});
+    searchAssets(e.currentTarget.value).then((data) => {
+      this.setState({ results: data });
+    });
+  }
+
   render () {
+    const searchItems = Object.values(this.state.results).map((el) => {
+
+      return (<li key={el.id}><Link to={`/assets/${el.id}`}>{el.symbol} {el.name}</Link></li>);
+    });
     const logo = (<svg className="logo" viewBox="0 0 1024 1024">
       <path d="M 0 1000 L 100 1000 L 200 800 L 600 600 L 450 580 L 400 400 L 0 1000z"></path>
       <path d="M 150 750 L 380 380 L 310 380 L 280 280 L 150 750z"></path>
@@ -38,8 +51,11 @@ class Greeting extends React.Component {
           <div className="greeting-flex">
             <div className="greeting-search">
               <form>
-                <input type="text" value="don't search yet"></input>
+                <input type="text" onChange={this.handleChange} value={this.state.query}></input>
               </form>
+              <div className="search-results">
+                <ul>{searchItems}</ul>
+              </div>
             </div>
             <nav className="greet-links">
               <Link to='/'>Home</Link>

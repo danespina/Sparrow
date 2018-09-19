@@ -26,7 +26,18 @@ class AssetShow extends React.Component {
     if (!this.props.portfolio) {
       this.props.fetchPortfolio(this.props.currentUserId);
     }
+  }
 
+  componentDidUpdate() {
+    this.props.fetchAsset(this.props.match.params.id).then((arg) => {
+      this.setState({ assets: {[arg.asset.id]: arg.asset } }).then(
+        () => {
+          return getExternalInfo("quote", this.state.assets[this.props.match.params.id]);
+        }
+      ).then((data) => {
+        this.setState({ assets: {[this.props.match.params.id]: data}});
+      });
+    });
   }
 
   render () {
