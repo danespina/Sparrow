@@ -9,6 +9,7 @@ class TradeForm extends React.Component {
     this.handleChange = this.handleChange.bind(this);
   }
   handleClick(e){
+    // TODO: verify trade is valid
     const trade = merge({}, this.state, {asset_id: this.props.assetId, avg_price: this.props.asset.latestPrice});
     this.props.makeTrade(trade);
     this.setState({position: 0});

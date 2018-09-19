@@ -1,4 +1,5 @@
 class Api::TradesController < ApplicationController
+  //# TODO: fix this
   def create
     @trade = Trade.create(trade_params)
     @trade[:user_id] = current_user.id
@@ -6,6 +7,7 @@ class Api::TradesController < ApplicationController
     cur_portfolio = Portfolio.find_by(user_id: @trade.user_id)
     if cur_portfolio.buying_power < trade_cost
       render json: ["Not enough buying power"], status: 422
+      return
     end
     if @trade.save
       if cur_portfolio.holdings[trade_params[:asset_id].to_s]

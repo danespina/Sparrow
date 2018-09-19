@@ -12,6 +12,7 @@ class AssetShow extends React.Component {
   }
 
   componentDidMount() {
+    // TODO: check if portfolio to prevent invalid trades
     this.props.fetchAsset(this.props.assetId).then(
       (arg) => {
         this.setState({ assets: {[arg.asset.id]: arg.asset } });

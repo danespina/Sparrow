@@ -910,6 +910,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
+      // TODO: check if portfolio to prevent invalid trades
       this.props.fetchAsset(this.props.assetId).then(function (arg) {
         _this2.setState({
           assets: _defineProperty({}, arg.asset.id, arg.asset)
@@ -2081,6 +2082,7 @@ function (_React$Component) {
   _createClass(TradeForm, [{
     key: "handleClick",
     value: function handleClick(e) {
+      // TODO: verify trade is valid
       var trade = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, this.state, {
         asset_id: this.props.assetId,
         avg_price: this.props.asset.latestPrice
@@ -2453,7 +2455,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
