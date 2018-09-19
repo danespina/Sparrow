@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import Splash from './placeholder_splash';
 
 const mapStateToProps = (state) => {
@@ -7,4 +8,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, null)(Splash);
+export default withRouter(connect(mapStateToProps, null)(Splash));

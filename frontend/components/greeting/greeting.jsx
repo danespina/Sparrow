@@ -7,6 +7,7 @@ class Greeting extends React.Component {
     super(props);
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
     this.state = { query: '', results: {} };
   }
   handleClick(e) {
@@ -24,6 +25,10 @@ class Greeting extends React.Component {
     });
   }
 
+  clearSearch(e) {
+    this.setState({ query: '', results: {} });
+  }
+
   handleChange(e) {
     this.setState({ query: e.currentTarget.value});
     searchAssets(e.currentTarget.value).then((data) => {
@@ -33,8 +38,7 @@ class Greeting extends React.Component {
 
   render () {
     const searchItems = Object.values(this.state.results).map((el) => {
-
-      return (<li key={el.id}><Link to={`/assets/${el.id}`}>{el.symbol} {el.name}</Link></li>);
+      return (<li key={el.id}><Link to={`/assets/${el.id}`} onClick={this.clearSearch}>{el.symbol} {el.name}</Link></li>);
     });
     const logo = (<svg className="logo" viewBox="0 0 1024 1024">
       <path d="M 0 1000 L 100 1000 L 200 800 L 600 600 L 450 580 L 400 400 L 0 1000z"></path>

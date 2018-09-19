@@ -28,16 +28,31 @@ class AssetShow extends React.Component {
     }
   }
 
-  componentDidUpdate() {
-    this.props.fetchAsset(this.props.match.params.id).then((arg) => {
-      this.setState({ assets: {[arg.asset.id]: arg.asset } }).then(
-        () => {
-          return getExternalInfo("quote", this.state.assets[this.props.match.params.id]);
-        }
-      ).then((data) => {
-        this.setState({ assets: {[this.props.match.params.id]: data}});
-      });
-    });
+  componentWillUnmount() {
+    // debugger
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.assetId !== this.props.assetId) {
+      this.props.fetchAsset(nextProps.assetId).then(
+        (arg) => {
+          this.setState({ assets: {[arg.asset.id]: arg.asset } });
+        }).then(
+          () => {
+            return getExternalInfo("quote", this.state.assets[nextProps.assetId]);
+          }
+        ).then((data) => {
+          this.setState({ assets: {[nextProps.assetId]: data}});
+        });
+    }
+  }
+
+  componentWillUpdate(prevProps, nextProps) {
+    // debugger;
+    // this.props.fetchAsset(this.props.assetId).then(
+    //   (arg) => {
+    //     console.log(arg);
+    //   });
   }
 
   render () {
