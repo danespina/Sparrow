@@ -18,7 +18,7 @@ export const fetchAsset = (id) => {
     url: `/api/assets/${id}`,
   });
 };
-//
+
 // export const fetchAssets = () => {
 //   return
 // }

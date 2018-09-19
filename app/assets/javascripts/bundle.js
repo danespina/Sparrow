@@ -1093,9 +1093,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
+  var portId = state.entities.users[state.session.currentUserId].portfolioId;
   return {
     assets: state.entities.assets,
-    portfolios: state.entities.portfolios
+    portfolio: state.entities.portfolios[portId]
   };
 };
 
@@ -1156,11 +1157,11 @@ function (_React$Component) {
 
       var stockItems;
 
-      if (Object.values(this.props.portfolios).length > 0) {
-        stockItems = Object.values(Object.values(this.props.portfolios)[0].holdings).map(function (holding) {
+      if (Boolean(this.props.portfolio)) {
+        stockItems = Object.values(this.props.portfolio.holdings).map(function (holding) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
             key: holding.asset_id,
-            asset: _this.props.assets[holding.asset_id],
+            asset: _this.props.portfolio.assetInfo[holding.asset_id],
             shares: holding.position
           });
         });
@@ -1388,33 +1389,32 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.fetchAllAssets().then(function (data) {
+      this.props.fetchPortfolio(this.props.portfolioId).then(function (data) {
         _this2.setState({
-          assets: data.assets
+          portfolio: data.portfolio
         });
-      }).then(function () {
-        _this2.props.fetchPortfolio(_this2.props.portfolioId).then(function (data) {
-          _this2.setState({
-            portfolio: data.portfolio
-          });
-        });
-      });
+      }); // this.props.fetchAllAssets().then((data) => {
+      //   this.setState({ assets: data.assets });
+      // }).then(() => {
+      // this.props.fetchPortfolio(this.props.portfolioId).then((data) => {
+      //   console.log(data);
+      //   this.setState({ portfolio: data.portfolio });
+      // });
+      // });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
-      var holds;
-
-      if (this.state.portfolio.holdings && Object.values(this.props.assets).length > 0) {
-        holds = Object.values(this.state.portfolio.holdings).map(function (el) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-            key: el.asset_id
-          }, "You own ", _this3.props.assets[el.asset_id].symbol, ",", el.position, ",", el.avg_price, "!");
-        });
-      }
-
+      // let holds;
+      // if(this.state.portfolio.holdings &&
+      //   Object.values(this.props.assets).length > 0){
+      //   holds = Object.values(this.state.portfolio.holdings).map((el) => {
+      //   return (<li key={el.asset_id}>
+      //     You own {this.props.assets[el.asset_id].symbol},
+      //     {el.position},
+      //     {el.avg_price}!</li>);
+      //   });
+      // }
       var chart;
 
       if (this.state.portfolio.history) {
@@ -1440,8 +1440,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-2-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _script__WEBPACK_IMPORTED_MODULE_3__["script"])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        portfolios: this.state.portfolios,
-        assets: this.state.assets
+        assets: this.state.portfolio.assetInfo
       }));
     }
   }]);
@@ -2166,6 +2165,7 @@ function (_React$Component) {
       });
 
       if (this.props.portfolio.buying_power > this.state.position * this.props.asset.latestPrice) {
+        this.tradeErrors = [];
         this.props.makeTrade(trade);
       } else {
         this.tradeErrors.push("Not enough buying power!");
@@ -2360,9 +2360,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   switch (action.type) {
     case _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PORTFOLIO"]:
-      var newPort = _defineProperty({}, action.portfolio.id, action.portfolio);
-
-      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, newPort);
+      return _defineProperty({}, action.portfolio.id, action.portfolio);
 
     default:
       return state;
@@ -2612,8 +2610,7 @@ var fetchAsset = function fetchAsset(id) {
     method: "GET",
     url: "/api/assets/".concat(id)
   });
-}; //
-// export const fetchAssets = () => {
+}; // export const fetchAssets = () => {
 //   return
 // }
 

@@ -2,9 +2,10 @@ import { connect } from 'react-redux';
 import HoldingsIndex from './holdings_show_index';
 
 const mapStateToProps = (state) => {
+  const portId = state.entities.users[state.session.currentUserId].portfolioId;
   return {
     assets: state.entities.assets,
-    portfolios: state.entities.portfolios,
+    portfolio: state.entities.portfolios[portId],
   };
 };
 

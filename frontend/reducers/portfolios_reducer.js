@@ -5,8 +5,7 @@ export default function (state = {}, action) {
   Object.freeze(state);
   switch (action.type) {
     case RECEIVE_PORTFOLIO:
-      const newPort = { [action.portfolio.id]: action.portfolio };
-      return merge({}, state, newPort);
+      return { [action.portfolio.id]: action.portfolio };
     default:
       return state;
   }

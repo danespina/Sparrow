@@ -48,6 +48,10 @@
   margin: 4px 0;
 }
 
+.trade-form-row svg {
+  margin-right: 8px
+}
+
 
 .trade-form-row input {
   max-width: 25%;

@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 class TradeForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {position: 0};
+    this.state = { position: 0 };
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.tradeErrors = [];
@@ -13,11 +13,12 @@ class TradeForm extends React.Component {
     // TODO: verify trade is valid
     const trade = merge({}, this.state, {asset_id: this.props.assetId, avg_price: this.props.asset.latestPrice});
     if (this.props.portfolio.buying_power > (this.state.position * this.props.asset.latestPrice)){
+      this.tradeErrors = [];
       this.props.makeTrade(trade);
     } else {
       this.tradeErrors.push("Not enough buying power!");
     }
-    this.setState({position: 0});
+    this.setState({ position: 0 });
   }
   componentDidMount() {
     // if (Object.keys(this.props.portfolio).length < 1) {
@@ -25,7 +26,7 @@ class TradeForm extends React.Component {
     // }
   }
   handleChange(e){
-    this.setState({position: e.target.value });
+    this.setState({ position: e.target.value });
   }
   render () {
     const errs = this.tradeErrors.map((el) => {

@@ -8,7 +8,7 @@
   margin: 0 auto;
   position: fixed;
   background-color: white;
-  padding: 0 20px;
+  padding-top: 14px;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -16,8 +16,8 @@
 .greeting-logo {
   display: block;
   box-sizing: border-box;
-  padding-left: 8px;
-  padding-right: 18px;
+  position: relative;
+  left: 20px;
 }
 
 .greeting-logo svg {
@@ -70,6 +70,8 @@
 .greeting-container-middle {
   display: block;
   margin: 0 auto;
+  /* margin-left: width - 48px; */
+  /* margin-right: auto; */
   width: 1024px;
 }
 
