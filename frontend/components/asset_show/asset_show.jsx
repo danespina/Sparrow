@@ -23,6 +23,10 @@ class AssetShow extends React.Component {
       ).then((data) => {
         this.setState({ assets: {[this.props.assetId]: data}});
       });
+    if (!this.props.portfolio) {
+      this.props.fetchPortfolio(this.props.currentUserId);
+    }
+
   }
 
   render () {

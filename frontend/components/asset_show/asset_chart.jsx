@@ -10,22 +10,42 @@ class AssetChart extends React.Component {
     this.update = this.update.bind(this);
   }
 
-  componentDidMount(){
+  cleanIncoming(arr) {
+    let lastVals = arr.map((el) => {
+      return el.close;
+    });
+    for (let i = lastVals.length; i >= 0; i--) {
+      if (!lastVals[i]) {
+        let j = i;
+        while (!lastVals[j] && j > 0) {
+          j--;
+        }
+        lastVals[i] = lastVals[j];
+      }
+    }
+    return arr.map((el, idx) => {
+      return {label: el.label, close: lastVals[idx]};
+    });
+  }
+
+  componentDidMount() {
     getExternalInfo(`chart/${this.state.timeFrame}`, this.props.asset).then((data) => {
       let mappedData = data.map((datum) => {
         return {label: datum.label, close: datum.close };
       });
+      mappedData = this.cleanIncoming(mappedData);
       this.setState({ chartData: mappedData });
     });
   }
 
   update(field) {
-
     this.setState({ timeFrame: field }, () => {
       getExternalInfo(`chart/${this.state.timeFrame}`, this.props.asset).then((data) => {
         let mappedData = data.map((datum) => {
           return {label: datum.label, close: datum.close };
         });
+        console.log(this.cleanIncoming(mappedData));
+        mappedData = this.cleanIncoming(mappedData);
         this.setState({ chartData: mappedData });
       });
     });

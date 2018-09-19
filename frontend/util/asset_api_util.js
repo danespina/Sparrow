@@ -18,8 +18,12 @@ export const fetchAsset = (id) => {
     url: `/api/assets/${id}`,
   });
 };
+//
+// export const fetchAssets = () => {
+//   return
+// }
 
-export const fetchAssets = () => {
+export const fetchAllAssets = () => {
   return $.ajax({
     method: "GET",
     url: "/api/assets",

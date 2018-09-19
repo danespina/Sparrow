@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 import TradeForm from './trade_form';
 import { makeTrade } from '../../actions/trade_actions';
+import { fetchPortfolio } from '../../actions/portfolio_actions';
 
 const mapStateToProps = (state) => {
   return {
-    test: 10,
+    user: state.entities.users[state.session.currentUserId],
+    portfolio: state.entities.portfolios[state.session.currentUserId],
   };
 };
 
@@ -12,6 +14,9 @@ const mapDispatchToProps = (dispatch) => {
   return {
     makeTrade: (trade) => {
       return dispatch(makeTrade(trade));
+    },
+    fetchPortfolio: (id) => {
+      return dispatch(fetchPortfolio(id));
     },
   };
 };

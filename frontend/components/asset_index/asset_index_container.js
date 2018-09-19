@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchAssets } from '../../actions/asset_actions';
+import { fetchAllAssets } from '../../actions/asset_actions';
 import AssetIndex from './asset_index';
 
 const mapStateToProps = (state) => {
@@ -10,8 +10,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchAssets: () => {
-      return dispatch(fetchAssets());
+    fetchAllAssets: () => {
+      return dispatch(fetchAllAssets());
     },
   };
 };

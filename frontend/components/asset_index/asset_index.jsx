@@ -7,7 +7,7 @@ class AssetIndex extends React.Component {
     this.state = { assets: {} };
   }
   componentDidMount() {
-    this.props.fetchAssets().then((data) => {
+    this.props.fetchAllAssets().then((data) => {
       this.setState({ assets: data.assets });
     });
   }

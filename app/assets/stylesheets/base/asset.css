@@ -21,7 +21,7 @@
 }
 
 .trade-form form {
-  padding: 16px 24px 24px;
+  padding: 16px 0 24px;
   display: flex;
   flex-direction: column;
 }
@@ -44,8 +44,10 @@
 .trade-form-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin: 4px 0;
 }
+
 
 .trade-form-row input {
   max-width: 25%;

@@ -90,7 +90,7 @@
 /*!*******************************************!*\
   !*** ./frontend/actions/asset_actions.js ***!
   \*******************************************/
-/*! exports provided: RECEIVE_ASSET, RECEIVE_ASSETS, receiveAsset, receiveAssets, fetchAsset, fetchAssets */
+/*! exports provided: RECEIVE_ASSET, RECEIVE_ASSETS, receiveAsset, receiveAssets, fetchAsset, fetchAllAssets */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -100,7 +100,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAsset", function() { return receiveAsset; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveAssets", function() { return receiveAssets; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAsset", function() { return fetchAsset; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAssets", function() { return fetchAssets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllAssets", function() { return fetchAllAssets; });
 /* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/asset_api_util */ "./frontend/util/asset_api_util.js");
 
 var RECEIVE_ASSET = 'RECEIVE_ASSET';
@@ -124,9 +124,9 @@ var fetchAsset = function fetchAsset(id) {
     });
   };
 };
-var fetchAssets = function fetchAssets() {
+var fetchAllAssets = function fetchAllAssets() {
   return function (dispatch) {
-    return _util_asset_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAssets"]().then(function (assets) {
+    return _util_asset_api_util__WEBPACK_IMPORTED_MODULE_0__["fetchAllAssets"]().then(function (assets) {
       return dispatch(receiveAssets(assets));
     });
   };
@@ -363,7 +363,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.fetchAssets().then(function (data) {
+      this.props.fetchAllAssets().then(function (data) {
         _this2.setState({
           assets: data.assets
         });
@@ -419,8 +419,8 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchAssets: function fetchAssets() {
-      return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAssets"])());
+    fetchAllAssets: function fetchAllAssets() {
+      return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAllAssets"])());
     }
   };
 };
@@ -653,6 +653,32 @@ function (_React$Component) {
   }
 
   _createClass(AssetChart, [{
+    key: "cleanIncoming",
+    value: function cleanIncoming(arr) {
+      var lastVals = arr.map(function (el) {
+        return el.close;
+      });
+
+      for (var i = lastVals.length; i >= 0; i--) {
+        if (!lastVals[i]) {
+          var j = i;
+
+          while (!lastVals[j] && j > 0) {
+            j--;
+          }
+
+          lastVals[i] = lastVals[j];
+        }
+      }
+
+      return arr.map(function (el, idx) {
+        return {
+          label: el.label,
+          close: lastVals[idx]
+        };
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -664,6 +690,7 @@ function (_React$Component) {
             close: datum.close
           };
         });
+        mappedData = _this2.cleanIncoming(mappedData);
 
         _this2.setState({
           chartData: mappedData
@@ -685,6 +712,8 @@ function (_React$Component) {
               close: datum.close
             };
           });
+          console.log(_this3.cleanIncoming(mappedData));
+          mappedData = _this3.cleanIncoming(mappedData);
 
           _this3.setState({
             chartData: mappedData
@@ -802,10 +831,10 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var newsList = this.state.news.map(function (news) {
+      var newsList = this.state.news.map(function (news, idx) {
         var niceDate = new Date(news.publishedAt);
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: news.publishedAt,
+          key: idx,
           className: "news-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
           href: news.url
@@ -922,6 +951,10 @@ function (_React$Component) {
           assets: _defineProperty({}, _this2.props.assetId, data)
         });
       });
+
+      if (!this.props.portfolio) {
+        this.props.fetchPortfolio(this.props.currentUserId);
+      }
     }
   }, {
     key: "render",
@@ -974,7 +1007,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
-/* harmony import */ var _asset_show__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./asset_show */ "./frontend/components/asset_show/asset_show.jsx");
+/* harmony import */ var _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/portfolio_actions */ "./frontend/actions/portfolio_actions.js");
+/* harmony import */ var _asset_show__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./asset_show */ "./frontend/components/asset_show/asset_show.jsx");
+
 
 
 
@@ -982,7 +1017,9 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     assetId: ownProps.match.params.id,
-    assets: state.entities.assets
+    assets: state.entities.assets,
+    currentUserId: state.session.currentUserId,
+    portfolio: state.entities.portfolios[state.entities.users[state.session.currentUserId].portfolioId]
   };
 };
 
@@ -990,11 +1027,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchAsset: function fetchAsset(id) {
       return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__["fetchAsset"])(id));
+    },
+    fetchPortfolio: function fetchPortfolio(id) {
+      return dispatch(Object(_actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_2__["fetchPortfolio"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_asset_show__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_asset_show__WEBPACK_IMPORTED_MODULE_3__["default"]));
 
 /***/ }),
 
@@ -1028,8 +1068,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchPortfolio: function fetchPortfolio(id) {
       return dispatch(Object(_actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_1__["fetchPortfolio"])(id));
     },
-    fetchAssets: function fetchAssets() {
-      return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAssets"])());
+    fetchAllAssets: function fetchAllAssets() {
+      return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAllAssets"])());
     }
   };
 };
@@ -1119,6 +1159,7 @@ function (_React$Component) {
       if (Object.values(this.props.portfolios).length > 0) {
         stockItems = Object.values(Object.values(this.props.portfolios)[0].holdings).map(function (holding) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+            key: holding.asset_id,
             asset: _this.props.assets[holding.asset_id],
             shares: holding.position
           });
@@ -1197,6 +1238,32 @@ function (_React$Component) {
   }
 
   _createClass(HoldingsItem, [{
+    key: "cleanIncoming",
+    value: function cleanIncoming(arr) {
+      var lastVals = arr.map(function (el) {
+        return el.close;
+      });
+
+      for (var i = lastVals.length; i >= 0; i--) {
+        if (!lastVals[i]) {
+          var j = i;
+
+          while (!lastVals[j] && j > 0) {
+            j--;
+          }
+
+          lastVals[i] = lastVals[j];
+        }
+      }
+
+      return arr.map(function (el, idx) {
+        return {
+          label: el.label,
+          close: lastVals[idx]
+        };
+      });
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -1208,6 +1275,7 @@ function (_React$Component) {
             close: datum.close
           };
         });
+        mappedData = _this2.cleanIncoming(mappedData);
 
         _this2.setState({
           chartData: mappedData
@@ -1223,7 +1291,9 @@ function (_React$Component) {
         price = this.state.chartData.pop().close;
       }
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: this.props.asset.id
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
         to: "/assets/".concat(this.props.asset.id)
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "holdings-form-row"
@@ -1318,7 +1388,7 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      this.props.fetchAssets().then(function (data) {
+      this.props.fetchAllAssets().then(function (data) {
         _this2.setState({
           assets: data.assets
         });
@@ -2004,13 +2074,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _trade_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./trade_form */ "./frontend/components/trade_show/trade_form.jsx");
 /* harmony import */ var _actions_trade_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/trade_actions */ "./frontend/actions/trade_actions.js");
+/* harmony import */ var _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/portfolio_actions */ "./frontend/actions/portfolio_actions.js");
+
 
 
 
 
 var mapStateToProps = function mapStateToProps(state) {
   return {
-    test: 10
+    user: state.entities.users[state.session.currentUserId],
+    portfolio: state.entities.portfolios[state.session.currentUserId]
   };
 };
 
@@ -2018,6 +2091,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     makeTrade: function makeTrade(trade) {
       return dispatch(Object(_actions_trade_actions__WEBPACK_IMPORTED_MODULE_2__["makeTrade"])(trade));
+    },
+    fetchPortfolio: function fetchPortfolio(id) {
+      return dispatch(Object(_actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_3__["fetchPortfolio"])(id));
     }
   };
 };
@@ -2076,6 +2152,7 @@ function (_React$Component) {
     };
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.tradeErrors = [];
     return _this;
   }
 
@@ -2087,10 +2164,22 @@ function (_React$Component) {
         asset_id: this.props.assetId,
         avg_price: this.props.asset.latestPrice
       });
-      this.props.makeTrade(trade);
+
+      if (this.props.portfolio.buying_power > this.state.position * this.props.asset.latestPrice) {
+        this.props.makeTrade(trade);
+      } else {
+        this.tradeErrors.push("Not enough buying power!");
+      }
+
       this.setState({
         position: 0
       });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {// if (Object.keys(this.props.portfolio).length < 1) {
+      //   this.props.fetchPortfolio(this.props.user.portfolioId);
+      // }
     }
   }, {
     key: "handleChange",
@@ -2102,6 +2191,31 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var errs = this.tradeErrors.map(function (el) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          width: "18",
+          height: "18",
+          viewBox: "0 0 18 18"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
+          fill: "none",
+          fillRule: "evenodd",
+          transform: "translate(0 -1)"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("circle", {
+          cx: "9",
+          cy: "10",
+          r: "9",
+          fill: "#303032"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("text", {
+          fill: "#FFF",
+          fontSize: "14",
+          fontWeight: "700",
+          letterSpacing: ".058"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tspan", {
+          x: "6.409",
+          y: "15"
+        }, "!")))), el);
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "trade-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2117,6 +2231,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Market Price"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "$", this.props.asset.latestPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "trade-form-row bold"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Estimated Cost"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "$", this.props.asset.latestPrice * this.state.position)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "trade-form-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errs)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "trade-form-row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleClick
@@ -2244,7 +2360,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
   switch (action.type) {
     case _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PORTFOLIO"]:
-      return _defineProperty({}, action.portfolio.id, action.portfolio);
+      var newPort = _defineProperty({}, action.portfolio.id, action.portfolio);
+
+      return lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, newPort);
 
     default:
       return state;
@@ -2466,7 +2584,7 @@ var configureStore = function configureStore() {
 /*!*****************************************!*\
   !*** ./frontend/util/asset_api_util.js ***!
   \*****************************************/
-/*! exports provided: getExternalInfo, getNews, fetchAsset, fetchAssets, getQuote, createAsset */
+/*! exports provided: getExternalInfo, getNews, fetchAsset, fetchAllAssets, getQuote, createAsset */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -2474,7 +2592,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getExternalInfo", function() { return getExternalInfo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getNews", function() { return getNews; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAsset", function() { return fetchAsset; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAssets", function() { return fetchAssets; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchAllAssets", function() { return fetchAllAssets; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getQuote", function() { return getQuote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createAsset", function() { return createAsset; });
 var getExternalInfo = function getExternalInfo(requestType, asset) {
@@ -2494,8 +2612,12 @@ var fetchAsset = function fetchAsset(id) {
     method: "GET",
     url: "/api/assets/".concat(id)
   });
-};
-var fetchAssets = function fetchAssets() {
+}; //
+// export const fetchAssets = () => {
+//   return
+// }
+
+var fetchAllAssets = function fetchAllAssets() {
   return $.ajax({
     method: "GET",
     url: "/api/assets"

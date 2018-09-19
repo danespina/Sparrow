@@ -25,9 +25,9 @@ export const fetchAsset = (id) => {
   };
 };
 
-export const fetchAssets = () => {
+export const fetchAllAssets = () => {
   return (dispatch) => {
-    return ApiUtil.fetchAssets().then((assets) => {
+    return ApiUtil.fetchAllAssets().then((assets) => {
       return dispatch(receiveAssets(assets));
     });
   };
