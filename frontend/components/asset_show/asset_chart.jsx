@@ -44,7 +44,6 @@ class AssetChart extends React.Component {
         let mappedData = data.map((datum) => {
           return {label: datum.label, close: datum.close };
         });
-        console.log(this.cleanIncoming(mappedData));
         mappedData = this.cleanIncoming(mappedData);
         this.setState({ chartData: mappedData });
       });

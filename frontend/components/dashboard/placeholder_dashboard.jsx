@@ -19,7 +19,6 @@ class Dashboard extends React.Component {
     //   this.setState({ assets: data.assets });
     // }).then(() => {
       // this.props.fetchPortfolio(this.props.portfolioId).then((data) => {
-      //   console.log(data);
       //   this.setState({ portfolio: data.portfolio });
       // });
     // });

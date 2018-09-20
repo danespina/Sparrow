@@ -1,5 +1,7 @@
 class AddEmployeesHeadquartersAndFoundedToAssetsTable < ActiveRecord::Migration[5.2]
   def change
+    Asset.destroy_all
+    
     change_table :assets do |t|
       t.column :headquarters, :string, null: false
       t.column :employees, :integer, null: false

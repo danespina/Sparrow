@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_20_130520) do
+ActiveRecord::Schema.define(version: 2018_09_20_210921) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,6 +20,11 @@ ActiveRecord::Schema.define(version: 2018_09_20_130520) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
+    t.string "headquarters", null: false
+    t.integer "employees", null: false
+    t.integer "founded", null: false
+    t.index ["name"], name: "index_assets_on_name"
+    t.index ["symbol"], name: "index_assets_on_symbol"
   end
 
   create_table "portfolios", force: :cascade do |t|
@@ -47,6 +52,9 @@ ActiveRecord::Schema.define(version: 2018_09_20_130520) do
     t.string "session_token", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email"
+    t.index ["session_token"], name: "index_users_on_session_token"
+    t.index ["username"], name: "index_users_on_username"
   end
 
   create_table "watchlists", force: :cascade do |t|

@@ -781,7 +781,6 @@ function (_React$Component) {
               close: datum.close
             };
           });
-          console.log(_this3.cleanIncoming(mappedData));
           mappedData = _this3.cleanIncoming(mappedData);
 
           _this3.setState({
@@ -1522,7 +1521,6 @@ function (_React$Component) {
       //   this.setState({ assets: data.assets });
       // }).then(() => {
       // this.props.fetchPortfolio(this.props.portfolioId).then((data) => {
-      //   console.log(data);
       //   this.setState({ portfolio: data.portfolio });
       // });
       // });
@@ -3040,7 +3038,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
@@ -3096,7 +3094,6 @@ var getQuote = function getQuote(sym) {
     url: "https://api.iextrading.com/1.0/stock/".concat(sym, "/quote")
   });
 }; // export const createAsset = (sym) => {
-//   console.log(`making ${sym}!`);
 //   getQuote(sym).then((quote) => {
 //     const asset = { symbol: sym, open: quote.open, close: quote.close };
 //     return $.ajax({
