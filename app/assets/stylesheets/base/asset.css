@@ -73,6 +73,12 @@
   box-shadow: none;
 }
 
+.watchlist-button {
+  position: fixed;
+  top: 350px;
+  background-color: magenta;
+  padding: 10px;
+}
 
 .col-1-3 {
   display: block;

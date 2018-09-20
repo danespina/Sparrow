@@ -238,18 +238,75 @@ var signup = function signup(user) {
 /*!*******************************************!*\
   !*** ./frontend/actions/trade_actions.js ***!
   \*******************************************/
-/*! exports provided: makeTrade */
+/*! exports provided: RECEIVE_TRADE, receiveTrade, makeTrade */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_TRADE", function() { return RECEIVE_TRADE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveTrade", function() { return receiveTrade; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "makeTrade", function() { return makeTrade; });
 /* harmony import */ var _util_trade_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/trade_api_util */ "./frontend/util/trade_api_util.js");
 
+var RECEIVE_TRADE = 'RECEIVE_TRADE';
+var receiveTrade = function receiveTrade(trade) {
+  return {
+    type: RECEIVE_TRADE,
+    trade: trade
+  };
+};
 var makeTrade = function makeTrade(trade) {
   return function (dispatch) {
     return _util_trade_api_util__WEBPACK_IMPORTED_MODULE_0__["makeTrade"](trade).then(function (data) {
-      console.log(data);
+      return dispatch(receiveTrade(data));
+    });
+  };
+};
+
+/***/ }),
+
+/***/ "./frontend/actions/watchlist_actions.js":
+/*!***********************************************!*\
+  !*** ./frontend/actions/watchlist_actions.js ***!
+  \***********************************************/
+/*! exports provided: ADD_TO_WATCHLIST, REMOVE_FROM_WATCHLIST, addItem, removeItem, addToWatchlist, removeFromWatchlist */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ADD_TO_WATCHLIST", function() { return ADD_TO_WATCHLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "REMOVE_FROM_WATCHLIST", function() { return REMOVE_FROM_WATCHLIST; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addItem", function() { return addItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeItem", function() { return removeItem; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToWatchlist", function() { return addToWatchlist; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFromWatchlist", function() { return removeFromWatchlist; });
+/* harmony import */ var _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/watchlist_api_util */ "./frontend/util/watchlist_api_util.js");
+
+var ADD_TO_WATCHLIST = 'ADD_TO_WATCHLIST';
+var REMOVE_FROM_WATCHLIST = 'REMOVE_FROM_WATCHLIST';
+var addItem = function addItem(item) {
+  return {
+    type: ADD_TO_WATCHLIST,
+    item: item
+  };
+};
+var removeItem = function removeItem(id) {
+  return {
+    type: REMOVE_FROM_WATCHLIST,
+    id: id
+  };
+};
+var addToWatchlist = function addToWatchlist(id) {
+  return function (dispatch) {
+    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["addToWatchlist"](id).then(function (data) {
+      return dispatch(addItem(data));
+    });
+  };
+};
+var removeFromWatchlist = function removeFromWatchlist(id) {
+  return function (dispatch) {
+    return _util_watchlist_api_util__WEBPACK_IMPORTED_MODULE_0__["removeFromWatchlist"](id).then(function (data) {
+      return dispatch(removeItem(data));
     });
   };
 };
@@ -902,13 +959,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -928,13 +985,36 @@ function (_React$Component) {
     _classCallCheck(this, AssetShow);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(AssetShow).call(this, props));
+    var beingWatched = false;
+
+    if (Boolean(_this.props.watchlist)) {
+      beingWatched = Object.keys(_this.props.watchlist).includes(_this.props.assetId);
+    }
+
     _this.state = {
-      assets: {}
+      assets: {},
+      watching: beingWatched
     };
+    _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(AssetShow, [{
+    key: "handleClick",
+    value: function handleClick(e) {
+      if (!this.state.watching) {
+        this.props.addToWatchlist(this.props.assetId);
+        this.setState({
+          watching: true
+        });
+      } else {
+        this.props.removeFromWatchlist(this.props.assetId);
+        this.setState({
+          watching: false
+        });
+      }
+    }
+  }, {
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -993,7 +1073,7 @@ function (_React$Component) {
       if (!this.state.assets[this.props.assetId]) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "wait");
       } else {
-        var curAsset = this.state.assets[this.props.assetId];
+        var curAsset = this.state.assets[parseInt(this.props.assetId)];
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "asset-page"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1015,7 +1095,10 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_trade_show_trade_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           asset: curAsset,
           assetId: this.props.assetId
-        })));
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+          className: "watchlist-button",
+          onClick: this.handleClick
+        }, this.state.watching ? 'Remove from' : 'Add to', " watchlist!")));
       }
     }
   }]);
@@ -1039,7 +1122,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
 /* harmony import */ var _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/portfolio_actions */ "./frontend/actions/portfolio_actions.js");
-/* harmony import */ var _asset_show__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./asset_show */ "./frontend/components/asset_show/asset_show.jsx");
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+/* harmony import */ var _asset_show__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./asset_show */ "./frontend/components/asset_show/asset_show.jsx");
+
 
 
 
@@ -1050,7 +1135,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     assetId: ownProps.match.params.id,
     assets: state.entities.assets,
     currentUserId: state.session.currentUserId,
-    portfolio: state.entities.portfolios[state.entities.users[state.session.currentUserId].portfolioId]
+    portfolio: state.entities.portfolios[state.entities.users[state.session.currentUserId].portfolioId],
+    watchlist: state.entities.users[state.session.currentUserId].watchlist
   };
 };
 
@@ -1061,11 +1147,17 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchPortfolio: function fetchPortfolio(id) {
       return dispatch(Object(_actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_2__["fetchPortfolio"])(id));
+    },
+    addToWatchlist: function addToWatchlist(id) {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["addToWatchlist"])(id));
+    },
+    removeFromWatchlist: function removeFromWatchlist(id) {
+      return dispatch(Object(_actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_3__["removeFromWatchlist"])(id));
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_asset_show__WEBPACK_IMPORTED_MODULE_3__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_asset_show__WEBPACK_IMPORTED_MODULE_4__["default"]));
 
 /***/ }),
 
@@ -1199,12 +1291,10 @@ function (_React$Component) {
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-1-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "holdings-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "holdings-header bold"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Stocks")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, stockItems)));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Stocks")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, stockItems));
     }
   }]);
 
@@ -1371,8 +1461,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 /* harmony import */ var _holdings_show_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./holdings_show_container */ "./frontend/components/dashboard/holdings_show_container.js");
-/* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./script */ "./frontend/components/dashboard/script.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var _watchlist_show_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./watchlist_show_container */ "./frontend/components/dashboard/watchlist_show_container.js");
+/* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./script */ "./frontend/components/dashboard/script.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1390,6 +1481,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1449,18 +1541,18 @@ function (_React$Component) {
       var chart;
 
       if (this.state.portfolio.history) {
-        chart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["LineChart"], {
+        chart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["LineChart"], {
           width: 676,
           height: 196,
           data: this.state.portfolio.history
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["Line"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Line"], {
           type: "linear",
           dataKey: "close",
           stroke: "#21ce99",
           strokeWidth: 2,
           dot: false,
           animationDuration: 0
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["YAxis"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["YAxis"], {
           domain: ['auto', 'auto'],
           hide: true
         }));
@@ -1470,9 +1562,11 @@ function (_React$Component) {
         className: "asset-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-2-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _script__WEBPACK_IMPORTED_MODULE_3__["script"])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _script__WEBPACK_IMPORTED_MODULE_4__["script"])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "col-1-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         assets: this.state.portfolio.assetInfo
-      }));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watchlist_show_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
     }
   }]);
 
@@ -1494,6 +1588,249 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "script", function() { return script; });
 var script = "FADE IN:\n\nEXT. CARIBBEAN SEA - DAY\n\nA gray, impenetrable wall of fog. From somewhere comes the\nFAINT SOUND of a LITTLE GIRL'S VOICE, singing, slow tempo,\nalmost under her breath.\n\n                     YOUNG ELIZABETH (O.S.)\n           Yo, ho, yo, ho, a pirate's life for me\n           Yo, ho, yo, ho, it's a pirate's life\n           for me...\n\nSuddenly a massive SHIP emerges from the grey, the Winged\nVictory maidenhead looming. It's a British dreadnought,\nthe H.M.S. Dauntless. Formidable, frightening, twenty-five\ngun ports on a side, and rail guns to boot.\n\nEXT. H.M.S. DAUNTLESS - FORECASTLE - DAY\n\nELIZABETH SWANN, strawberry blond hair, stands at the bow\nrailing, gazing at the seas, still singing --\n\n                     ELIZABETH\n           ...drink up me hearties, yo, ho...\n\nJOSHAMEE GIBBS, who was born old, skin a dark leather,\nclutches her shoulder, startling her.\n\n                     GIBBS\n               (sotto)\n           Quiet, missy! Cursed pirates sail\n           these waters. You want to call\n           'em down on us?\n\nElizabeth stares wide-eyed at him.\n\n                        NORRINGTON\n           Mr. Gibbs.\n\nNORRINGTON, a dashing young man, Royal Navy to the core,\nglares sternly at Gibbs. Standing besides him is GOVERNOR\nWEATHERBY SWAN, a man of obvious high station, brass\nbuttons on his thick blue jacket. He is Elizabeth's\nfather.\n\n                     NORRINGTON (CONT'D)\n           That will do.\n\n                    GIBBS\n          She was singing about pirates.\n          Bad luck to sing about pirates,\n          with us mired in this unnatural\n          fog-- mark my words.\n\n                    NORRINGTON\n          Consider them marked.   On your\n          way.\n\n                    GIBBS\n          'Aye, Captain.\n              (as he moves off)\n          Bad luck to have a woman on board,\n          too. Even a mini'ture one.\n\nHe returns to his deck-swabbing duties, surreptitiously\ntakes a quick swig from flask.\n\n                    ELIZABETH\n          I think it would be rather\n          exciting to meet a pirate.\n\n                    NORRINGTON\n          Think again, Miss Swan.   Vile and\n          dissolute creatures, the  lot of\n          them. I intend to see to   it that\n          any man who sails under a  pirate\n          flag, or wears a pirates  brand,\n          gets what he deserves: a  short\n          drop and a sudden stop.\n\nElizabeth doesn't know what 'a short drop and a sudden\nstop' means. Gibbs helpfully mimes: a man being hung.\n\n                    SWAN\n          Captain Norrington... I appreciate\n          your fervor, but I am concerned about\n          the effect this subject will have on\n          my daughter.\n\n                    NORRINGTON\n          My apologies, Governor.\n\n                    ELIZABETH\n          Actually, I find it all fascinating.\n\n                    SWAN\n\n          And that's what concerns me. Elizabeth,\n          dear... we will be landing in Port\n          Royal very soon, and beginning our new\n          lives. Wouldn't it be wonderful if we\n          comport ourselves as befits our class\n          and station?\n\n                    ELIZABETH\n          Yes, father.\n\nChastised, she turns away, to look out over the bow rail.\n\n                    ELIZABETH (CONT'D)\n              (to herself)\n          I still think it would be exciting\n          to meet a pirate...\n\nThe fog still hems in the ship; very little of the sea is\nvisible --\n\n-- but suddenly, a FIGURE comes into view. A young boy,\nWILL TURNER, floating on his back in the otherwise empty\nwater. There is nothing to show where he came from, or how\nhe came to be there.\n\n                     ELIZABETH (CONT'D)\n          Look!   A boy! In the water!\n\nNorrington and Swann spot him --\n\n                    NORRINGTON\n          Man overboard!\n\n                    ELIZABETH\n          Boy overboard!\n\n                    NORRINGTON\n          Fetch a hook! Haul him out of\n          there!\n\nQuick movement and activity on the deck. Sailors use a\nboathook to snag the boy he the passes. Norrington and\nSwann haul him aboard, and lay him on the deck. Elizabeth\nsidles in for a closer look.\n\n                    NORRINGTON (CONT'D)\n          He's still breathing.\n\n                     SWAN\n\n          Where did he come from?\n\n                    GIBBS\n          Mary mother of God ...\n\nAttention is turned away from the boy --\n\nThe sea is no longer empty. WRECKAGE from a ship litters\nthe water... along with the bodies of its crew. What is\nleft of the ship's hull BURNS, a ragged British flag\nhanging limply from the stern.\n\nThe H.M.S. Dauntless slips silently through it all.   The\nscene calls for hushed voices.\n\n                    SWAN\n          What happened here?\n\n                    NORRINGTON\n          An explosion in the powder magazine.\n          Merchant vessels run heavily armed.\n\n                    GIBBS\n          Lot of good it did them...\n              (off Swan's look)\n          Everyone's thinking it! I'm just\n          saying it! Pirates!\n\n                    SWAN\n          There is no proof of that. It could\n          have been an accident. Captain, these\n          men were protection. If there is even\n          the slightest chance one of those poor\n          devils is still alive, we cannot\n          abandon them!\n\n                     NORRINGTON\n          Of course not, Governor.\n              (to the crew)\n          Come about and strike the sails! Unlash\n          the boats! Gunnery crew... jackets off\n          the cannons!\n              (to Swann)\n          Hope for the best...prepare for\n          the worst.\n              (to two sailors)\n          Move the boy aft. We'll need the\n          deck clear.\n\nThey lift the boy. Swann pulls Elizabeth away from the\nrail, away from the hideous scene in the water.\n\n                    SWAN\n          Elizabeth, I want you to accompany\n          the boy. He's in your charge now.\n          You'll watch over him?\n\nElizabeth nods gravely. Swann hurries away to help unstow\nthe longboat. The sailors lay the boy gently on the poop\ndeck, behind the wheel, then hurry off. Elizabeth kneels\ndown besides the boy.\n\nHis good looks are not lost on her. She reaches out,\ngently brushes the blond hair from his eyes --\n\nSuddenly, he grabs her wrist, awake now. Elizabeth is\nstartled, but their eyes lock. She takes his hand in hers.\n\n                    ELIZABETH\n          My name is Elizabeth Swann.\n\n                    WILL\n          Will Turner.\n\n                    ELIZABETH\n          I'm watching over you, Will.\n\nHe clutches her hands, then slips back into\nunconsciousness.\n\nHis movement has opened the collar of his shirt; Elizabeth\nsees he wears a chain around his neck. She tugs it free,\nrevealing--\n\nA GOLD MEDALLION.   One side is blank.   She turns it over --\n\nA SKULL gazes up at her. Vaguely Aztec in design, but to\nher eyes, it means one thing only:\n\n                    ELIZABETH (CONT'D)\n          You're a pirate.\n\nShe glances back at the crew.   Sees Norrington, giving\norders, moving toward her.\n\nShe looks back at Will -- comes to a quick decision. Takes\nthe medallion from around his neck. Hides it under her\ncoat.";
+
+/***/ }),
+
+/***/ "./frontend/components/dashboard/watchlist_show_container.js":
+/*!*******************************************************************!*\
+  !*** ./frontend/components/dashboard/watchlist_show_container.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _watchlist_show_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./watchlist_show_index */ "./frontend/components/dashboard/watchlist_show_index.jsx");
+
+
+
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    assets: state.entities.assets,
+    watchlist: state.entities.users[state.session.currentUserId].watchlist
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, null)(_watchlist_show_index__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/dashboard/watchlist_show_index.jsx":
+/*!****************************************************************!*\
+  !*** ./frontend/components/dashboard/watchlist_show_index.jsx ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _watchlist_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./watchlist_show_item */ "./frontend/components/dashboard/watchlist_show_item.jsx");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var WatchlistIndex =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WatchlistIndex, _React$Component);
+
+  function WatchlistIndex(props) {
+    _classCallCheck(this, WatchlistIndex);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(WatchlistIndex).call(this, props));
+  }
+
+  _createClass(WatchlistIndex, [{
+    key: "render",
+    value: function render() {
+      var _this = this;
+
+      var watchItems;
+
+      if (Boolean(this.props.watchlist)) {
+        watchItems = Object.values(this.props.watchlist).map(function (watch) {
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watchlist_show_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
+            key: watch.id,
+            asset: _this.props.watchlist[watch.id]
+          });
+        });
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "watchlist-form"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "holdings-header bold"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Watchlist")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, watchItems));
+    }
+  }]);
+
+  return WatchlistIndex;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WatchlistIndex);
+
+/***/ }),
+
+/***/ "./frontend/components/dashboard/watchlist_show_item.jsx":
+/*!***************************************************************!*\
+  !*** ./frontend/components/dashboard/watchlist_show_item.jsx ***!
+  \***************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+var WatchlistItem =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(WatchlistItem, _React$Component);
+
+  function WatchlistItem(props) {
+    var _this;
+
+    _classCallCheck(this, WatchlistItem);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(WatchlistItem).call(this, props));
+    _this.state = {
+      chartData: []
+    };
+    return _this;
+  }
+
+  _createClass(WatchlistItem, [{
+    key: "cleanIncoming",
+    value: function cleanIncoming(arr) {
+      var lastVals = arr.map(function (el) {
+        return el.close;
+      });
+
+      for (var i = lastVals.length; i >= 0; i--) {
+        if (!lastVals[i]) {
+          var j = i;
+
+          while (!lastVals[j] && j > 0) {
+            j--;
+          }
+
+          lastVals[i] = lastVals[j];
+        }
+      }
+
+      return arr.map(function (el, idx) {
+        return {
+          label: el.label,
+          close: lastVals[idx]
+        };
+      });
+    }
+  }, {
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      var _this2 = this;
+
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])('chart/1D', this.props.asset).then(function (data) {
+        var mappedData = data.map(function (datum) {
+          return {
+            label: datum.label,
+            close: datum.close
+          };
+        });
+        mappedData = _this2.cleanIncoming(mappedData);
+
+        _this2.setState({
+          chartData: mappedData
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var price;
+
+      if (this.state.chartData.pop()) {
+        price = this.state.chartData.pop().close;
+      }
+
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        key: this.props.asset.id
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__["Link"], {
+        to: "/assets/".concat(this.props.asset.id)
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "holdings-form-row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "holdings-symbol"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+        className: "bold"
+      }, this.props.asset.symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["LineChart"], {
+        width: 80,
+        height: 40,
+        data: this.state.chartData
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["Line"], {
+        type: "linear",
+        dataKey: "close",
+        stroke: "#21ce99",
+        strokeWidth: 1,
+        dot: false,
+        animationDuration: 0
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["YAxis"], {
+        domain: ['auto', 'auto'],
+        hide: true
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "$", price))));
+    }
+  }]);
+
+  return WatchlistItem;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (WatchlistItem);
 
 /***/ }),
 
@@ -2421,9 +2758,11 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/portfolio_actions */ "./frontend/actions/portfolio_actions.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_trade_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/trade_actions */ "./frontend/actions/trade_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2435,6 +2774,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   switch (action.type) {
     case _actions_portfolio_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_PORTFOLIO"]:
       return _defineProperty({}, action.portfolio.id, action.portfolio);
+
+    case _actions_trade_actions__WEBPACK_IMPORTED_MODULE_1__["RECEIVE_TRADE"]:
+      {
+        var portId = Object.keys(state)[0];
+        var updatedHoldings;
+
+        if (state[portId].holdings[action.trade.asset_id]) {
+          var oldPrice = state[portId].holdings[action.trade.asset_id].position * state[portId].holdings[action.trade.asset_id].avg_price;
+          var newPos = state[portId].holdings[action.trade.asset_id].position + action.trade.position;
+          var newPrice = oldPrice + action.trade.position * action.trade.avg_price;
+          updatedHoldings = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state[portId].holdings, _defineProperty({}, action.trade.asset_id, {
+            asset_id: action.trade.asset_id,
+            position: newPos,
+            avg_price: newPrice / newPos
+          }));
+        } else {
+          updatedHoldings = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state[portId].holdings, _defineProperty({}, action.trade.asset_id, {
+            asset_id: action.trade.asset_id,
+            position: action.trade.position,
+            avg_price: action.trade.avg_price
+          }));
+        }
+
+        var newBuyingPower = state[portId].buying_power - action.trade.position * action.trade.avg_price;
+        var updatedPortfolio = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state[portId], updatedHoldings);
+        return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, _defineProperty({}, portId, updatedPortfolio));
+      }
 
     default:
       return state;
@@ -2545,9 +2911,11 @@ var defaultState = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
-/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions/watchlist_actions */ "./frontend/actions/watchlist_actions.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/merge */ "./node_modules/lodash/merge.js");
+/* harmony import */ var lodash_merge__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_merge__WEBPACK_IMPORTED_MODULE_2__);
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -2559,8 +2927,32 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   switch (action.type) {
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       {
-        var newState = lodash_merge__WEBPACK_IMPORTED_MODULE_1___default()({}, state, _defineProperty({}, action.user.id, action.user));
+        var newState = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, _defineProperty({}, action.user.id, action.user));
         return newState;
+      }
+
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_1__["ADD_TO_WATCHLIST"]:
+      {
+        var userId = Object.keys(state)[0];
+        var updatedWatchlist = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state[userId].watchlist, _defineProperty({}, action.item.id, action.item));
+        var updatedUser = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state[userId], {
+          watchlist: updatedWatchlist
+        });
+        return lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, _defineProperty({}, userId, updatedUser));
+      }
+
+    case _actions_watchlist_actions__WEBPACK_IMPORTED_MODULE_1__["REMOVE_FROM_WATCHLIST"]:
+      {
+        var _userId = Object.keys(state)[0];
+
+        var _updatedWatchlist = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state[_userId].watchlist);
+
+        delete _updatedWatchlist[action.id.id];
+
+        var _updatedUser = lodash_merge__WEBPACK_IMPORTED_MODULE_2___default()({}, state[_userId]);
+
+        _updatedUser.watchlist = _updatedWatchlist;
+        return _defineProperty({}, _userId, _updatedUser);
       }
 
     default:
@@ -2885,6 +3277,37 @@ var makeTrade = function makeTrade(trade) {
     data: {
       trade: trade
     }
+  });
+};
+
+/***/ }),
+
+/***/ "./frontend/util/watchlist_api_util.js":
+/*!*********************************************!*\
+  !*** ./frontend/util/watchlist_api_util.js ***!
+  \*********************************************/
+/*! exports provided: addToWatchlist, removeFromWatchlist */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "addToWatchlist", function() { return addToWatchlist; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeFromWatchlist", function() { return removeFromWatchlist; });
+var addToWatchlist = function addToWatchlist(id) {
+  return $.ajax({
+    method: "POST",
+    url: "/api/watchlists/",
+    data: {
+      watchlist: {
+        asset_id: id
+      }
+    }
+  });
+};
+var removeFromWatchlist = function removeFromWatchlist(id) {
+  return $.ajax({
+    method: "DELETE",
+    url: "/api/watchlists/".concat(id)
   });
 };
 

@@ -9,6 +9,7 @@ class User < ApplicationRecord
 
   has_many :portfolios, dependent: :destroy
   has_many :trades, dependent: :destroy
+  has_many :watchlists, dependent: :destroy
 
   def self.find_by_credentials(username, password)
     user_by_username = User.find_by(username: username)

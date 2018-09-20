@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HoldingsContainer from './holdings_show_container';
+import WatchlistContainer from './watchlist_show_container';
 import { script } from './script';
 import { LineChart, Line, YAxis } from 'recharts';
 
@@ -50,7 +51,10 @@ class Dashboard extends React.Component {
             {chart}
           <p>{script}</p>
         </div>
-        <HoldingsContainer assets={this.state.portfolio.assetInfo}/>
+        <div className="col-1-3">
+          <HoldingsContainer assets={this.state.portfolio.assetInfo}/>
+          <WatchlistContainer />
+        </div>
       </div>
     );
   }

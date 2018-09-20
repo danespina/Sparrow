@@ -8,7 +8,22 @@ import TradeContainer from '../trade_show/trade_container';
 class AssetShow extends React.Component {
   constructor(props){
     super(props);
-    this.state = { assets: {} };
+    let beingWatched = false;
+    if (Boolean(this.props.watchlist)){
+      beingWatched = Object.keys(this.props.watchlist).includes(this.props.assetId);
+    }
+    this.state = { assets: {}, watching: beingWatched };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(e) {
+    if (!this.state.watching) {
+      this.props.addToWatchlist(this.props.assetId);
+      this.setState({ watching: true });
+    } else {
+      this.props.removeFromWatchlist(this.props.assetId);
+      this.setState({ watching: false });
+    }
   }
 
   componentDidMount() {
@@ -59,7 +74,7 @@ class AssetShow extends React.Component {
     if(!this.state.assets[this.props.assetId]){
       return (<h1>wait</h1>);
     } else {
-      const curAsset = this.state.assets[this.props.assetId];
+      const curAsset = this.state.assets[parseInt(this.props.assetId)];
       return (
         <div className="asset-page">
           <div className = "col-2-3">
@@ -76,6 +91,7 @@ class AssetShow extends React.Component {
           </div>
           <div className="col-1-3">
             <TradeContainer asset={curAsset} assetId={this.props.assetId} />
+            <button className="watchlist-button" onClick={this.handleClick}>{this.state.watching ? 'Remove from' : 'Add to' } watchlist!</button>
           </div>
         </div>
       );

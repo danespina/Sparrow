@@ -33,7 +33,7 @@ class Api::TradesController < ApplicationController
       end
       cur_portfolio.buying_power -= trade_cost
       cur_portfolio.save
-      render json: {}
+      render json: @trade
     else
       render json: @trade.errors.full_messages, status: 422
     end

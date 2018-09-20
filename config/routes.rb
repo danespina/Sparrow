@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resource :session, only: [:create, :destroy]
     resources :portfolios, only: [:create, :update, :show]
     resources :trades, only: [:create]
+    resources :watchlists, only: [:create, :destroy]
   end
   resources :assets, only: [:search] do
     get "search", on: :collection
