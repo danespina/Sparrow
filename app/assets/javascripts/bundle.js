@@ -508,13 +508,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
 
@@ -533,8 +533,10 @@ function (_React$Component) {
     _this.state = {
       about: {},
       stats: {},
-      quote: {}
+      quote: {},
+      hiding: true
     };
+    _this.toggleHide = _this.toggleHide.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -556,10 +558,20 @@ function (_React$Component) {
     }
   }, {
     key: "toggleHide",
-    value: function toggleHide() {
+    value: function toggleHide(e) {
       var hideThis = document.getElementById('sometimes-show');
       hideThis.classList.toggle('hidden');
       hideThis.classList.toggle('showing');
+
+      if (this.state.hiding) {
+        this.setState({
+          hiding: false
+        });
+      } else {
+        this.setState({
+          hiding: true
+        });
+      }
     }
   }, {
     key: "formatNums",
@@ -616,7 +628,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "show-hide",
         onClick: this.toggleHide
-      }, "ShowHide")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+      }, "Show ", this.state.hiding ? 'More' : 'Less')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
         className: "asset-about-detail"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
@@ -624,11 +636,11 @@ function (_React$Component) {
         href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
       }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be seeded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.employees)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be seeded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.headquarters)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "To be seeded")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.founded)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
       }, "Market Cap"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.formatNums(this.props.asset.marketCap))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
@@ -1037,10 +1049,6 @@ function (_React$Component) {
       }
     }
   }, {
-    key: "componentWillUnmount",
-    value: function componentWillUnmount() {// debugger
-    }
-  }, {
     key: "componentWillReceiveProps",
     value: function componentWillReceiveProps(nextProps) {
       var _this3 = this;
@@ -1058,14 +1066,6 @@ function (_React$Component) {
           });
         });
       }
-    }
-  }, {
-    key: "componentWillUpdate",
-    value: function componentWillUpdate(prevProps, nextProps) {// debugger;
-      // this.props.fetchAsset(this.props.assetId).then(
-      //   (arg) => {
-      //     console.log(arg);
-      //   });
     }
   }, {
     key: "render",
@@ -1092,13 +1092,15 @@ function (_React$Component) {
           asset: curAsset
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "col-1-3"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "sidebar"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_trade_show_trade_container__WEBPACK_IMPORTED_MODULE_5__["default"], {
           asset: curAsset,
           assetId: this.props.assetId
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           className: "watchlist-button",
           onClick: this.handleClick
-        }, this.state.watching ? 'Remove from' : 'Add to', " watchlist!")));
+        }, this.state.watching ? 'Remove from' : 'Add to', " Watchlist!"))));
       }
     }
   }]);
@@ -1564,9 +1566,11 @@ function (_React$Component) {
         className: "col-2-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _script__WEBPACK_IMPORTED_MODULE_4__["script"])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-1-3"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "dash-sidebar"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_container__WEBPACK_IMPORTED_MODULE_2__["default"], {
         assets: this.state.portfolio.assetInfo
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watchlist_show_container__WEBPACK_IMPORTED_MODULE_3__["default"], null)));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_watchlist_show_container__WEBPACK_IMPORTED_MODULE_3__["default"], null))));
     }
   }]);
 
@@ -1884,7 +1888,7 @@ function (_React$Component) {
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.clearSearch = _this.clearSearch.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
-      query: '',
+      query: 'Search',
       results: {}
     };
     return _this;
@@ -2095,7 +2099,6 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
-  // debugger
   return {
     processForm: function processForm(user) {
       return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["login"])({

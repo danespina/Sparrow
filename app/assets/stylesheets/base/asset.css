@@ -5,7 +5,7 @@
 }
 
 .trade-form {
-  position: fixed;
+  position: relative;
   border: 1px solid var(--light-gray);
   box-shadow: 0 0 4px 1px rgba(0,0,0,.01),
     0 3px 24px rgba(48,51,51,.09);
@@ -74,10 +74,24 @@
 }
 
 .watchlist-button {
-  position: fixed;
-  top: 350px;
-  background-color: magenta;
+  /* position: fixed; */
+  margin: 24px 24px 0;
+  border: 1px solid var(--main-green);
   padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+  color: var(--main-green);
+}
+
+.watchlist-button:hover {
+  border-color: var(--medium-green);
+  color: var(--medium-green);
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
 }
 
 .col-1-3 {
@@ -85,6 +99,7 @@
   width: 27.8%;
   position: relative;
 }
+
 
 .col-2-3 {
   display: block;

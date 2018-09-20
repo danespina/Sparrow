@@ -43,10 +43,6 @@ class AssetShow extends React.Component {
     }
   }
 
-  componentWillUnmount() {
-    // debugger
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.assetId !== this.props.assetId) {
       this.props.fetchAsset(nextProps.assetId).then(
@@ -60,14 +56,6 @@ class AssetShow extends React.Component {
           this.setState({ assets: {[nextProps.assetId]: data}});
         });
     }
-  }
-
-  componentWillUpdate(prevProps, nextProps) {
-    // debugger;
-    // this.props.fetchAsset(this.props.assetId).then(
-    //   (arg) => {
-    //     console.log(arg);
-    //   });
   }
 
   render () {
@@ -90,8 +78,10 @@ class AssetShow extends React.Component {
             </div>
           </div>
           <div className="col-1-3">
-            <TradeContainer asset={curAsset} assetId={this.props.assetId} />
-            <button className="watchlist-button" onClick={this.handleClick}>{this.state.watching ? 'Remove from' : 'Add to' } watchlist!</button>
+            <div className="sidebar">
+              <TradeContainer asset={curAsset} assetId={this.props.assetId} />
+              <button className="watchlist-button" onClick={this.handleClick}>{this.state.watching ? 'Remove from' : 'Add to' } Watchlist!</button>
+            </div>
           </div>
         </div>
       );

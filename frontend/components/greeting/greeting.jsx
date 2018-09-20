@@ -8,7 +8,7 @@ class Greeting extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
-    this.state = { query: '', results: {} };
+    this.state = { query: 'Search', results: {} };
   }
   handleClick(e) {
     this.props.logout();

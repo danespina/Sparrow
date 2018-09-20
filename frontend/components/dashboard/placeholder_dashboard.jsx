@@ -52,8 +52,10 @@ class Dashboard extends React.Component {
           <p>{script}</p>
         </div>
         <div className="col-1-3">
-          <HoldingsContainer assets={this.state.portfolio.assetInfo}/>
-          <WatchlistContainer />
+          <div className="dash-sidebar">
+            <HoldingsContainer assets={this.state.portfolio.assetInfo}/>
+            <WatchlistContainer />
+          </div>
         </div>
       </div>
     );

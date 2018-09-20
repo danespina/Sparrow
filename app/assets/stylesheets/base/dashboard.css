@@ -1,9 +1,17 @@
-.holdings-form {
-  position: fixed;
-  min-width: 298px;
+.dash-sidebar {
   border: 1px solid var(--light-gray);
   box-shadow: 0 0 4px 1px rgba(0,0,0,.01),
     0 3px 24px rgba(48,51,51,.09);
+  min-width: 298px;
+  position: fixed;
+}
+
+.holdings-form {
+  position: relative;
+  min-width: 298px;
+  /* border: 1px solid var(--light-gray);
+  box-shadow: 0 0 4px 1px rgba(0,0,0,.01),
+    0 3px 24px rgba(48,51,51,.09); */
 }
 
 .holdings-header {
@@ -47,10 +55,9 @@
 }
 
 .watchlist-form {
-  position: fixed;
-  top: 300px;
+  position: relative;
   min-width: 298px;
-  border: 1px solid var(--light-gray);
+  /* border: 1px solid var(--light-gray);
   box-shadow: 0 0 4px 1px rgba(0,0,0,.01),
-    0 3px 24px rgba(48,51,51,.09);
+    0 3px 24px rgba(48,51,51,.09); */
 }

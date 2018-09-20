@@ -4,7 +4,8 @@ import { getExternalInfo } from '../../util/asset_api_util';
 class AssetAbout extends React.Component {
   constructor(props){
     super(props);
-    this.state = { about: {}, stats: {}, quote: {} };
+    this.state = { about: {}, stats: {}, quote: {}, hiding: true };
+    this.toggleHide = this.toggleHide.bind(this);
   }
 
   componentDidMount(){
@@ -16,10 +17,15 @@ class AssetAbout extends React.Component {
     });
   }
 
-  toggleHide() {
+  toggleHide(e) {
     const hideThis = document.getElementById('sometimes-show');
     hideThis.classList.toggle('hidden');
     hideThis.classList.toggle('showing');
+    if (this.state.hiding) {
+      this.setState({ hiding: false });
+    } else {
+      this.setState({ hiding: true });
+    }
   }
 
   formatNums(number) {
@@ -61,7 +67,7 @@ class AssetAbout extends React.Component {
         <div className="about-span">
           <div className="asset-header">
             <h2>About {this.props.asset.symbol}</h2>
-            <button id="show-hide" onClick={this.toggleHide}>ShowHide</button>
+            <button id="show-hide" onClick={this.toggleHide}>Show {this.state.hiding ? 'More' : 'Less'}</button>
           </div>
           <h3>{this.state.about.description}</h3>
           <ul className="asset-about-detail">
@@ -76,19 +82,19 @@ class AssetAbout extends React.Component {
             <li>
               <div className="bold">Employees</div>
               <div>
-                To be seeded
+                {this.props.asset.employees}
               </div>
               </li>
             <li>
               <div className="bold">Headquarters</div>
               <div>
-                To be seeded
+                {this.props.asset.headquarters}
               </div>
               </li>
             <li>
               <div className="bold">Founded</div>
               <div>
-                To be seeded
+                {this.props.asset.founded}
               </div>
               </li>
             <li>

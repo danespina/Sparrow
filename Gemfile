@@ -28,6 +28,7 @@ gem 'pry-rails'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rails_12factor'
 gem 'figaro'
+gem 'faker'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
