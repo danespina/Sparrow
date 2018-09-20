@@ -42,11 +42,10 @@
 }
 
 .search-results {
-  display: flex;
-  width: 100%;
+  max-width: 480px;
   position: absolute;
-  background-color: magenta;
-  border: 1px solid lime;
+  background-color: white;
+  border: 1px solid var(--black);
 }
 
 .greet-links {

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   before_validation :ensure_session_token
+  after_create :ensure_portfolio
   validates :username, :email, :password_digest, :session_token, presence: true
   validates :username, :email, uniqueness: true
   validates :password, length:{ minimum: 6 }, allow_nil: true
@@ -44,6 +45,10 @@ class User < ApplicationRecord
 
   def ensure_session_token
     self.session_token ||= User.generate_session_token
+  end
+
+  def ensure_portfolio
+    Portfolio.create(user_id: self.id)
   end
 
 

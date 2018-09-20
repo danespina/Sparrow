@@ -6,7 +6,7 @@ import { fetchPortfolio } from '../../actions/portfolio_actions';
 const mapStateToProps = (state) => {
   return {
     user: state.entities.users[state.session.currentUserId],
-    portfolio: state.entities.portfolios[state.session.currentUserId],
+    portfolio: state.entities.portfolios[state.entities.users[state.session.currentUserId].portfolioId],
   };
 };
 

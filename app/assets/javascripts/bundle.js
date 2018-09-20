@@ -2156,7 +2156,7 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state) {
   return {
     user: state.entities.users[state.session.currentUserId],
-    portfolio: state.entities.portfolios[state.session.currentUserId]
+    portfolio: state.entities.portfolios[state.entities.users[state.session.currentUserId].portfolioId]
   };
 };
 
