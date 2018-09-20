@@ -10,7 +10,7 @@ class Dashboard extends React.Component {
     this.state = { assets: {}, portfolio: {} };
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.props.fetchPortfolio(this.props.portfolioId).then((data) => {
       this.setState({ portfolio: data.portfolio });
     });
