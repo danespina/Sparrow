@@ -43,7 +43,14 @@ class Dashboard extends React.Component {
       </LineChart>;
     }
     let fakeAsset;
-    let news;
+    let news = <div className="cover">
+      <div class="loader" id="loader-6">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+    </div>;
     if (this.state.portfolio.key) {
       fakeAsset = { name: 'stocks', key: this.state.portfolio.key };
       news = <AssetNews asset={fakeAsset} />;

@@ -70,7 +70,6 @@ class AssetShow extends React.Component {
               <header className="asset-show-header">
                 <h1>{curAsset.companyName}!</h1>
                 <span className="display-nums">${curAsset.latestPrice}</span>
-                <h3>{curAsset.change} ({this.state.assets[this.props.assetId].changePercent}%) Today</h3>
               </header>
               <AssetChart asset={curAsset} />
               <AssetAbout asset={curAsset} />

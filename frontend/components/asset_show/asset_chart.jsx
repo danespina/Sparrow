@@ -72,7 +72,14 @@ class AssetChart extends React.Component {
     });
     let change;
     let percentChange;
-    let loading = <h1 className="cover">{'WAIT'}</h1>;
+    let loading = <div className="cover">
+      <div className="loader" id="loader-6">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+    </div>;
     if (this.state.chartData.length > 0) {
       change = this.displayNum(this.state.chartData.pop().close - this.state.chartData.shift().close);
       percentChange = ((this.state.chartData.pop().close - this.state.chartData.shift().close) * 100 / this.state.chartData.shift().close).toFixed(2);
@@ -82,11 +89,12 @@ class AssetChart extends React.Component {
     return (
       <div className="the-chart">
         <div className="chart-header">
+          {loading}
           <h3>{change} ({percentChange}%)</h3> <h3 className="dark-gray">{this.times[this.state.timeFrame]}</h3>
         </div>
         <LineChart width={676} height={196} data={this.state.chartData}>
           <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} animationDuration={0}/>
-          <Tooltip  position={{ x: 0, y: 0 }} />
+          <Tooltip labelFormatter={(data) => (`Date: ${data}`)} />
           <YAxis domain={['auto', 'auto']} hide={true}/>
         </LineChart>
         <ul>

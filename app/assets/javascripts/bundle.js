@@ -630,7 +630,7 @@ function (_React$Component) {
         className: "about-span"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About ", this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "About"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         id: "show-hide",
         onClick: this.toggleHide
       }, "Show ", this.state.hiding ? 'More' : 'Less')), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, this.state.about.description), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
@@ -826,9 +826,12 @@ function (_React$Component) {
       });
       var change;
       var percentChange;
-      var loading = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+      var loading = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "cover"
-      }, 'WAIT');
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "loader",
+        id: "loader-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)));
 
       if (this.state.chartData.length > 0) {
         change = this.displayNum(this.state.chartData.pop().close - this.state.chartData.shift().close);
@@ -840,7 +843,7 @@ function (_React$Component) {
         className: "the-chart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "chart-header"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, change, " (", percentChange, "%)"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+      }, loading, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, change, " (", percentChange, "%)"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
         className: "dark-gray"
       }, this.times[this.state.timeFrame])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
         width: 676,
@@ -854,9 +857,8 @@ function (_React$Component) {
         dot: false,
         animationDuration: 0
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
-        position: {
-          x: 0,
-          y: 0
+        labelFormatter: function labelFormatter(data) {
+          return "Date: ".concat(data);
         }
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         domain: ['auto', 'auto'],
@@ -1120,7 +1122,7 @@ function (_React$Component) {
           className: "asset-show-header"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "display-nums"
-        }, "$", curAsset.latestPrice), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, curAsset.change, " (", this.state.assets[this.props.assetId].changePercent, "%) Today")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        }, "$", curAsset.latestPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           asset: curAsset
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_about__WEBPACK_IMPORTED_MODULE_4__["default"], {
           asset: curAsset
@@ -1598,7 +1600,12 @@ function (_React$Component) {
       }
 
       var fakeAsset;
-      var news;
+      var news = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "cover"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        class: "loader",
+        id: "loader-6"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)));
 
       if (this.state.portfolio.key) {
         fakeAsset = {
@@ -2045,18 +2052,22 @@ function (_React$Component) {
         }, "Leave")))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "greeting-container ".concat(hidden)
+          className: "".concat(hidden)
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "greeting-container"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-logo"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/"
         }, logo)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "greeting-container-home"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greet-links"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/signup"
         }, "Sign Up"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/login"
-        }, "Log In")));
+        }, "Log In")))));
       }
     }
   }]);

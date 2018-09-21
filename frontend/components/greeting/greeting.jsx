@@ -74,13 +74,17 @@ class Greeting extends React.Component {
       </header>);
     } else {
       return(
-        <div className={`greeting-container ${hidden}`}>
-          <div className="greeting-logo">
-            <Link to='/'>{logo}</Link>
-          </div>
-          <div className="greet-links">
-            <Link to='/signup'>Sign Up</Link>
-            <Link to='/login'>Log In</Link>
+        <div className={`${hidden}`}>
+          <div className={"greeting-container"}>
+            <div className="greeting-logo">
+              <Link to='/'>{logo}</Link>
+            </div>
+            <div className="greeting-container-home">
+              <div className="greet-links">
+                <Link to='/signup'>Sign Up</Link>
+                <Link to='/login'>Log In</Link>
+              </div>
+            </div>
           </div>
         </div>
       );
