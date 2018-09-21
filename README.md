@@ -1,24 +1,5 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Welcome to Sparrow!
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Sparrow is a clone of Robinhood made in 10 days.  It was made using a React/Redux front-end built on top of a Rails back-end that ustilizes a Postgresql database.  Stock prices and information is sourced from the IEX Group API (https://iextrading.com/) and news is sourced from News API (https://newsapi.org/).
