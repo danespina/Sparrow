@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HoldingsContainer from './holdings_show_container';
 import WatchlistContainer from './watchlist_show_container';
 import { script } from './script';
-import { LineChart, Line, YAxis } from 'recharts';
+import { LineChart, Line, YAxis, XAxis, CartesianAxis, Tooltip } from 'recharts';
 import AssetNews from '../asset_show/asset_news';
 
 class Dashboard extends React.Component {
@@ -39,12 +39,15 @@ class Dashboard extends React.Component {
     if(this.state.portfolio.history){
       chart = <LineChart width={676} height={196} data={this.state.portfolio.history}>
         <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} animationDuration={0}/>
+        <Tooltip viewBox={{ x: 0, y: 0, width: 100, height: 100 }} />
+        <YAxis domain={['auto', 'auto']} hide={true}/>
+        <XAxis dataKey="label" hide={true} />
         <YAxis domain={['auto', 'auto']} hide={true}/>
       </LineChart>;
     }
     let fakeAsset;
     let news = <div className="cover">
-      <div class="loader" id="loader-6">
+      <div className="loader" id="loader-6">
           <span></span>
           <span></span>
           <span></span>

@@ -856,12 +856,11 @@ function (_React$Component) {
         strokeWidth: 2,
         dot: false,
         animationDuration: 0
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], {
-        labelFormatter: function labelFormatter(data) {
-          return "Date: ".concat(data);
-        }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         domain: ['auto', 'auto'],
+        hide: true
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["XAxis"], {
+        dataKey: "label",
         hide: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, timeButtons));
     }
@@ -1593,6 +1592,19 @@ function (_React$Component) {
           strokeWidth: 2,
           dot: false,
           animationDuration: 0
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], {
+          viewBox: {
+            x: 0,
+            y: 0,
+            width: 100,
+            height: 100
+          }
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["YAxis"], {
+          domain: ['auto', 'auto'],
+          hide: true
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["XAxis"], {
+          dataKey: "label",
+          hide: true
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["YAxis"], {
           domain: ['auto', 'auto'],
           hide: true
@@ -1603,7 +1615,7 @@ function (_React$Component) {
       var news = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "cover"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        class: "loader",
+        className: "loader",
         id: "loader-6"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)));
 
@@ -3110,7 +3122,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

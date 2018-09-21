@@ -1,5 +1,5 @@
 import React from 'react';
-import { LineChart, Line, YAxis, CartesianAxis, Tooltip } from 'recharts';
+import { LineChart, Line, YAxis, XAxis, CartesianAxis, Tooltip } from 'recharts';
 import { getExternalInfo } from '../../util/asset_api_util';
 
 class AssetChart extends React.Component {
@@ -94,8 +94,9 @@ class AssetChart extends React.Component {
         </div>
         <LineChart width={676} height={196} data={this.state.chartData}>
           <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} animationDuration={0}/>
-          <Tooltip labelFormatter={(data) => (`Date: ${data}`)} />
+          <Tooltip  />
           <YAxis domain={['auto', 'auto']} hide={true}/>
+          <XAxis dataKey="label" hide={true} />
         </LineChart>
         <ul>
           {timeButtons}
