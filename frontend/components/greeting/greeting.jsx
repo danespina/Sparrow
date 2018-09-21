@@ -8,7 +8,7 @@ class Greeting extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
-    this.state = { query: 'Search', results: {} };
+    this.state = { query: '', results: {} };
   }
   handleClick(e) {
     this.props.logout();
@@ -55,7 +55,7 @@ class Greeting extends React.Component {
           <div className="greeting-flex">
             <div className="greeting-search">
               <form>
-                <input type="text" onChange={this.handleChange} value={this.state.query}></input>
+                <input type="text" onChange={this.handleChange} value={this.state.query} placeholder={'search'}></input>
               </form>
               <div className="search-results">
                 <ul>{searchItems}</ul>

@@ -6,6 +6,9 @@ class AssetAbout extends React.Component {
     super(props);
     this.state = { about: {}, stats: {}, quote: {}, hiding: true };
     this.toggleHide = this.toggleHide.bind(this);
+    this.employees = this.props.asset.employees;
+    this.headquarters = this.props.asset.headquarters;
+    this.founded = this.props.asset.founded;
   }
 
   componentDidMount(){
@@ -82,19 +85,19 @@ class AssetAbout extends React.Component {
             <li>
               <div className="bold">Employees</div>
               <div>
-                {this.props.asset.employees}
+                {this.employees}
               </div>
               </li>
             <li>
               <div className="bold">Headquarters</div>
               <div>
-                {this.props.asset.headquarters}
+                {this.headquarters}
               </div>
               </li>
             <li>
               <div className="bold">Founded</div>
               <div>
-                {this.props.asset.founded}
+                {this.founded}
               </div>
               </li>
             <li>

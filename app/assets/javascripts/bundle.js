@@ -537,6 +537,9 @@ function (_React$Component) {
       hiding: true
     };
     _this.toggleHide = _this.toggleHide.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.employees = _this.props.asset.employees;
+    _this.headquarters = _this.props.asset.headquarters;
+    _this.founded = _this.props.asset.founded;
     return _this;
   }
 
@@ -636,11 +639,11 @@ function (_React$Component) {
         href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
       }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.employees)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.employees)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.headquarters)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Headquarters"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.headquarters)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
-      }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.asset.founded)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, "Founded"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.founded)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
       }, "Market Cap"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.formatNums(this.props.asset.marketCap))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
@@ -716,7 +719,14 @@ function (_React$Component) {
       chartData: [],
       timeFrame: "1D"
     };
-    _this.times = ['1D', '1M', '3M', '6M', '1Y', '2Y'];
+    _this.times = {
+      '1D': 'Today',
+      '1M': 'Past Month',
+      '3M': 'Past 3 Months',
+      '6M': 'Past 6 Months',
+      '1Y': 'Past Year',
+      '2Y': 'Past 2 Years'
+    };
     _this.update = _this.update.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
@@ -746,6 +756,15 @@ function (_React$Component) {
           close: lastVals[idx]
         };
       });
+    }
+  }, {
+    key: "displayNum",
+    value: function displayNum(num) {
+      if (num < 0) {
+        return "-$ ".concat(Math.abs(num).toFixed(2));
+      } else {
+        return "$ ".concat(num.toFixed(2));
+      }
     }
   }, {
     key: "componentDidMount",
@@ -794,7 +813,7 @@ function (_React$Component) {
     value: function render() {
       var _this4 = this;
 
-      var timeButtons = this.times.map(function (frame) {
+      var timeButtons = Object.keys(this.times).map(function (frame) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
           key: frame,
           className: _this4.state.timeFrame === frame ? "selected-time-frame" : "",
@@ -803,9 +822,21 @@ function (_React$Component) {
           }
         }, frame);
       });
+      var change;
+      var percentChange;
+
+      if (this.state.chartData.length > 0) {
+        change = this.displayNum(this.state.chartData.pop().close - this.state.chartData.shift().close);
+        percentChange = ((this.state.chartData.pop().close - this.state.chartData.shift().close) * 100 / this.state.chartData.shift().close).toFixed(2);
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "chart-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, change, " (", percentChange, "%)"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", {
+        className: "dark-gray"
+      }, this.times[this.state.timeFrame])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["LineChart"], {
         width: 676,
         height: 196,
         data: this.state.chartData
@@ -1886,7 +1917,7 @@ function (_React$Component) {
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.clearSearch = _this.clearSearch.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.state = {
-      query: 'Search',
+      query: '',
       results: {}
     };
     return _this;
@@ -1974,7 +2005,8 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "text",
           onChange: this.handleChange,
-          value: this.state.query
+          value: this.state.query,
+          placeholder: 'search'
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "search-results"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, searchItems))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
@@ -3038,7 +3070,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

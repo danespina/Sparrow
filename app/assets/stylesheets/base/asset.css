@@ -154,6 +154,10 @@
   color: var(--main-green);
 }
 
+.chart-header {
+  display: flex;
+}
+
 .selected-time-frame {
   border-bottom: 2px solid var(--main-green);
   color: var(--main-green);
