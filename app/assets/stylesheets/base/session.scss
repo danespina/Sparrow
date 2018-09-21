@@ -1,17 +1,32 @@
 .session-div {
   display: flex;
   min-width: 100%;
+  position: relative;
+  // top: -64px;
 }
 
 .flex {
   display: flex;
   align-items: center;
+  flex: 1 1 0;
 }
 
 .greet-img {
-  display: flex;
   flex: 1 1 50%;
   min-width: 520px;
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.greet-img img {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 20%;
+  transform: translate(-50%, -50%);
+  height: 100vh;
+  width: auto;
 }
 
 .greet-form-container {
@@ -41,7 +56,7 @@
   line-height: 30px;
   margin: 0 0 16px;
 }
-.greet-form form, label{
+.greet-form form, label {
   display: flex;
   flex-direction: column;
 }
@@ -99,7 +114,6 @@
 
 .greet-ship {
   background-color: var(--main-green);
-  max-height: 900px;
 }
 
 .form-buttons {

@@ -84,7 +84,7 @@ class SessionForm extends React.Component {
       <div className="session-div">
         <div className="flex">
           <div className="greet-img">
-            <img src={window.shipURL} className="greet-ship"/>
+            <img src={window.pearlURL} className="greet-ship"/>
           </div>
           <div className="greet-form-container">
             <div className="greet-form">

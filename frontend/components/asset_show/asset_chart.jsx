@@ -37,9 +37,9 @@ class AssetChart extends React.Component {
 
   displayNum(num) {
     if(num < 0){
-      return `-$ ${Math.abs(num).toFixed(2)}`;
+      return `-$${Math.abs(num).toFixed(2)}`;
     } else {
-      return `$ ${num.toFixed(2)}`;
+      return `$${num.toFixed(2)}`;
     }
   }
 
@@ -72,9 +72,11 @@ class AssetChart extends React.Component {
     });
     let change;
     let percentChange;
+    let loading = <h1 className="cover">{'WAIT'}</h1>;
     if (this.state.chartData.length > 0) {
       change = this.displayNum(this.state.chartData.pop().close - this.state.chartData.shift().close);
       percentChange = ((this.state.chartData.pop().close - this.state.chartData.shift().close) * 100 / this.state.chartData.shift().close).toFixed(2);
+      loading = null;
     }
 
     return (

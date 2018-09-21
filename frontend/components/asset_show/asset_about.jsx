@@ -57,8 +57,8 @@ class AssetAbout extends React.Component {
       {"Volume": this.formatNums(this.props.asset.iexVolume)},
       {"52 Week High": `$ ${this.state.stats.week52high}`},
       {"52 Week Low": `$ ${this.state.stats.week52low}`},];
-    const sometimesShow = moreAbout.map((el) => {
-      return (<li>
+    const sometimesShow = moreAbout.map((el, idx) => {
+      return (<li key={idx}>
         <div className="bold">{Object.keys(el)}</div>
         <div>
           {Object.values(el)}

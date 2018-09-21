@@ -5,3 +5,5 @@ json.set! :assetInfo do
     json.set! ass.id, {id: ass[:id], symbol: ass[:symbol]} if @portfolio.holdings.keys.include?(ass.id.to_s)
   end
 end
+
+json.set! :key, ENV['NEWS_API_KEY']

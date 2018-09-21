@@ -617,8 +617,10 @@ function (_React$Component) {
       }, {
         "52 Week Low": "$ ".concat(this.state.stats.week52low)
       }];
-      var sometimesShow = moreAbout.map(function (el) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      var sometimesShow = moreAbout.map(function (el, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: idx
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "bold"
         }, Object.keys(el)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, Object.values(el)));
       });
@@ -761,9 +763,9 @@ function (_React$Component) {
     key: "displayNum",
     value: function displayNum(num) {
       if (num < 0) {
-        return "-$ ".concat(Math.abs(num).toFixed(2));
+        return "-$".concat(Math.abs(num).toFixed(2));
       } else {
-        return "$ ".concat(num.toFixed(2));
+        return "$".concat(num.toFixed(2));
       }
     }
   }, {
@@ -824,10 +826,14 @@ function (_React$Component) {
       });
       var change;
       var percentChange;
+      var loading = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", {
+        className: "cover"
+      }, 'WAIT');
 
       if (this.state.chartData.length > 0) {
         change = this.displayNum(this.state.chartData.pop().close - this.state.chartData.shift().close);
         percentChange = ((this.state.chartData.pop().close - this.state.chartData.shift().close) * 100 / this.state.chartData.shift().close).toFixed(2);
+        loading = null;
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -923,7 +929,7 @@ function (_React$Component) {
 
       Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getNews"])(this.props.asset).then(function (data) {
         _this2.setState({
-          news: data.articles.slice(5)
+          news: data.articles
         });
       });
     }
@@ -1496,6 +1502,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _watchlist_show_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./watchlist_show_container */ "./frontend/components/dashboard/watchlist_show_container.js");
 /* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./script */ "./frontend/components/dashboard/script.js");
 /* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var _asset_show_asset_news__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../asset_show/asset_news */ "./frontend/components/asset_show/asset_news.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1513,6 +1520,7 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 
 
 
@@ -1589,11 +1597,24 @@ function (_React$Component) {
         }));
       }
 
+      var fakeAsset;
+      var news;
+
+      if (this.state.portfolio.key) {
+        fakeAsset = {
+          name: 'stocks',
+          key: this.state.portfolio.key
+        };
+        news = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_show_asset_news__WEBPACK_IMPORTED_MODULE_6__["default"], {
+          asset: fakeAsset
+        });
+      }
+
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "asset-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-2-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, _script__WEBPACK_IMPORTED_MODULE_4__["script"])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, news), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-1-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dash-sidebar"
@@ -1970,6 +1991,12 @@ function (_React$Component) {
     value: function render() {
       var _this3 = this;
 
+      var hidden = "";
+
+      if (this.props.location.pathname === "/login" || this.props.location.pathname === "/signup") {
+        hidden = "hidden";
+      }
+
       var searchItems = Object.values(this.state.results).map(function (el) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
           key: el.id
@@ -2006,9 +2033,9 @@ function (_React$Component) {
           type: "text",
           onChange: this.handleChange,
           value: this.state.query,
-          placeholder: 'search'
+          placeholder: 'Search'
         })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "search-results"
+          className: "search-results bold"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, searchItems))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("nav", {
           className: "greet-links"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -2018,7 +2045,7 @@ function (_React$Component) {
         }, "Leave")))));
       } else {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "greeting-container"
+          className: "greeting-container ".concat(hidden)
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "greeting-logo"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
@@ -2051,8 +2078,10 @@ function (_React$Component) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
-/* harmony import */ var _greeting__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./greeting */ "./frontend/components/greeting/greeting.jsx");
+/* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
+/* harmony import */ var _actions_session_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/session_actions */ "./frontend/actions/session_actions.js");
+/* harmony import */ var _greeting__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./greeting */ "./frontend/components/greeting/greeting.jsx");
+
 
 
 
@@ -2066,12 +2095,12 @@ var mapStateToProps = function mapStateToProps(state) {
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     logout: function logout() {
-      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["logout"])());
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_2__["logout"])());
     }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_greeting__WEBPACK_IMPORTED_MODULE_2__["default"]));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_greeting__WEBPACK_IMPORTED_MODULE_3__["default"])));
 
 /***/ }),
 
@@ -2307,7 +2336,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "greet-img"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: window.shipURL,
+        src: window.pearlURL,
         className: "greet-ship"
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "greet-form-container"

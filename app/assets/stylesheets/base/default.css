@@ -33,13 +33,13 @@ h3 {
 }
 
 .main-content {
-  padding-top: 36px;
+  /* padding-top: 36px; */
   width: 1024px;
   margin: 0 auto;
   display: flex;
 }
 
 .main {
-  padding-top: 64px;
+  /* padding-top: 64px; */
   position: relative;
 }

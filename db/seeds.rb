@@ -13,7 +13,7 @@ data = [{"symbol":"A","name":"Agilent Technologies Inc.","date":"2018-09-20","is
 
 new_data = []
 data.each do |el|
-  address = Faker::Address.city + ' ' + Faker::Address.state
+  address = Faker::Address.city + ', ' + Faker::Address.state
   workers = 1000 * rand(1000)
   year = 1900 + rand(118)
 

@@ -37,6 +37,10 @@ class Greeting extends React.Component {
   }
 
   render () {
+    let hidden = "";
+    if (this.props.location.pathname === "/login" || this.props.location.pathname === "/signup") {
+      hidden = "hidden";
+    }
     const searchItems = Object.values(this.state.results).map((el) => {
       return (<li key={el.id}><Link to={`/assets/${el.id}`} onClick={this.clearSearch}>{el.symbol} {el.name}</Link></li>);
     });
@@ -55,9 +59,9 @@ class Greeting extends React.Component {
           <div className="greeting-flex">
             <div className="greeting-search">
               <form>
-                <input type="text" onChange={this.handleChange} value={this.state.query} placeholder={'search'}></input>
+                <input type="text" onChange={this.handleChange} value={this.state.query} placeholder={'Search'}></input>
               </form>
-              <div className="search-results">
+              <div className="search-results bold">
                 <ul>{searchItems}</ul>
               </div>
             </div>
@@ -70,7 +74,7 @@ class Greeting extends React.Component {
       </header>);
     } else {
       return(
-        <div className="greeting-container">
+        <div className={`greeting-container ${hidden}`}>
           <div className="greeting-logo">
             <Link to='/'>{logo}</Link>
           </div>

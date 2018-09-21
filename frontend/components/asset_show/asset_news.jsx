@@ -8,7 +8,7 @@ class AssetNews extends React.Component {
   }
   componentDidMount(){
     getNews(this.props.asset).then((data) => {
-      this.setState({ news: data.articles.slice(5) });
+      this.setState({ news: data.articles });
     });
   }
   render () {

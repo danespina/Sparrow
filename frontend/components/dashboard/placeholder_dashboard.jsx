@@ -4,6 +4,7 @@ import HoldingsContainer from './holdings_show_container';
 import WatchlistContainer from './watchlist_show_container';
 import { script } from './script';
 import { LineChart, Line, YAxis } from 'recharts';
+import AssetNews from '../asset_show/asset_news';
 
 class Dashboard extends React.Component {
   constructor(props){
@@ -24,7 +25,6 @@ class Dashboard extends React.Component {
     // });
   }
   render () {
-
     // let holds;
     // if(this.state.portfolio.holdings &&
     //   Object.values(this.props.assets).length > 0){
@@ -42,13 +42,19 @@ class Dashboard extends React.Component {
         <YAxis domain={['auto', 'auto']} hide={true}/>
       </LineChart>;
     }
+    let fakeAsset;
+    let news;
+    if (this.state.portfolio.key) {
+      fakeAsset = { name: 'stocks', key: this.state.portfolio.key };
+      news = <AssetNews asset={fakeAsset} />;
+    }
     return (
       <div className="asset-page">
         <div className="col-2-3">
           <h1>Hello!</h1>
           <h1>You have ${this.state.portfolio.buying_power}</h1>
             {chart}
-          <p>{script}</p>
+          {news}
         </div>
         <div className="col-1-3">
           <div className="dash-sidebar">
