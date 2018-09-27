@@ -36,10 +36,20 @@ class AssetChart extends React.Component {
   }
 
   displayNum(num) {
-    if(num < 0){
+    if (!num) {
+      return 0;
+    } else if(num < 0){
       return `-$${Math.abs(num).toFixed(2)}`;
     } else {
       return `$${num.toFixed(2)}`;
+    }
+  }
+
+  parseNum(num) {
+    if (!num) {
+      return 0;
+    } else {
+      return num;
     }
   }
 
@@ -81,10 +91,12 @@ class AssetChart extends React.Component {
         </div>
     </div>;
     if (this.state.chartData.length > 0) {
-      change = this.displayNum(this.state.chartData.pop().close - this.state.chartData.shift().close);
-      percentChange = ((this.state.chartData.pop().close - this.state.chartData.shift().close) * 100 / this.state.chartData.shift().close).toFixed(2);
+      const chartVals = this.state.chartData;
+      change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[0].close);
+      percentChange = ((chartVals[chartVals.length - 1].close - chartVals[0].close) * 100 / chartVals[0].close).toFixed(2);
       loading = null;
     }
+    console.log(this.state.chartData);
 
     return (
       <div className="the-chart">

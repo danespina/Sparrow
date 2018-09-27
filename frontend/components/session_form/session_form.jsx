@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 class SessionForm extends React.Component {
 
@@ -52,7 +53,7 @@ class SessionForm extends React.Component {
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
           <g fill="none" fill-rule="evenodd" transform="translate(0 -1)">
             <circle cx="9" cy="10" r="9" fill="#303032"/>
-            <text fill="#FFF" font-family="DINPro-Black, DINPro" font-size="14" font-weight="700" letter-spacing=".058">
+            <text fill="#FFF" fontSize="14" fontWeight="700" letterSpacing=".058">
               <tspan x="6.409" y="15">!</tspan>
             </text>
           </g>
@@ -62,7 +63,7 @@ class SessionForm extends React.Component {
 
     let loginFields;
     if (this.props.formType === 'signup'){
-      header = (<h1>SIGNUP</h1>);
+      header = (<h1>Sign up for Sparrow!</h1>);
       loginFields = (
         <div>
           <label><div className="form-label">Username</div>
@@ -80,6 +81,14 @@ class SessionForm extends React.Component {
         </label>
       </div>);
     }
+
+    let linkToOtherOption;
+    if (this.props.formType === 'signup'){
+      linkToOtherOption = (<Link to='/login'>Already have an account? Log in!</Link>)
+    } else {
+      linkToOtherOption = (<Link to='/signup'>Don't have an account? Sign up!</Link>)
+    }
+
     return(
       <div className="session-div">
         <div className="flex">
@@ -94,6 +103,7 @@ class SessionForm extends React.Component {
                 <label><div className="form-label">Password</div>
                   <input type="password" value={this.state.password} onChange={this.update('password')}></input>
                 </label>
+                {linkToOtherOption}
                 <ul className="bold">
                   {errMessages}
                 </ul>

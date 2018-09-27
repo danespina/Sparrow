@@ -112,6 +112,15 @@
   background-color: var(--medium-green);
 }
 
+.greet-form a {
+  color: var(--main-green);
+  padding: 14px 0;
+}
+
+.greet-form a:hover {
+  color: var(--medium-green);
+}
+
 .greet-ship {
   background-color: var(--main-green);
 }

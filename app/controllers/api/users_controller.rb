@@ -3,9 +3,9 @@ class Api::UsersController < ApplicationController
     @user = User.create(user_params)
     if @user.save
       login(@user)
-      render :show
+      render "api/users/show"
     else
-      render json: @user.errors.full_messages, status: 422
+      render json: ["Unable to sign up with provided credentials"], status: 422
     end
   end
 
