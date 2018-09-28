@@ -10,7 +10,9 @@ class HoldingsIndex extends React.Component {
     let stockItems;
     if(Boolean(this.props.portfolio)){
       stockItems = Object.values(this.props.portfolio.holdings).map((holding) => {
-        return <HoldingsItem key={holding.asset_id} asset={this.props.portfolio.assetInfo[holding.asset_id]} shares={holding.position} />;
+        if (holding.position > 0) {
+          return <HoldingsItem key={holding.asset_id} asset={this.props.portfolio.assetInfo[holding.asset_id]} shares={holding.position} />;
+        }
       });
     }
     return (

@@ -169,7 +169,7 @@ var fetchPortfolio = function fetchPortfolio(id) {
 /*!*********************************************!*\
   !*** ./frontend/actions/session_actions.js ***!
   \*********************************************/
-/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_ERRORS, logoutCurrentUser, receiveErrors, login, logout, signup */
+/*! exports provided: RECEIVE_CURRENT_USER, LOGOUT_CURRENT_USER, RECEIVE_ERRORS, CLEAR_ERRORS, logoutCurrentUser, receiveErrors, clearErrors, login, logout, signup, removeErrors */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -177,16 +177,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_CURRENT_USER", function() { return RECEIVE_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LOGOUT_CURRENT_USER", function() { return LOGOUT_CURRENT_USER; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RECEIVE_ERRORS", function() { return RECEIVE_ERRORS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_ERRORS", function() { return CLEAR_ERRORS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logoutCurrentUser", function() { return logoutCurrentUser; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "receiveErrors", function() { return receiveErrors; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearErrors", function() { return clearErrors; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "login", function() { return login; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "logout", function() { return logout; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "signup", function() { return signup; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeErrors", function() { return removeErrors; });
 /* harmony import */ var _util_session_api_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../util/session_api_util */ "./frontend/util/session_api_util.js");
 
 var RECEIVE_CURRENT_USER = 'RECEIVE_CURRENT_USER';
 var LOGOUT_CURRENT_USER = 'LOGOUT_CURRENT_USER';
 var RECEIVE_ERRORS = 'RECEIVE_ERRORS';
+var CLEAR_ERRORS = 'CLEAR_ERRORS';
 
 var receiveCurrentUser = function receiveCurrentUser(user) {
   return {
@@ -204,6 +208,11 @@ var receiveErrors = function receiveErrors(errors) {
   return {
     type: RECEIVE_ERRORS,
     errors: errors
+  };
+};
+var clearErrors = function clearErrors() {
+  return {
+    type: CLEAR_ERRORS
   };
 };
 var login = function login(user) {
@@ -229,6 +238,11 @@ var signup = function signup(user) {
     }, function (err) {
       return dispatch(receiveErrors(err.responseJSON));
     });
+  };
+};
+var removeErrors = function removeErrors() {
+  return function (dispatch) {
+    return dispatch(clearErrors());
   };
 };
 
@@ -776,7 +790,7 @@ function (_React$Component) {
       if (!num) {
         return 0;
       } else {
-        return num;
+        return num.toFixed(2);
       }
     }
   }, {
@@ -847,11 +861,10 @@ function (_React$Component) {
       if (this.state.chartData.length > 0) {
         var chartVals = this.state.chartData;
         change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[0].close);
-        percentChange = ((chartVals[chartVals.length - 1].close - chartVals[0].close) * 100 / chartVals[0].close).toFixed(2);
+        percentChange = this.parseNum((chartVals[chartVals.length - 1].close - chartVals[0].close) * 100 / chartVals[0].close);
         loading = null;
       }
 
-      console.log(this.state.chartData);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1334,11 +1347,13 @@ function (_React$Component) {
 
       if (Boolean(this.props.portfolio)) {
         stockItems = Object.values(this.props.portfolio.holdings).map(function (holding) {
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            key: holding.asset_id,
-            asset: _this.props.portfolio.assetInfo[holding.asset_id],
-            shares: holding.position
-          });
+          if (holding.position > 0) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              key: holding.asset_id,
+              asset: _this.props.portfolio.assetInfo[holding.asset_id],
+              shares: holding.position
+            });
+          }
         });
       }
 
@@ -2206,6 +2221,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
         username: user.username,
         password: user.password
       }));
+    },
+    clearErrors: function clearErrors() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearErrors"])());
     }
   };
 };
@@ -2320,7 +2338,7 @@ function (_React$Component) {
           viewBox: "0 0 18 18"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("g", {
           fill: "none",
-          "fill-rule": "evenodd",
+          fillRule: "evenodd",
           transform: "translate(0 -1)"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("circle", {
           cx: "9",
@@ -2370,11 +2388,13 @@ function (_React$Component) {
 
       if (this.props.formType === 'signup') {
         linkToOtherOption = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/login"
+          to: "/login",
+          onClick: this.props.clearErrors
         }, "Already have an account? Log in!");
       } else {
         linkToOtherOption = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
-          to: "/signup"
+          to: "/signup",
+          onClick: this.props.clearErrors
         }, "Don't have an account? Sign up!");
       }
 
@@ -2447,22 +2467,15 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch, ownProps) {
         password: user.password
       }));
     },
-    login: function (_login) {
-      function login(_x) {
-        return _login.apply(this, arguments);
-      }
-
-      login.toString = function () {
-        return _login.toString();
-      };
-
-      return login;
-    }(function (user) {
-      return dispatch(login({
+    login: function login(user) {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["login"])({
         username: user.username,
         password: user.password
       }));
-    })
+    },
+    clearErrors: function clearErrors() {
+      return dispatch(Object(_actions_session_actions__WEBPACK_IMPORTED_MODULE_1__["clearErrors"])());
+    }
   };
 };
 
@@ -2674,6 +2687,7 @@ function (_React$Component) {
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.tradeErrors = [];
+    _this.tradeSuccess = [];
     return _this;
   }
 
@@ -2686,9 +2700,12 @@ function (_React$Component) {
         avg_price: this.props.asset.latestPrice
       });
 
-      if (this.props.portfolio.buying_power > this.state.position * this.props.asset.latestPrice) {
+      if (this.state.position === 0) {
+        return;
+      } else if (this.props.portfolio.buying_power > this.state.position * this.props.asset.latestPrice) {
         this.tradeErrors = [];
         this.props.makeTrade(trade);
+        this.tradeSuccess.push("You bought ".concat(this.state.position, " shares of ").concat(this.props.asset.symbol, "!"));
       } else {
         this.tradeErrors.push("Not enough buying power!");
       }
@@ -2713,8 +2730,10 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var errs = this.tradeErrors.map(function (el) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
+      var errs = this.tradeErrors.map(function (el, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: idx
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
           xmlns: "http://www.w3.org/2000/svg",
           width: "18",
           height: "18",
@@ -2738,6 +2757,11 @@ function (_React$Component) {
           y: "15"
         }, "!")))), el);
       });
+      var bought = this.tradeSuccess.map(function (el, idx) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: idx
+        }, el);
+      });
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "trade-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2754,7 +2778,7 @@ function (_React$Component) {
         className: "trade-form-row bold"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Estimated Cost"), " ", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "$", this.props.asset.latestPrice * this.state.position)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "trade-form-row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errs)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, bought), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, errs)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "trade-form-row"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         onClick: this.handleClick
@@ -2964,6 +2988,9 @@ __webpack_require__.r(__webpack_exports__);
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_CURRENT_USER"]:
       return [];
 
+    case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_ERRORS"]:
+      return [];
+
     case _actions_session_actions__WEBPACK_IMPORTED_MODULE_0__["RECEIVE_ERRORS"]:
       {
         var newState = state.concat(action.errors);
@@ -3148,7 +3175,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

@@ -8,13 +8,17 @@ class TradeForm extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.tradeErrors = [];
+    this.tradeSuccess = [];
   }
   handleClick(e){
     // TODO: verify trade is valid
     const trade = merge({}, this.state, {asset_id: this.props.assetId, avg_price: this.props.asset.latestPrice});
-    if (this.props.portfolio.buying_power > (this.state.position * this.props.asset.latestPrice)){
+    if (this.state.position === 0) {
+      return;
+    } else if (this.props.portfolio.buying_power > (this.state.position * this.props.asset.latestPrice)){
       this.tradeErrors = [];
       this.props.makeTrade(trade);
+      this.tradeSuccess.push(`You bought ${this.state.position} shares of ${this.props.asset.symbol}!`);
     } else {
       this.tradeErrors.push("Not enough buying power!");
     }
@@ -29,8 +33,8 @@ class TradeForm extends React.Component {
     this.setState({ position: e.target.value });
   }
   render () {
-    const errs = this.tradeErrors.map((el) => {
-      return (<li><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+    const errs = this.tradeErrors.map((el, idx) => {
+      return (<li key={idx}><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
           <g fill="none" fillRule="evenodd" transform="translate(0 -1)">
             <circle cx="9" cy="10" r="9" fill="#303032"/>
             <text fill="#FFF" fontSize="14" fontWeight="700" letterSpacing=".058">
@@ -39,6 +43,9 @@ class TradeForm extends React.Component {
           </g>
         </svg>
         {el}</li>);
+    });
+    const bought = this.tradeSuccess.map((el, idx) => {
+      return (<li key={idx}>{el}</li>);
     });
     return (
       <div className="trade-form">
@@ -57,6 +64,7 @@ class TradeForm extends React.Component {
             <h4>Estimated Cost</h4> <h4>${this.props.asset.latestPrice * this.state.position}</h4>
           </div>
           <div className="trade-form-row">
+            <ul>{bought}</ul>
             <ul>{errs}</ul>
           </div>
           <div className="trade-form-row">

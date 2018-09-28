@@ -96,7 +96,6 @@ class AssetChart extends React.Component {
       percentChange = this.parseNum((chartVals[chartVals.length - 1].close - chartVals[0].close) * 100 / chartVals[0].close);
       loading = null;
     }
-    console.log(this.state.chartData);
 
     return (
       <div className="the-chart">

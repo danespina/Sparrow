@@ -51,7 +51,7 @@ class SessionForm extends React.Component {
     if (this.props.errors.length > 0){
       errMessages = (<li>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
-          <g fill="none" fill-rule="evenodd" transform="translate(0 -1)">
+          <g fill="none" fillRule="evenodd" transform="translate(0 -1)">
             <circle cx="9" cy="10" r="9" fill="#303032"/>
             <text fill="#FFF" fontSize="14" fontWeight="700" letterSpacing=".058">
               <tspan x="6.409" y="15">!</tspan>
@@ -84,9 +84,9 @@ class SessionForm extends React.Component {
 
     let linkToOtherOption;
     if (this.props.formType === 'signup'){
-      linkToOtherOption = (<Link to='/login'>Already have an account? Log in!</Link>)
+      linkToOtherOption = (<Link to='/login' onClick={this.props.clearErrors}>Already have an account? Log in!</Link>)
     } else {
-      linkToOtherOption = (<Link to='/signup'>Don't have an account? Sign up!</Link>)
+      linkToOtherOption = (<Link to='/signup' onClick={this.props.clearErrors}>Don't have an account? Sign up!</Link>)
     }
 
     return(
