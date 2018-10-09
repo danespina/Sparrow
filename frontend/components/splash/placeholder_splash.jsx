@@ -15,7 +15,7 @@ class Splash extends React.Component {
     } else {
       return (
         <div className="splash">
-          <div className="flex">
+          <div className="flex-col">
             <div className="home-row">
               <div className="left flex-child">
                 <div className="left-header">
@@ -32,6 +32,9 @@ class Splash extends React.Component {
               </div>
             </div>
             <div className="home-row">
+              <div className="left flex-child">
+                <img src={phoneURL}></img>
+              </div>
               <div className="right flex-child">
                 <div className="left-header">
                   <h1>Invest for free</h1>
@@ -42,9 +45,6 @@ class Splash extends React.Component {
                     like manual account management and hundreds of storefront locations,
                     so we can offer zero commission trading.</h4>
                 </div>
-              </div>
-              <div className="left flex-child">
-                <img src={phoneURL}></img>
               </div>
             </div>
             <div className="home-row">
@@ -63,6 +63,9 @@ class Splash extends React.Component {
             </div>
             <div className="home-row">
               <div className="right flex-child">
+                <img src={phoneURL}></img>
+              </div>
+              <div className="left flex-child">
                 <div className="left-header">
                   <h1>Learn by doing.</h1>
                 </div>
@@ -70,9 +73,6 @@ class Splash extends React.Component {
                   <h4>With Robinhood, you can learn to invest in the stock market as you build out your portfolio.</h4>
                   <h4>Discover new stocks through Collections, track your favorites with a personalized news feed, and more.</h4>
                 </div>
-              </div>
-              <div className="left flex-child">
-                <img src={phoneURL}></img>
               </div>
             </div>
           </div>

@@ -57,6 +57,7 @@
 
 .left-header {
   margin-bottom: 30px;
+  margin-top: 144px;
 }
 
 .left-words {
@@ -64,4 +65,14 @@
   line-height: 24px;
   margin-bottom: 30px;
   width: 380px;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-row {
+  display: flex;
+  padding: 40px;
 }

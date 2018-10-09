@@ -2545,7 +2545,9 @@ function (_React$Component) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "splash"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-          className: "flex"
+          className: "flex-col"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "home-row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -2558,7 +2560,43 @@ function (_React$Component) {
           className: "right flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
           src: phoneURL
-        }))));
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "home-row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left flex-child"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: phoneURL
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "right flex-child"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Invest for free")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-words"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "We believe that the financial system should work for the rest of us, not just the wealthy."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "We\u2019ve cut the fat that makes other brokerages costly, like manual account management and hundreds of storefront locations, so we can offer zero commission trading.")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "home-row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left flex-child"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "No manual needed.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-words"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "We\u2019ve designed Sparrow from the ground up for the next generation of newcomers and experts alike."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "It\u2019s fast, dead simple and just works."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "right flex-child"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: phoneURL
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "home-row"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "right flex-child"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+          src: phoneURL
+        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left flex-child"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-header"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Learn by doing.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          className: "left-words"
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "With Robinhood, you can learn to invest in the stock market as you build out your portfolio."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "Discover new stocks through Collections, track your favorites with a personalized news feed, and more."))))));
       }
     }
   }]);
