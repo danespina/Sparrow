@@ -29,6 +29,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rails_12factor'
 gem 'figaro'
 gem 'faker'
+gem 'iex-ruby-client'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'

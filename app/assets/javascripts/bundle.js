@@ -859,9 +859,11 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)));
 
       if (this.state.chartData.length > 0) {
+        console.log(this.state.chartData);
+        var startIdx = this.state.timeFrame === "1D" ? 1 : 0;
         var chartVals = this.state.chartData;
-        change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[0].close);
-        percentChange = this.parseNum((chartVals[chartVals.length - 1].close - chartVals[0].close) * 100 / chartVals[0].close);
+        change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[startIdx].close);
+        percentChange = this.parseNum((chartVals[chartVals.length - 1].close - chartVals[startIdx].close) * 100 / chartVals[startIdx].close);
         loading = null;
       }
 
@@ -1624,17 +1626,14 @@ function (_React$Component) {
           viewBox: {
             x: 0,
             y: 0,
-            width: 100,
-            height: 100
+            width: 50,
+            height: 30
           }
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["YAxis"], {
           domain: ['auto', 'auto'],
           hide: true
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["XAxis"], {
           dataKey: "label",
-          hide: true
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["YAxis"], {
-          domain: ['auto', 'auto'],
           hide: true
         }));
       }
@@ -1661,7 +1660,9 @@ function (_React$Component) {
         className: "asset-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-2-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), chart, news), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "the-chart"
+      }, chart), news), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-1-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dash-sidebar"
@@ -3213,7 +3214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

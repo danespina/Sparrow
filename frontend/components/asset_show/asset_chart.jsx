@@ -91,9 +91,11 @@ class AssetChart extends React.Component {
         </div>
     </div>;
     if (this.state.chartData.length > 0) {
+      console.log(this.state.chartData);
+      const startIdx = this.state.timeFrame === "1D" ? 1 : 0;
       const chartVals = this.state.chartData;
-      change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[0].close);
-      percentChange = this.parseNum((chartVals[chartVals.length - 1].close - chartVals[0].close) * 100 / chartVals[0].close);
+      change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[startIdx].close);
+      percentChange = this.parseNum((chartVals[chartVals.length - 1].close - chartVals[startIdx].close) * 100 / chartVals[startIdx].close);
       loading = null;
     }
 
@@ -105,7 +107,7 @@ class AssetChart extends React.Component {
         </div>
         <LineChart width={676} height={196} data={this.state.chartData}>
           <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} animationDuration={0}/>
-          <Tooltip  />
+          <Tooltip />
           <YAxis domain={['auto', 'auto']} hide={true}/>
           <XAxis dataKey="label" hide={true} />
         </LineChart>

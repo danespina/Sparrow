@@ -39,10 +39,9 @@ class Dashboard extends React.Component {
     if(this.state.portfolio.history){
       chart = <LineChart width={676} height={196} data={this.state.portfolio.history}>
         <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} animationDuration={0}/>
-        <Tooltip viewBox={{ x: 0, y: 0, width: 100, height: 100 }} />
+        <Tooltip viewBox={{ x: 0, y: 0, width: 50, height: 30 }} />
         <YAxis domain={['auto', 'auto']} hide={true}/>
         <XAxis dataKey="label" hide={true} />
-        <YAxis domain={['auto', 'auto']} hide={true}/>
       </LineChart>;
     }
     let fakeAsset;
@@ -63,7 +62,9 @@ class Dashboard extends React.Component {
         <div className="col-2-3">
           <h1>Hello!</h1>
           <h1>You have ${this.state.portfolio.buying_power}</h1>
+          <div className="the-chart">
             {chart}
+          </div>
           {news}
         </div>
         <div className="col-1-3">
