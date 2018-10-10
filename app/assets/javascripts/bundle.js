@@ -2559,15 +2559,25 @@ function (_React$Component) {
           to: "/signup"
         }, "Sign Up")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "right flex-child"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: phoneURL
-        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+          width: "452",
+          autoPlay: true,
+          loop: true
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+          src: phone1URL,
+          type: "video/webm"
+        })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "home-row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left flex-child"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: phoneURL
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+          width: "452",
+          autoPlay: true,
+          loop: true
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+          src: phone2URL,
+          type: "video/webm"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "right flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left-header"
@@ -2584,14 +2594,19 @@ function (_React$Component) {
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "We\u2019ve designed Sparrow from the ground up for the next generation of newcomers and experts alike."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, "It\u2019s fast, dead simple and just works."))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "right flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: phoneURL
+          src: phone3URL
         }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "home-row"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "right flex-child"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-          src: phoneURL
-        })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("video", {
+          width: "452",
+          autoPlay: true,
+          loop: true
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("source", {
+          src: phone4URL,
+          type: "video/webm"
+        }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left flex-child"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "left-header"

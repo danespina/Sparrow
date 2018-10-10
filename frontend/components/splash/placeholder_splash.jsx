@@ -28,12 +28,16 @@ class Splash extends React.Component {
                 <Link to='/signup'>Sign Up</Link>
               </div>
               <div className="right flex-child">
-                <img src={phoneURL}></img>
+                <video width="452" autoPlay loop >
+                  <source src={phone1URL} type="video/webm" ></source>
+                </video>
               </div>
             </div>
             <div className="home-row">
               <div className="left flex-child">
-                <img src={phoneURL}></img>
+                <video width="452" autoPlay loop >
+                  <source src={phone2URL} type="video/webm" ></source>
+                </video>
               </div>
               <div className="right flex-child">
                 <div className="left-header">
@@ -58,12 +62,14 @@ class Splash extends React.Component {
                 </div>
               </div>
               <div className="right flex-child">
-                <img src={phoneURL}></img>
+                <img src={phone3URL}></img>
               </div>
             </div>
             <div className="home-row">
               <div className="right flex-child">
-                <img src={phoneURL}></img>
+                <video width="452" autoPlay loop >
+                  <source src={phone4URL} type="video/webm" ></source>
+                </video>
               </div>
               <div className="left flex-child">
                 <div className="left-header">
