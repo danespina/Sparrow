@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HoldingsContainer from './holdings_show_container';
 import WatchlistContainer from './watchlist_show_container';
 import { script } from './script';
-import { LineChart, Line, YAxis, XAxis, CartesianAxis, Tooltip } from 'recharts';
+import { LineChart, PieChart, Line, YAxis, XAxis, CartesianAxis, Tooltip, Pie } from 'recharts';
 import AssetNews from '../asset_show/asset_news';
 
 class Dashboard extends React.Component {
@@ -44,6 +44,17 @@ class Dashboard extends React.Component {
         <XAxis dataKey="label" hide={true} />
       </LineChart>;
     }
+    let holdingsChart;
+    if (this.state.portfolio.holdings) {
+      const pieData = Object.values(this.state.portfolio.holdings).map((holding) => {
+          return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
+      });
+      holdingsChart = <PieChart width={676} height={250}>
+                        <Pie data={pieData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} fill="#21ce99" />
+                        <Tooltip />
+                      </PieChart>;
+
+    }
     let fakeAsset;
     let news = <div className="cover">
       <div className="loader" id="loader-6">
@@ -64,6 +75,7 @@ class Dashboard extends React.Component {
           <h1>You have ${this.state.portfolio.buying_power}</h1>
           <div className="the-chart">
             {chart}
+            {holdingsChart}
           </div>
           {news}
         </div>

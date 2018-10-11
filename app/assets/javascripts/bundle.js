@@ -1742,6 +1742,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       // let holds;
       // if(this.state.portfolio.holdings &&
       //   Object.values(this.props.assets).length > 0){
@@ -1782,6 +1784,29 @@ function (_React$Component) {
         }));
       }
 
+      var holdingsChart;
+
+      if (this.state.portfolio.holdings) {
+        var pieData = Object.values(this.state.portfolio.holdings).map(function (holding) {
+          return {
+            symbol: _this3.state.portfolio.assetInfo[holding.asset_id].symbol,
+            position: holding.position
+          };
+        });
+        holdingsChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
+          width: 676,
+          height: 250
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Pie"], {
+          data: pieData,
+          dataKey: "position",
+          nameKey: "symbol",
+          cx: "50%",
+          cy: "50%",
+          outerRadius: 100,
+          fill: "#21ce99"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null));
+      }
+
       var fakeAsset;
       var news = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "cover"
@@ -1806,7 +1831,7 @@ function (_React$Component) {
         className: "col-2-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
-      }, chart), news), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, chart, holdingsChart), news), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-1-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dash-sidebar"
