@@ -5,6 +5,7 @@
   min-width: 298px;
   position: fixed;
   overflow-y: scroll;
+  max-height: 860px;
 }
 
 ::-webkit-scrollbar {
