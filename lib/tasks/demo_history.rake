@@ -1,5 +1,5 @@
 task :demo_history => :environment do
-  current_value = 100000
+  current_value = 20500
   date = (DateTime.now - 2.years)
   today = DateTime.now.strftime("%Y-%m-%d")
   new_history = []
@@ -7,8 +7,6 @@ task :demo_history => :environment do
     current_value += (current_value * ((0.01 + 0.005) * rand - 0.005))
     label_date = date.strftime("%Y-%m-%d")
     history_value = current_value.round(2)
-    history_item = { "label" => label_date, "close" => history_value }
-    p history_item
     new_history << { "label" => label_date, "close" => history_value }
     date += 1.days
   end

@@ -179,6 +179,8 @@
 #show-hide {
   background-color: white;
   color: var(--main-green);
+  padding: 0;
+  margin: 0;
 }
 
 #show-hide:hover {
@@ -189,7 +191,7 @@
   margin-bottom: 20px;
 }
 
-.asset-about button {
+.about-span a {
   font-weight: bold;
   background-color: var(--light-green);
   border: 1px var(--light-green);
@@ -199,7 +201,7 @@
   margin-right: 10px;
 }
 
-.asset-about button:hover {
+.about-span a:hover {
   background-color: var(--main-green);
   color: #fff;
 }
