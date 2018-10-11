@@ -867,7 +867,6 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null)));
 
       if (this.state.chartData.length > 0) {
-        console.log(this.state.chartData);
         var startIdx = this.state.timeFrame === "1D" ? 1 : 0;
         var chartVals = this.state.chartData;
         change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[startIdx].close);
@@ -890,8 +889,7 @@ function (_React$Component) {
         dataKey: "close",
         stroke: "#21ce99",
         strokeWidth: 2,
-        dot: false,
-        animationDuration: 0
+        dot: false
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["Tooltip"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_1__["YAxis"], {
         domain: ['auto', 'auto'],
         hide: true
@@ -1766,8 +1764,7 @@ function (_React$Component) {
           dataKey: "close",
           stroke: "#21ce99",
           strokeWidth: 2,
-          dot: false,
-          animationDuration: 0
+          dot: false
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], {
           viewBox: {
             x: 0,
@@ -3398,7 +3395,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

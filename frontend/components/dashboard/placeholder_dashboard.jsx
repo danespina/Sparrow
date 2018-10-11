@@ -38,7 +38,7 @@ class Dashboard extends React.Component {
     let chart;
     if(this.state.portfolio.history){
       chart = <LineChart width={676} height={196} data={this.state.portfolio.history}>
-        <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} animationDuration={0}/>
+        <Line type="linear" dataKey="close" stroke="#21ce99" strokeWidth={2} dot={false} />
         <Tooltip viewBox={{ x: 0, y: 0, width: 50, height: 30 }} />
         <YAxis domain={['auto', 'auto']} hide={true}/>
         <XAxis dataKey="label" hide={true} />
