@@ -44,15 +44,27 @@ class Dashboard extends React.Component {
         <XAxis dataKey="label" hide={true} />
       </LineChart>;
     }
-    let holdingsChart;
+    let longChart;
+    let shortChart;
+    let longData = [];
+    let shortData = [];
     if (this.state.portfolio.holdings) {
-      const pieData = Object.values(this.state.portfolio.holdings).map((holding) => {
-        console.log(this.state.portfolio.assetInfo[holding.asset_id].symbol)
-        console.log(holding.position)
-          return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
+      const pieData = Object.values(this.state.portfolio.holdings).forEach((holding) => {
+        if (holding.position > 0) {
+          return longData.push({ symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position });
+        } else if (holding.position < 0) {
+          return shortData.push({ symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: Math.abs(holding.position) });
+        }
+        // console.log(this.state.portfolio.assetInfo[holding.asset_id].symbol)
+        // console.log(holding.position)
+        //   return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
       });
-      holdingsChart = <PieChart width={676} height={250}>
-                        <Pie data={pieData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} fill="#21ce99" />
+      longChart = <PieChart width={333} height={250}>
+                        <Pie data={longData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} fill="#21ce99" />
+                        <Tooltip />
+                      </PieChart>;
+      shortChart = <PieChart width={333} height={250}>
+                        <Pie data={shortData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} fill="#f45531" />
                         <Tooltip />
                       </PieChart>;
 
@@ -77,7 +89,16 @@ class Dashboard extends React.Component {
           <h1>You have ${this.state.portfolio.buying_power}</h1>
           <div className="the-chart">
             {chart}
-            {holdingsChart}
+            <div className="pie-charts">
+              <div className="long-pie">
+                <h2>Long</h2>
+                {longChart}
+              </div>
+              <div className="short-pie">
+                <h2>Short</h2>
+                {shortChart}
+              </div>
+            </div>
           </div>
           {news}
         </div>

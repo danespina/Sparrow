@@ -1491,7 +1491,7 @@ function (_React$Component) {
 
       if (Boolean(this.props.portfolio)) {
         stockItems = Object.values(this.props.portfolio.holdings).map(function (holding) {
-          if (holding.position > 0) {
+          if (holding.position !== 0) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
               key: holding.asset_id,
               asset: _this.props.portfolio.assetInfo[holding.asset_id],
@@ -1781,28 +1781,51 @@ function (_React$Component) {
         }));
       }
 
-      var holdingsChart;
+      var longChart;
+      var shortChart;
+      var longData = [];
+      var shortData = [];
 
       if (this.state.portfolio.holdings) {
-        var pieData = Object.values(this.state.portfolio.holdings).map(function (holding) {
-          console.log(_this3.state.portfolio.assetInfo[holding.asset_id].symbol);
-          console.log(holding.position);
-          return {
-            symbol: _this3.state.portfolio.assetInfo[holding.asset_id].symbol,
-            position: holding.position
-          };
+        var pieData = Object.values(this.state.portfolio.holdings).forEach(function (holding) {
+          if (holding.position > 0) {
+            return longData.push({
+              symbol: _this3.state.portfolio.assetInfo[holding.asset_id].symbol,
+              position: holding.position
+            });
+          } else if (holding.position < 0) {
+            return shortData.push({
+              symbol: _this3.state.portfolio.assetInfo[holding.asset_id].symbol,
+              position: Math.abs(holding.position)
+            });
+          } // console.log(this.state.portfolio.assetInfo[holding.asset_id].symbol)
+          // console.log(holding.position)
+          //   return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
+
         });
-        holdingsChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
-          width: 676,
+        longChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
+          width: 333,
           height: 250
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Pie"], {
-          data: pieData,
+          data: longData,
           dataKey: "position",
           nameKey: "symbol",
           cx: "50%",
           cy: "50%",
           outerRadius: 100,
           fill: "#21ce99"
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null));
+        shortChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
+          width: 333,
+          height: 250
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Pie"], {
+          data: shortData,
+          dataKey: "position",
+          nameKey: "symbol",
+          cx: "50%",
+          cy: "50%",
+          outerRadius: 100,
+          fill: "#f45531"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null));
       }
 
@@ -1830,7 +1853,13 @@ function (_React$Component) {
         className: "col-2-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
-      }, chart, holdingsChart), news), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "pie-charts"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "long-pie"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Long"), longChart), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "short-pie"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Short"), shortChart))), news), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-1-3"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "dash-sidebar"
@@ -3397,7 +3426,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);
