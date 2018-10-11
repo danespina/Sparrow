@@ -5,6 +5,13 @@ export const getExternalInfo = (requestType, asset) => {
   });
 };
 
+export const getCollection = (tag) => {
+  return $.ajax({
+    method: "GET",
+    url: `https://api.iextrading.com/1.0/stock/market/collection/tag?collectionName=${tag}`,
+  });
+};
+
 export const getNews = (asset) => {
   return $.ajax({
     method: "GET",

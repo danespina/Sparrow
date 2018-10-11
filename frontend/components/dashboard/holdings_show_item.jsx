@@ -36,8 +36,8 @@ class HoldingsItem extends React.Component {
   }
   render () {
     let price;
-    if (this.state.chartData.pop()){
-      price = this.state.chartData.pop().close;
+    if (this.state.chartData[this.state.chartData.length - 1]){
+      price = this.state.chartData[this.state.chartData.length - 1].close;
     }
     return(
       <li key={this.props.asset.id}>

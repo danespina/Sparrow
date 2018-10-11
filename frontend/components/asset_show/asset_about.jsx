@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getExternalInfo } from '../../util/asset_api_util';
 
 class AssetAbout extends React.Component {
@@ -48,7 +49,7 @@ class AssetAbout extends React.Component {
     let assetTags;
     if (this.state.about.tags){
       assetTags = this.state.about.tags.map((tag) => {
-        return <button key={tag}>{tag}</button>;
+        return <Link to={`/collection/${tag}`} key={tag} >{tag}</Link>;
       });
     }
     const moreAbout = [{"High Today": `$ ${this.props.asset.high}`},

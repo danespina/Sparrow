@@ -5,6 +5,7 @@ import LoginFormContainer from './session_form/login_form_container';
 import SignupFormContainer from './session_form/signup_form_container';
 import { AuthRoute, ProtectedRoute } from '../util/route_util';
 import AssetShowContainer from './asset_show/asset_show_container';
+import CollectionIndexContainer from './collection/collection_index_container';
 import SplashContainer from './splash/splash_container';
 
 const App = () => (
@@ -16,6 +17,7 @@ const App = () => (
       <main className="main-content">
         <Route exact path="/" component={SplashContainer} />
         <ProtectedRoute path="/assets/:id" component={AssetShowContainer} />
+        <ProtectedRoute path="/collection/:tag" component={CollectionIndexContainer} />
       </main>
     </main>
   </div>
