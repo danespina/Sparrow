@@ -47,6 +47,8 @@ class Dashboard extends React.Component {
     let holdingsChart;
     if (this.state.portfolio.holdings) {
       const pieData = Object.values(this.state.portfolio.holdings).map((holding) => {
+        console.log(this.state.portfolio.assetInfo[holding.asset_id].symbol)
+        console.log(holding.position)
           return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
       });
       holdingsChart = <PieChart width={676} height={250}>
