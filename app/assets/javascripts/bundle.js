@@ -2190,11 +2190,11 @@ function (_React$Component) {
       }
 
       var searchItems = Object.values(this.state.results).map(function (el) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
-          key: el.id
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__["Link"], {
           to: "/assets/".concat(el.id),
           onClick: _this3.clearSearch
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+          key: el.id
         }, el.symbol, " ", el.name));
       });
       var logo = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", {
