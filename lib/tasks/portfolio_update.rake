@@ -1,3 +1,4 @@
+# TODO: Add check for day of week to prevent running on weekends
 task :portfolio_update => :environment do
   Portfolio.all.each do |portfolio|
     current_date = DateTime.now.strftime("%Y-%m-%d")
