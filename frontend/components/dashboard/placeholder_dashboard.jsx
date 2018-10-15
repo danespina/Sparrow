@@ -62,11 +62,11 @@ class Dashboard extends React.Component {
         //   return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
       });
       longChart = <PieChart width={333} height={250}>
-                        <Pie data={longData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} fill="#21ce99" />
+                        <Pie data={longData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} innerRadius={50} fill="#21ce99" />
                         <Tooltip />
                       </PieChart>;
       shortChart = <PieChart width={333} height={250}>
-                        <Pie data={shortData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} fill="#f45531" />
+                        <Pie data={shortData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} innerRadius={50} fill="#f45531" />
                         <Tooltip />
                       </PieChart>;
 
@@ -87,10 +87,13 @@ class Dashboard extends React.Component {
     return (
       <div className="asset-page">
         <div className="col-2-3">
-          <h1>Hello!</h1>
+          <h1>Welcome to Sparrow</h1>
           <h1>You have ${this.state.portfolio.buying_power}</h1>
           <div className="the-chart">
             {chart}
+            <div className="asset-header">
+              <h2>Holdings</h2>
+            </div>
             <div className="pie-charts">
               <div className="long-pie">
                 <h2>Long</h2>

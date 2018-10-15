@@ -1154,7 +1154,7 @@ function (_React$Component) {
           className: "asset-show-main"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("header", {
           className: "asset-show-header"
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName, "!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, curAsset.companyName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", {
           className: "display-nums"
         }, "$", curAsset.latestPrice)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_asset_chart__WEBPACK_IMPORTED_MODULE_3__["default"], {
           asset: curAsset
@@ -1297,7 +1297,8 @@ function (_React$Component) {
           collection: data
         });
       });
-    }
+    } // TODO: Create fetchAssets action to properly link assets in collection
+
   }, {
     key: "render",
     value: function render() {
@@ -1488,11 +1489,24 @@ function (_React$Component) {
     value: function render() {
       var _this = this;
 
-      var stockItems;
+      var longItems;
+      var shortItems;
 
       if (Boolean(this.props.portfolio)) {
-        stockItems = Object.values(this.props.portfolio.holdings).map(function (holding) {
-          if (holding.position !== 0) {
+        longItems = Object.values(this.props.portfolio.holdings).map(function (holding) {
+          if (holding.position > 0) {
+            return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
+              key: holding.asset_id,
+              asset: _this.props.portfolio.assetInfo[holding.asset_id],
+              shares: holding.position
+            });
+          }
+        });
+      }
+
+      if (Boolean(this.props.portfolio)) {
+        shortItems = Object.values(this.props.portfolio.holdings).map(function (holding) {
+          if (holding.position < 0) {
             return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_holdings_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
               key: holding.asset_id,
               asset: _this.props.portfolio.assetInfo[holding.asset_id],
@@ -1506,7 +1520,7 @@ function (_React$Component) {
         className: "holdings-form"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "holdings-header bold"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Stocks")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, stockItems));
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Stocks")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, longItems), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", null, shortItems));
     }
   }]);
 
@@ -1737,7 +1751,8 @@ function (_React$Component) {
       //   this.setState({ portfolio: data.portfolio });
       // });
       // });
-    }
+    } // TODO: Add holdings by sector
+
   }, {
     key: "render",
     value: function render() {
@@ -1814,6 +1829,7 @@ function (_React$Component) {
           cx: "50%",
           cy: "50%",
           outerRadius: 100,
+          innerRadius: 50,
           fill: "#21ce99"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null));
         shortChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
@@ -1826,6 +1842,7 @@ function (_React$Component) {
           cx: "50%",
           cy: "50%",
           outerRadius: 100,
+          innerRadius: 50,
           fill: "#f45531"
         }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null));
       }
@@ -1852,9 +1869,11 @@ function (_React$Component) {
         className: "asset-page"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "col-2-3"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Hello!"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "Welcome to Sparrow"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h1", null, "You have $", this.state.portfolio.buying_power), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "the-chart"
       }, chart, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "asset-header"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h2", null, "Holdings")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "pie-charts"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "long-pie"
@@ -2194,22 +2213,17 @@ function (_React$Component) {
     key: "handleClick",
     value: function handleClick(e) {
       this.props.logout();
-    }
-  }, {
-    key: "makeSeeds",
-    value: function makeSeeds(e) {
-      $.ajax({
-        method: "GET",
-        url: "https://api.iextrading.com/1.0/ref-data/symbols"
-      }).then(function (resArr) {
-        resArr.map(function (el) {
-          return Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["createAsset"])({
-            symbol: el.symbol,
-            name: el.name
-          });
-        });
-      });
-    }
+    } // makeSeeds(e) {
+    //   $.ajax({
+    //     method: "GET",
+    //     url: `https://api.iextrading.com/1.0/ref-data/symbols`,
+    //   }).then((resArr) => {
+    //     resArr.map((el) => {
+    //       return createAsset({ symbol: el.symbol, name: el.name });
+    //     });
+    //   });
+    // }
+
   }, {
     key: "clearSearch",
     value: function clearSearch(e) {
@@ -2217,7 +2231,8 @@ function (_React$Component) {
         query: '',
         results: {}
       });
-    }
+    } // TODO: Add debouncing
+
   }, {
     key: "handleChange",
     value: function handleChange(e) {

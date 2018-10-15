@@ -68,7 +68,7 @@ class AssetShow extends React.Component {
           <div className = "col-2-3">
             <div className="asset-show-main">
               <header className="asset-show-header">
-                <h1>{curAsset.companyName}!</h1>
+                <h1>{curAsset.companyName}</h1>
                 <span className="display-nums">${curAsset.latestPrice}</span>
               </header>
               <AssetChart asset={curAsset} />

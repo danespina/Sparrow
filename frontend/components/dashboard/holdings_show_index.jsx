@@ -7,10 +7,18 @@ class HoldingsIndex extends React.Component {
     super(props);
   }
   render () {
-    let stockItems;
+    let longItems;
+    let shortItems;
     if(Boolean(this.props.portfolio)){
-      stockItems = Object.values(this.props.portfolio.holdings).map((holding) => {
-        if (holding.position !== 0) {
+      longItems = Object.values(this.props.portfolio.holdings).map((holding) => {
+        if (holding.position > 0) {
+          return <HoldingsItem key={holding.asset_id} asset={this.props.portfolio.assetInfo[holding.asset_id]} shares={holding.position} />;
+        }
+      });
+    }
+    if(Boolean(this.props.portfolio)){
+      shortItems = Object.values(this.props.portfolio.holdings).map((holding) => {
+        if (holding.position < 0) {
           return <HoldingsItem key={holding.asset_id} asset={this.props.portfolio.assetInfo[holding.asset_id]} shares={holding.position} />;
         }
       });
@@ -20,7 +28,8 @@ class HoldingsIndex extends React.Component {
         <div className="holdings-header bold">
           <h3>Stocks</h3>
         </div>
-        <ul>{stockItems}</ul>
+        <ul>{longItems}</ul>
+        <ul>{shortItems}</ul>
       </div>
     );
   }
