@@ -24,6 +24,8 @@ class Dashboard extends React.Component {
       // });
     // });
   }
+
+  // TODO: Add holdings by sector
   render () {
     // let holds;
     // if(this.state.portfolio.holdings &&

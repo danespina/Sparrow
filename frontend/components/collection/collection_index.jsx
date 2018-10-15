@@ -14,6 +14,7 @@ class CollectionIndex extends React.Component {
     });
   }
 
+// TODO: Create fetchAssets action to properly link assets in collection
   render () {
     let collectionItems;
     if (Boolean(this.state.collection)) {

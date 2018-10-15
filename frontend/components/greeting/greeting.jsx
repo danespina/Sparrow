@@ -14,21 +14,22 @@ class Greeting extends React.Component {
     this.props.logout();
   }
 
-  makeSeeds(e) {
-    $.ajax({
-      method: "GET",
-      url: `https://api.iextrading.com/1.0/ref-data/symbols`,
-    }).then((resArr) => {
-      resArr.map((el) => {
-        return createAsset({ symbol: el.symbol, name: el.name });
-      });
-    });
-  }
+  // makeSeeds(e) {
+  //   $.ajax({
+  //     method: "GET",
+  //     url: `https://api.iextrading.com/1.0/ref-data/symbols`,
+  //   }).then((resArr) => {
+  //     resArr.map((el) => {
+  //       return createAsset({ symbol: el.symbol, name: el.name });
+  //     });
+  //   });
+  // }
 
   clearSearch(e) {
     this.setState({ query: '', results: {} });
   }
 
+// TODO: Add debouncing
   handleChange(e) {
     this.setState({ query: e.currentTarget.value});
     searchAssets(e.currentTarget.value).then((data) => {
