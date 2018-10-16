@@ -8,7 +8,7 @@
   max-height: 860px;
 }
 
-::-webkit-scrollbar {
+.dash-sidebar::-webkit-scrollbar {
     display: none;
 }
 

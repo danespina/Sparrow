@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   padding-top: 100px;
+  min-width: 1024px;
 }
 
 .trade-form {
