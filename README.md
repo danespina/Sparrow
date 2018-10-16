@@ -18,7 +18,7 @@ Sparrow was made using a Ruby on Rails back-end that utilizes a Postgresql datab
 
 Visitors can sign up, log in, or view a demo account from links on the landing page.  Once signed in, a user will see an interactive chart of their portfolio history above a news feed.  The portfolio history is updated daily by a rake task shown below.
 
-```
+```ruby
 task :portfolio_update => :environment do
   Portfolio.all.each do |portfolio|
     current_date = DateTime.now.strftime("%Y-%m-%d")
