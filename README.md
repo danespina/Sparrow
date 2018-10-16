@@ -8,7 +8,7 @@
 
 ## Technologies
 
-Sparrow was made using a Ruby on Rails back-end that utilizes a Postgresql database and a React/Redux front-end.
+Sparrow was made using a Ruby on Rails back-end that utilizes a PostgreSQL database and a React/Redux front-end.
 
 ## Key Features
 
