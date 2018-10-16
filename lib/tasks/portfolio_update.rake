@@ -9,10 +9,14 @@ task :portfolio_update => :environment do
     assets.each do |asset|
       quote = IEX::Resources::Quote.get("#{asset.symbol.downcase}")
       latest_price = quote.latest_price
-      current_value += portfolio.holdings[asset.id.to_s]["position"] * latest_price
+      current_position = portfolio.holdings[asset.id.to_s]["position"]
+      current_value += current_position * latest_price
     end
 
-    new_history = portfolio.history << { "label" => current_date, "close" => current_value }
+    new_history = portfolio.history << {
+      "label" => current_date,
+      "close" => current_value
+    }
     portfolio.update(history: new_history)
   end
 end

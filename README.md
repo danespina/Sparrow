@@ -16,7 +16,33 @@ Sparrow was made using a Ruby on Rails back-end that utilizes a Postgresql datab
 
 [[https://github.com/danespina/Sparrow/app/assets/images/sparrow_readme_2.png|alt=portfolio]]
 
-Visitors can sign up, log in, or view a demo account from links on the landing page.  Once signed in, a user will see an interactive chart of their portfolio history above a news feed.  To the right, a container displays the user's current holdings and watched stocks.  
+Visitors can sign up, log in, or view a demo account from links on the landing page.  Once signed in, a user will see an interactive chart of their portfolio history above a news feed.  The portfolio history is updated daily by a rake task shown below.
+
+```
+task :portfolio_update => :environment do
+  Portfolio.all.each do |portfolio|
+    current_date = DateTime.now.strftime("%Y-%m-%d")
+    current_value = portfolio.buying_power
+    asset_ids = portfolio.holdings.keys
+    assets = Asset.find(asset_ids)
+
+    assets.each do |asset|
+      quote = IEX::Resources::Quote.get("#{asset.symbol.downcase}")
+      latest_price = quote.latest_price
+      current_position = portfolio.holdings[asset.id.to_s]["position"]
+      current_value += current_position * latest_price
+    end
+
+    new_history = portfolio.history << {
+      "label" => current_date,
+      "close" => current_value
+    }
+    portfolio.update(history: new_history)
+  end
+end
+```
+
+To the right of the history, a container displays the user's current holdings and watched stocks.  
 
 ### Holdings and Watchlist
 
