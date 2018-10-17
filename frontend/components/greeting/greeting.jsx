@@ -43,7 +43,7 @@ class Greeting extends React.Component {
       hidden = "hidden";
     }
     const searchItems = Object.values(this.state.results).map((el) => {
-      return (<Link to={`/assets/${el.id}`} onClick={this.clearSearch}><li key={el.id}>{el.symbol} {el.name}</li></Link>);
+      return (<Link to={`/assets/${el.id}`} key={el.id} onClick={this.clearSearch}><li key={el.id}>{el.symbol} {el.name}</li></Link>);
     });
     const logo = (<svg className="logo" viewBox="0 0 1024 1024">
       <path d="M 0 1000 L 100 1000 L 200 800 L 600 600 L 450 580 L 400 400 L 0 1000z"></path>

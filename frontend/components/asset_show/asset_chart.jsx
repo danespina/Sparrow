@@ -15,6 +15,7 @@ class AssetChart extends React.Component {
       '2Y': 'Past 2 Years'
     };
     this.update = this.update.bind(this);
+    this.numRenders = 0;
   }
 
   cleanIncoming(arr) {
@@ -76,6 +77,7 @@ class AssetChart extends React.Component {
   }
 
   render () {
+    this.numRenders++;
     let timeButtons = Object.keys(this.times).map((frame) => {
       return <button key={frame} className={this.state.timeFrame === frame ? "selected-time-frame" : ""}
         onClick={() => this.update(frame)}>{frame}</button>;
@@ -95,6 +97,8 @@ class AssetChart extends React.Component {
       const chartVals = this.state.chartData;
       change = this.displayNum(chartVals[chartVals.length - 1].close - chartVals[startIdx].close);
       percentChange = this.parseNum((chartVals[chartVals.length - 1].close - chartVals[startIdx].close) * 100 / chartVals[startIdx].close);
+      loading = null;
+    } else if (this.numRenders > 2) {
       loading = null;
     }
 

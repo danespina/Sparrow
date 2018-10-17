@@ -40,6 +40,8 @@ class AssetAbout extends React.Component {
       return (num / Math.pow(10, 6)).toFixed(2) + ' M';
     } else if (num){
       return num.toFixed(2);
+    } else if (isNaN(num)) {
+      return 0;
     } else {
       return num;
     }
@@ -52,12 +54,12 @@ class AssetAbout extends React.Component {
         return <Link to={`/collection/${tag}`} key={tag} >{tag}</Link>;
       });
     }
-    const moreAbout = [{"High Today": `$ ${this.props.asset.high}`},
-      {"Low Today": `$ ${this.props.asset.low}`},
-      {"Open Price": `$ ${this.props.asset.open}`},
+    const moreAbout = [{"High Today": `$ ${this.formatNums(this.props.asset.high)}`},
+      {"Low Today": `$ ${this.formatNums(this.props.asset.low)}`},
+      {"Open Price": `$ ${this.formatNums(this.props.asset.open)}`},
       {"Volume": this.formatNums(this.props.asset.iexVolume)},
-      {"52 Week High": `$ ${this.state.stats.week52high}`},
-      {"52 Week Low": `$ ${this.state.stats.week52low}`},];
+      {"52 Week High": `$ ${this.formatNums(this.state.stats.week52high)}`},
+      {"52 Week Low": `$ ${this.formatNums(this.state.stats.week52low)}`},];
     const sometimesShow = moreAbout.map((el, idx) => {
       return (<li key={idx}>
         <div className="bold">{Object.keys(el)}</div>

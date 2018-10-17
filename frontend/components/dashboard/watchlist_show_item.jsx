@@ -1,7 +1,7 @@
 import React from 'react';
-import { getExternalInfo } from '../../util/asset_api_util';
-import { LineChart, Line, YAxis } from 'recharts';
 import { Link } from 'react-router-dom';
+import { LineChart, Line, YAxis } from 'recharts';
+import { getExternalInfo } from '../../util/asset_api_util';
 
 class WatchlistItem extends React.Component {
   constructor(props) {

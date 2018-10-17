@@ -60,7 +60,14 @@ class AssetShow extends React.Component {
 
   render () {
     if(!this.state.assets[this.props.assetId]){
-      return (<h1>wait</h1>);
+      return (<div className="cover">
+        <div className="loader" id="loader-6">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+      </div>);
     } else {
       const curAsset = this.state.assets[parseInt(this.props.assetId)];
       return (
