@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import debounce from 'lodash.debounce';
 import { searchAssets, createAsset } from '../../util/asset_api_util';
 
 class Greeting extends React.Component {
@@ -8,6 +9,7 @@ class Greeting extends React.Component {
     this.handleClick = this.handleClick.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
+    this.debouncedSearch = debounce(this.debouncedSearch.bind(this), 300);
     this.state = { query: '', results: {} };
   }
   handleClick(e) {
@@ -29,12 +31,16 @@ class Greeting extends React.Component {
     this.setState({ query: '', results: {} });
   }
 
-// TODO: Add debouncing
-  handleChange(e) {
-    this.setState({ query: e.currentTarget.value});
-    searchAssets(e.currentTarget.value).then((data) => {
+  debouncedSearch(query) {
+    searchAssets(query).then((data) => {
       this.setState({ results: data });
     });
+  }
+
+  handleChange(e) {
+    this.debouncedSearch.cancel();
+    this.setState({ query: e.currentTarget.value });
+    this.debouncedSearch(e.currentTarget.value);
   }
 
   render () {

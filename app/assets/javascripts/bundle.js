@@ -1554,7 +1554,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1660,18 +1660,18 @@ function (_React$Component) {
         className: "holdings-symbol"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "bold"
-      }, this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.shares, " shares")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["LineChart"], {
+      }, this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h5", null, this.props.shares, " shares")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["LineChart"], {
         width: 80,
         height: 40,
         data: this.state.chartData
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["Line"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["Line"], {
         type: "linear",
         dataKey: "close",
         stroke: "#21ce99",
         strokeWidth: 1,
         dot: false,
         animationDuration: 0
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["YAxis"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["YAxis"], {
         domain: ['auto', 'auto'],
         hide: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "$", price))));
@@ -1700,7 +1700,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _holdings_show_container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./holdings_show_container */ "./frontend/components/dashboard/holdings_show_container.js");
 /* harmony import */ var _watchlist_show_container__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./watchlist_show_container */ "./frontend/components/dashboard/watchlist_show_container.js");
 /* harmony import */ var _script__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./script */ "./frontend/components/dashboard/script.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
 /* harmony import */ var _asset_show_asset_news__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../asset_show/asset_news */ "./frontend/components/asset_show/asset_news.jsx");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -1782,27 +1782,27 @@ function (_React$Component) {
       var chart;
 
       if (this.state.portfolio.history) {
-        chart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["LineChart"], {
+        chart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["LineChart"], {
           width: 676,
           height: 196,
           data: this.state.portfolio.history
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["Line"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Line"], {
           type: "linear",
           dataKey: "close",
           stroke: "#21ce99",
           strokeWidth: 2,
           dot: false
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["Tooltip"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], {
           viewBox: {
             x: 0,
             y: 0,
             width: 50,
             height: 30
           }
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["YAxis"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["YAxis"], {
           domain: ['auto', 'auto'],
           hide: true
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["XAxis"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["XAxis"], {
           dataKey: "label",
           hide: true
         }));
@@ -1830,10 +1830,10 @@ function (_React$Component) {
           //   return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
 
         });
-        longChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["PieChart"], {
+        longChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
           width: 333,
           height: 250
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["Pie"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Pie"], {
           data: longData,
           dataKey: "position",
           nameKey: "symbol",
@@ -1842,11 +1842,11 @@ function (_React$Component) {
           outerRadius: 100,
           innerRadius: 50,
           fill: "#21ce99"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["Tooltip"], null));
-        shortChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["PieChart"], {
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null));
+        shortChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
           width: 333,
           height: 250
-        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["Pie"], {
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Pie"], {
           data: shortData,
           dataKey: "position",
           nameKey: "symbol",
@@ -1855,7 +1855,7 @@ function (_React$Component) {
           outerRadius: 100,
           innerRadius: 50,
           fill: "#f45531"
-        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_7__["Tooltip"], null));
+        }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["Tooltip"], null));
       }
 
       var fakeAsset;
@@ -2033,7 +2033,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
+/* harmony import */ var recharts__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! recharts */ "./node_modules/recharts/es6/index.js");
 /* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -2139,18 +2139,18 @@ function (_React$Component) {
         className: "holdings-symbol"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "bold"
-      }, this.props.asset.symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["LineChart"], {
+      }, this.props.asset.symbol)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["LineChart"], {
         width: 80,
         height: 40,
         data: this.state.chartData
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["Line"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["Line"], {
         type: "linear",
         dataKey: "close",
         stroke: "#21ce99",
         strokeWidth: 1,
         dot: false,
         animationDuration: 0
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_4__["YAxis"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["YAxis"], {
         domain: ['auto', 'auto'],
         hide: true
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "$", price))));
@@ -2176,7 +2176,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/es/index.js");
-/* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash.debounce */ "./node_modules/lodash.debounce/index.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _util_asset_api_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../util/asset_api_util */ "./frontend/util/asset_api_util.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2199,6 +2201,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
+
 var Greeting =
 /*#__PURE__*/
 function (_React$Component) {
@@ -2213,6 +2216,7 @@ function (_React$Component) {
     _this.handleClick = _this.handleClick.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.handleChange = _this.handleChange.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.clearSearch = _this.clearSearch.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.debouncedSearch = lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default()(_this.debouncedSearch.bind(_assertThisInitialized(_assertThisInitialized(_this))), 300);
     _this.state = {
       query: '',
       results: {}
@@ -2242,21 +2246,26 @@ function (_React$Component) {
         query: '',
         results: {}
       });
-    } // TODO: Add debouncing
-
+    }
   }, {
-    key: "handleChange",
-    value: function handleChange(e) {
+    key: "debouncedSearch",
+    value: function debouncedSearch(query) {
       var _this2 = this;
 
-      this.setState({
-        query: e.currentTarget.value
-      });
-      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_2__["searchAssets"])(e.currentTarget.value).then(function (data) {
+      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_3__["searchAssets"])(query).then(function (data) {
         _this2.setState({
           results: data
         });
       });
+    }
+  }, {
+    key: "handleChange",
+    value: function handleChange(e) {
+      this.debouncedSearch.cancel();
+      this.setState({
+        query: e.currentTarget.value
+      });
+      this.debouncedSearch(e.currentTarget.value);
     }
   }, {
     key: "render",
