@@ -10,8 +10,10 @@ class CollectionIndex extends React.Component {
 
   componentDidMount() {
     getCollection(this.props.match.params.tag).then((data) => {
+      console.log(data);
       this.setState({ collection: data });
     });
+
   }
 
 // TODO: Create fetchAssets action to properly link assets in collection

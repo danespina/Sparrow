@@ -1134,7 +1134,8 @@ function (_React$Component) {
       if (nextProps.assetId !== this.props.assetId) {
         this.props.fetchAsset(nextProps.assetId).then(function (arg) {
           _this3.setState({
-            assets: _defineProperty({}, arg.asset.id, arg.asset)
+            assets: _defineProperty({}, arg.asset.id, arg.asset),
+            watching: Object.keys(_this3.props.watchlist).includes(_this3.props.assetId)
           });
         }).then(function () {
           return Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getExternalInfo"])("quote", _this3.state.assets[nextProps.assetId]);
@@ -1304,6 +1305,8 @@ function (_React$Component) {
       var _this2 = this;
 
       Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getCollection"])(this.props.match.params.tag).then(function (data) {
+        console.log(data);
+
         _this2.setState({
           collection: data
         });
@@ -2125,8 +2128,8 @@ function (_React$Component) {
     value: function render() {
       var price;
 
-      if (this.state.chartData.pop()) {
-        price = this.state.chartData.pop().close;
+      if (this.state.chartData[this.state.chartData.length - 1]) {
+        price = this.state.chartData[this.state.chartData.length - 1].close;
       }
 
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
@@ -3463,7 +3466,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

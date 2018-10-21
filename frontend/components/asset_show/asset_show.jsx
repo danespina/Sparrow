@@ -47,7 +47,10 @@ class AssetShow extends React.Component {
     if (nextProps.assetId !== this.props.assetId) {
       this.props.fetchAsset(nextProps.assetId).then(
         (arg) => {
-          this.setState({ assets: {[arg.asset.id]: arg.asset } });
+          this.setState({
+            assets: {[arg.asset.id]: arg.asset },
+            watching: Object.keys(this.props.watchlist).includes(this.props.assetId),
+          });
         }).then(
           () => {
             return getExternalInfo("quote", this.state.assets[nextProps.assetId]);
