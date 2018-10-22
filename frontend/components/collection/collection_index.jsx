@@ -5,13 +5,19 @@ import WatchlistItem from '../dashboard/watchlist_show_item';
 class CollectionIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { collection: null };
+    this.state = { symbols: null };
   }
 
   componentDidMount() {
-    getCollection(this.props.match.params.tag).then((data) => {
-      console.log(data);
-      this.setState({ collection: data });
+    this.props.fetchAllAssets().then((arg) => {
+      this.setState({ assets: arg.assets });
+    }).then(() => {
+      return getCollection(this.props.match.params.tag);
+    }).then((data) => {
+      const mappedData = data.map((datum) => {
+        return datum.symbol;
+      });
+      this.setState({ symbols: mappedData });
     });
 
   }
@@ -19,9 +25,15 @@ class CollectionIndex extends React.Component {
 // TODO: Create fetchAssets action to properly link assets in collection
   render () {
     let collectionItems;
-    if (Boolean(this.state.collection)) {
-      collectionItems = this.state.collection.map((asset) => {
-        return <WatchlistItem key={asset.symbol} asset={asset} />;
+    if (Boolean(this.state.symbols)) {
+      let assets = [];
+      Object.values(this.state.assets).map((asset) => {
+        if (this.state.symbols.includes(asset.symbol)) {
+          assets.push(asset);
+        }
+      });
+      collectionItems = assets.map((asset) => {
+        return <WatchlistItem key={asset.id} asset={asset} />;
       });
     }
     return (

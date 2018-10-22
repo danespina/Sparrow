@@ -1294,7 +1294,7 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(CollectionIndex).call(this, props));
     _this.state = {
-      collection: null
+      symbols: null
     };
     return _this;
   }
@@ -1304,11 +1304,19 @@ function (_React$Component) {
     value: function componentDidMount() {
       var _this2 = this;
 
-      Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getCollection"])(this.props.match.params.tag).then(function (data) {
-        console.log(data);
+      this.props.fetchAllAssets().then(function (arg) {
+        _this2.setState({
+          assets: arg.assets
+        });
+      }).then(function () {
+        return Object(_util_asset_api_util__WEBPACK_IMPORTED_MODULE_1__["getCollection"])(_this2.props.match.params.tag);
+      }).then(function (data) {
+        var mappedData = data.map(function (datum) {
+          return datum.symbol;
+        });
 
         _this2.setState({
-          collection: data
+          symbols: mappedData
         });
       });
     } // TODO: Create fetchAssets action to properly link assets in collection
@@ -1316,12 +1324,20 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this3 = this;
+
       var collectionItems;
 
-      if (Boolean(this.state.collection)) {
-        collectionItems = this.state.collection.map(function (asset) {
+      if (Boolean(this.state.symbols)) {
+        var assets = [];
+        Object.values(this.state.assets).map(function (asset) {
+          if (_this3.state.symbols.includes(asset.symbol)) {
+            assets.push(asset);
+          }
+        });
+        collectionItems = assets.map(function (asset) {
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_dashboard_watchlist_show_item__WEBPACK_IMPORTED_MODULE_2__["default"], {
-            key: asset.symbol,
+            key: asset.id,
             asset: asset
           });
         });
@@ -1353,7 +1369,9 @@ function (_React$Component) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var react_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router */ "./node_modules/react-router/es/index.js");
-/* harmony import */ var _collection_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./collection_index */ "./frontend/components/collection/collection_index.jsx");
+/* harmony import */ var _actions_asset_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/asset_actions */ "./frontend/actions/asset_actions.js");
+/* harmony import */ var _collection_index__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./collection_index */ "./frontend/components/collection/collection_index.jsx");
+
 
 
 
@@ -1366,23 +1384,13 @@ var mapStateToProps = function mapStateToProps(state) {
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
-    fetchAllAssets: function (_fetchAllAssets) {
-      function fetchAllAssets() {
-        return _fetchAllAssets.apply(this, arguments);
-      }
-
-      fetchAllAssets.toString = function () {
-        return _fetchAllAssets.toString();
-      };
-
-      return fetchAllAssets;
-    }(function () {
-      return dispatch(fetchAllAssets());
-    })
+    fetchAllAssets: function fetchAllAssets() {
+      return dispatch(Object(_actions_asset_actions__WEBPACK_IMPORTED_MODULE_2__["fetchAllAssets"])());
+    }
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_collection_index__WEBPACK_IMPORTED_MODULE_2__["default"])));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_router__WEBPACK_IMPORTED_MODULE_1__["withRouter"])(Object(react_redux__WEBPACK_IMPORTED_MODULE_0__["connect"])(mapStateToProps, mapDispatchToProps)(_collection_index__WEBPACK_IMPORTED_MODULE_3__["default"])));
 
 /***/ }),
 
@@ -3466,7 +3474,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { fetchAllAssets } from '../../actions/asset_actions';
 import CollectionIndex from './collection_index';
 
 const mapStateToProps = (state) => {
