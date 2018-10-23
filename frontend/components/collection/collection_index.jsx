@@ -1,5 +1,6 @@
 import React from 'react';
 import { getCollection } from '../../util/asset_api_util';
+import CollectionItem from './collection_item';
 import WatchlistItem from '../dashboard/watchlist_show_item';
 
 class CollectionIndex extends React.Component {
@@ -33,13 +34,13 @@ class CollectionIndex extends React.Component {
         }
       });
       collectionItems = assets.map((asset) => {
-        return <WatchlistItem key={asset.id} asset={asset} />;
+        return <CollectionItem key={asset.id} asset={asset} watchlist={this.props.watchlist} />;
       });
     }
     return (
-      <div className="collection-form">
+      <div className="col-2-3 collection-form">
         <div className="holdings-header bold">
-          <h3>Collection</h3>
+          <h3>{this.props.match.params.tag}</h3>
         </div>
         <ul>{collectionItems}</ul>
       </div>

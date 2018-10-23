@@ -6,6 +6,7 @@ import CollectionIndex from './collection_index';
 const mapStateToProps = (state) => {
   return {
     assets: state.entities.assets,
+    watchlist: state.entities.users[state.session.currentUserId].watchlist,
   };
 };
 
