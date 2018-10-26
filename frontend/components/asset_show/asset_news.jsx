@@ -15,7 +15,7 @@ class AssetNews extends React.Component {
     const newsList = this.state.news.map( (news, idx) => {
       let niceDate = new Date(news.publishedAt);
       return (<li key={idx} className="news-item">
-        <a href={news.url}>
+        <a href={news.url} target="_blank">
           <div className="news-item-col1">
             <img src={news.urlToImage} className="news-img" />
           </div>

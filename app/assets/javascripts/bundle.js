@@ -984,7 +984,8 @@ function (_React$Component) {
           key: idx,
           className: "news-item"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-          href: news.url
+          href: news.url,
+          target: "_blank"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
           className: "news-item-col1"
         }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
