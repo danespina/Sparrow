@@ -80,7 +80,7 @@ class AssetAbout extends React.Component {
             <li>
               <div className="bold">CEO</div>
               <div>
-                <a id="show-hide" href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`}>
+                <a id="show-hide" href={`https://www.google.com/search?q=${this.state.about.CEO} ${this.state.about.companyName}`} target="_blank">
                   {this.state.about.CEO}
                 </a>
               </div>

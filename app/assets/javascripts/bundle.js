@@ -663,7 +663,8 @@ function (_React$Component) {
         className: "bold"
       }, "CEO"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
         id: "show-hide",
-        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName)
+        href: "https://www.google.com/search?q=".concat(this.state.about.CEO, " ").concat(this.state.about.companyName),
+        target: "_blank"
       }, this.state.about.CEO))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "bold"
       }, "Employees"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.employees)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1989,10 +1990,7 @@ function (_React$Component) {
               symbol: _this3.state.portfolio.assetInfo[holding.asset_id].symbol,
               position: Math.abs(holding.position)
             });
-          } // console.log(this.state.portfolio.assetInfo[holding.asset_id].symbol)
-          // console.log(holding.position)
-          //   return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
-
+          }
         });
         longChart = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_5__["PieChart"], {
           width: 333,
@@ -3627,7 +3625,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var configureStore = function configureStore() {
   var preloadedState = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"], redux_logger__WEBPACK_IMPORTED_MODULE_1___default.a));
+  return Object(redux__WEBPACK_IMPORTED_MODULE_0__["createStore"])(_reducers_root_reducer__WEBPACK_IMPORTED_MODULE_3__["default"], preloadedState, Object(redux__WEBPACK_IMPORTED_MODULE_0__["applyMiddleware"])(redux_thunk__WEBPACK_IMPORTED_MODULE_2__["default"]));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (configureStore);

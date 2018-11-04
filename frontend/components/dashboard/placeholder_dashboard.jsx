@@ -57,9 +57,6 @@ class Dashboard extends React.Component {
         } else if (holding.position < 0) {
           return shortData.push({ symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: Math.abs(holding.position) });
         }
-        // console.log(this.state.portfolio.assetInfo[holding.asset_id].symbol)
-        // console.log(holding.position)
-        //   return { symbol: this.state.portfolio.assetInfo[holding.asset_id].symbol, position: holding.position };
       });
       longChart = <PieChart width={333} height={250}>
                         <Pie data={longData} dataKey="position" nameKey="symbol" cx="50%" cy="50%" outerRadius={100} innerRadius={50} fill="#21ce99" />
