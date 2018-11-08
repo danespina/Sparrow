@@ -1523,7 +1523,7 @@ function (_React$Component) {
         className: "holdings-symbol"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         className: "bold"
-      }, this.props.asset.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, following)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["LineChart"], {
+      }, this.props.asset.symbol), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", null, following)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(recharts__WEBPACK_IMPORTED_MODULE_2__["LineChart"], {
         width: 80,
         height: 40,
         data: this.state.chartData

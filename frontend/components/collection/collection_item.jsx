@@ -48,7 +48,7 @@ class CollectionItem extends React.Component {
         <Link to={`/assets/${this.props.asset.id}`}>
           <div className="holdings-form-row">
             <div className="holdings-symbol">
-              <h4 className="bold">{this.props.asset.name}</h4>
+              <h4 className="bold">{this.props.asset.symbol}</h4>
               <h4>{following}</h4>
             </div>
             <LineChart width={80} height={40} data={this.state.chartData}>
