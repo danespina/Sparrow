@@ -1502,7 +1502,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var price;
+      var price = 'n/a';
       var following;
 
       if (this.state.chartData[this.state.chartData.length - 1]) {
