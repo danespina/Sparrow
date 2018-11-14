@@ -1809,7 +1809,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var price;
+      var price = 'n/a';
 
       if (this.state.chartData[this.state.chartData.length - 1]) {
         price = this.state.chartData[this.state.chartData.length - 1].close;
@@ -2285,7 +2285,7 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var price;
+      var price = 'n/a';
 
       if (this.state.chartData[this.state.chartData.length - 1]) {
         price = this.state.chartData[this.state.chartData.length - 1].close;

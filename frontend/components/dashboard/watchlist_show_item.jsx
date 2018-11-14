@@ -35,7 +35,7 @@ class WatchlistItem extends React.Component {
     });
   }
   render () {
-    let price;
+    let price = 'n/a';
     if (this.state.chartData[this.state.chartData.length - 1]){
       price = this.state.chartData[this.state.chartData.length - 1].close;
     }
