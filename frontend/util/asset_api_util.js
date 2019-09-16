@@ -1,14 +1,14 @@
 export const getExternalInfo = (requestType, asset) => {
   return $.ajax({
     method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/${asset.symbol}/${requestType}`,
+    url: `https://cloud.iexapis.com/stable/stock/${asset.symbol}/${requestType}?token=${window.iexPublishableKey}`,
   });
 };
 
 export const getCollection = (tag) => {
   return $.ajax({
     method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/market/collection/tag?collectionName=${tag}`,
+    url: `https://cloud.iexapis.com/stable/stock/market/collection/tag?collectionName=${tag}?token=${window.iexPublishableKey}`,
   });
 };
 
@@ -40,7 +40,7 @@ export const fetchAllAssets = () => {
 export const getQuote = (sym) => {
   return $.ajax({
     method: "GET",
-    url: `https://api.iextrading.com/1.0/stock/${sym}/quote`,
+    url: `https://cloud.iexapis.com/stable/stock/${sym}/quote?token=${window.iexPublishableKey}`,
   });
 };
 

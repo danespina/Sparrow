@@ -7,6 +7,9 @@
 
     <%= stylesheet_link_tag    'application', media: 'all' %>
     <%= javascript_include_tag 'application' %>
+    <script type="text/javascript">
+      window.iexPublishableKey = "<%= ENV['IEX_PUBLISHABLE_KEY'] %>"
+    </script>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <%= favicon_link_tag asset_path('logo.png'), :rel => 'icon', :type =>  'image/png' %>
 

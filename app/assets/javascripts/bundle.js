@@ -3652,13 +3652,13 @@ __webpack_require__.r(__webpack_exports__);
 var getExternalInfo = function getExternalInfo(requestType, asset) {
   return $.ajax({
     method: "GET",
-    url: "https://api.iextrading.com/1.0/stock/".concat(asset.symbol, "/").concat(requestType)
+    url: "https://cloud.iexapis.com/stable/stock/".concat(asset.symbol, "/").concat(requestType, "?token=").concat(window.iexPublishableKey)
   });
 };
 var getCollection = function getCollection(tag) {
   return $.ajax({
     method: "GET",
-    url: "https://api.iextrading.com/1.0/stock/market/collection/tag?collectionName=".concat(tag)
+    url: "https://cloud.iexapis.com/stable/stock/market/collection/tag?collectionName=".concat(tag, "?token=").concat(window.iexPublishableKey)
   });
 };
 var getNews = function getNews(asset) {
@@ -3685,7 +3685,7 @@ var fetchAllAssets = function fetchAllAssets() {
 var getQuote = function getQuote(sym) {
   return $.ajax({
     method: "GET",
-    url: "https://api.iextrading.com/1.0/stock/".concat(sym, "/quote")
+    url: "https://cloud.iexapis.com/stable/stock/".concat(sym, "/quote?token=").concat(window.iexPublishableKey)
   });
 }; // export const createAsset = (sym) => {
 //   getQuote(sym).then((quote) => {
